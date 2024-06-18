@@ -1,0 +1,92 @@
+.form-container {
+  width: 40%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 80px;
+}
+
+#first_form {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+#first_form .button input {
+  width: 100px;
+  padding: 10px;
+  margin-left: 45%;
+}
+
+#second_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 10px;
+  width: 100%;
+}
+
+#second_form .container {
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+  width: 100%;
+}
+
+#second_form .first-column, #second_form .second-column {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  width: 100%;
+}
+
+#second_form .button input {
+  width: 10%;
+  padding: 10px;
+}
+
+#second_form .button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#third_form {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+#third_form .first-column, #third_form .second-column {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  width: 100%;
+}
+
+#third_form .button input {
+  width: 10%;
+  padding: 10px;
+  margin-left: 28%;
+}
+
+input[type="text"], input[type="email"], input[type="password"], input[type="date"] {
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+input[type="submit"], input[type="button"] {
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #333;
+  color: white;
+}
+
+h1 {
+  text-align: center;
+}
