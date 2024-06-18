@@ -107,7 +107,7 @@ header h1 {
 #third_form .button input {
   width: 20%;
   padding: 10px;
-  margin-left: 28%;
+  margin-left: 20%;
 }
 
 input[type="text"], input[type="email"], input[type="password"], input[type="date"] {
