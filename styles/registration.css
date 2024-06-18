@@ -97,6 +97,13 @@ header h1 {
   margin: 10px;
 }
 
+#third_form .container {
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+  width: 100%;
+}
+
 #third_form .first-column, #third_form .second-column {
   display: flex;
   flex-direction: column;
