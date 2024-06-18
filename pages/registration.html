@@ -81,20 +81,22 @@
       <form id="third_form" action="POST" onsubmit="showForm3('third_form'); return false;" style="display: none;">
         <h2>Login Details</h2>
 
-        <div class="first-column">
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required>
-
-          <label for="student_ID">Student ID</label>
-          <input type="text" id="student_ID" name="student_ID" required>
-        </div>
-
-        <div class="second-column">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" required>
-
-          <label for="re_password">Confirm Password</label>
-          <input type="password" id="re_password" name="re_password" required>
+        <div class="container">
+          <div class="first-column">
+            <label for="student_ID">Student ID</label>
+            <input type="text" id="student_ID" name="student_ID" required>
+  
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+  
+          <div class="second-column">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+  
+            <label for="re_password">Confirm Password</label>
+            <input type="password" id="re_password" name="re_password" required>
+          </div>
         </div>
 
         <div class="button">
