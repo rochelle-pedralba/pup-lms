@@ -33,57 +33,14 @@ header h1 {
 }
 
 .dropdown-container {
-  margin-top: 120px;
+  margin-top: 150px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  width: 20%;
 }
 
-<<<<<<< HEAD
 .form-container {
   display: none;
-=======
-#second_form .first-column, #second_form .second-column {
-  display: flex;
-  flex-direction: column;
-  margin: 5px;
-  width: 100%;
-}
-
-#second_form .button input {
-  width: 20%;
-  padding: 10px;
-}
-
-#second_form .button {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-#third_form {
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
-}
- 
-#third_form .container {
-  display: flex;
-  flex-direction: row;
-  margin: 5px;
-  width: 100%;
-}
-
-#third_form .first-column, #third_form .second-column {
-  display: flex;
-  flex-direction: column;
-  margin: 5px;
-  width: 100%;
-}
-
-#third_form .button input {
-  width: 20%;
-  padding: 10px;
-  margin-left: 20%;
 }
 
 input[type="text"], input[type="email"], input[type="password"], input[type="date"] {
@@ -100,7 +57,6 @@ input[type="submit"], input[type="button"] {
   border: 1px solid #ccc;
   background-color: #333;
   color: white;
->>>>>>> 1050fe39a0f9fdbaa5bff6f7cd0902992f00c02d
 }
 
 footer div {
