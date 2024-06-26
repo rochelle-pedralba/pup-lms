@@ -92,7 +92,16 @@
       </form>
     </div>
 
+    <footer id="footer">
+      <div>
+        <p>&copy; 2021 PUP Learning Management System</p>
+      </div>
+    </footer>
+
     <script>
+
+      var footer = document.getElementById("footer");
+      footer.style= "margin-top: 400px";
 
       function populate() {
         fetch('../json/dropdown.json')
@@ -105,7 +114,8 @@
         function showForm(json) {
             document.getElementById("registration_form").style.display = "block";
             var role = document.getElementById("roles").value;
-            
+
+            footer.style= "margin-top: 10px";
             document.getElementById("roles").disabled = true;
 
             if (role == 3) {
@@ -131,6 +141,7 @@
               facultyPositionLabel.textContent = "Faculty Position:";
               var facultyPositionSelect = document.createElement("select");
               facultyPositionSelect.id = "faculty_position";
+              facultyPositionSelect.required = true;
 
               facultyPositionSelect.innerHTML = '<option value="" selected disabled>Select a Position</option>';
 
@@ -157,6 +168,7 @@
               yearLevelLabel.textContent = "Year Level:";
               var yearLevelSelect = document.createElement("select");
               yearLevelSelect.id = "year_level";
+              yearLevelSelect.required = true;
 
               yearLevelSelect.innerHTML = '<option value="" selected disabled>Select a Year Level</option>';
               
@@ -171,6 +183,7 @@
               programLabel.textContent = "Program:";
               var programSelect = document.createElement("select");
               programSelect.id = "program";
+              programSelect.required = true;
 
               programSelect.innerHTML = '<option value="" selected disabled>Select a Program</option>';
 
@@ -185,6 +198,7 @@
               studentTypeLabel.textContent = "Type of Student:";
               var studentTypeSelect = document.createElement("select");
               studentTypeSelect.id = "student_type";
+              studentTypeSelect.required = true;
 
               studentTypeSelect.innerHTML = '<option value="" selected disabled>Select Type</option>';
               
@@ -206,11 +220,5 @@
             }
           }
     </script>
-
-    <footer>
-      <div>
-        <p>&copy; 2021 PUP Learning Management System</p>
-      </div>
-    </footer>
   </body>
 </html>
