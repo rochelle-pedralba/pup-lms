@@ -74,21 +74,24 @@
         <div class="login-information">
           <h2>Login Information</h2>
 
+            <label for="user_ID">User ID</label>
+            <input type="text" id="user_ID" name="user_ID" required><br><br>
+
             <label for="email">Email Address:</label>
             <input type="email" id="email" name="email" required><br><br>
 
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br><br>
+            <input id="password" name="password" type="password" onchange="validatePassword(this.value)" required><br><br>
 
-            <label for="user_ID">User ID</label>
-            <input type="text" id="user_ID" name="user_ID" required>
+            <label for="confirm_password">Confirm Password:</label>
+            <input id="confirm_password" type="password" onchange='checkPassword()' required><br><br>
         </div>
 
         <div id="student_form"></div>
 
         <div id="faculty_form"></div>
 
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" id="submit" disabled>
       </form>
     </div>
 
