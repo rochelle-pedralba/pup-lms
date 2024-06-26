@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Admin Registration</title>
+    <link rel="stylesheet" type="text/css" href="../styles/registration.css">
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">
+        <img src="../assets/PUP_logo.png" alt="PUP Logo">
+      </div>
+      <div class="title">
+        <h1>PUP Learning Management System</h1>
+      </div>
+    </header>
+
+    <div>
+      <div class="dropdown-container">
+        <h2>Select Roles</h2>
+        <select id="roles">
+          <option selected disabled>- Select -</option>
+          <option value="3">Faculty</option>
+          <option value="5">Student</option>
+        </select>
+        <div>
+          <button onclick="populate();">next</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-container" id="registration_form">
+      <form method="GET">
+
+        <div class="personal-information">
+          <h2>Personal Information</h2>
+
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" required><br><br>
+    
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" required><br><br>
+
+            <label for="middle_name">Middle Name:</label>
+            <input type="text" id="middle_name" name="middle_name"><br><br>
+    
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required><br><br>    
+        </div>
+       
+        <div class="contact-details">
+          <h2>Contact Information</h2>
+
+            <label for="mobile">Mobile Number:</label>
+            <input type="tel" id="mobile" name="mobile" required><br><br>
+
+            <label for="region">Region:</label>
+            <input type="text" id="region" name="region" required><br><br>
+
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required><br><br>
+
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" required><br><br>
+    
+            <label for="province">Province:</label>
+            <input type="text" id="province" name="province" required><br><br>
+    
+            <label for="zip_code">Zip Code:</label>
+            <input type="text" id="zip_code" name="zip_code" required><br><br>
+        </div>
+
+        <div class="login-information">
+          <h2>Login Information</h2>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+
+            <label for="user_ID">User ID</label>
+            <input type="text" id="user_ID" name="user_ID" required>
+        </div>
+
+        <div id="student_form"></div>
+
+        <div id="faculty_form"></div>
+
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+
+    <script>
+
+      function populate() {
+        fetch('../json/dropdown.json')
+        .then((response) => response.json())
+        .then((json) => {
+          showForm(json);
+        });
+      }
+
+        function showForm(json) {
+            document.getElementById("registration_form").style.display = "block";
+            var role = document.getElementById("roles").value;
+            
+            document.getElementById("roles").disabled = true;
+
+            if (role == 3) {
+              var facultyForm = document.getElementById("faculty_form");
+              var form = document.createElement("div");
+              
+              var departmentLabel = document.createElement("label");
+              departmentLabel.textContent = "Department:";
+              var departmentSelect = document.createElement("select");
+              departmentSelect.id = "department";
+              departmentSelect.required = true;
+
+              departmentSelect.innerHTML = '<option value="" selected disabled>Select a Department</option>';
+              
+              json["faculty"]["Department"].forEach((department) => {
+                var option = document.createElement("option");
+                option.value = department;
+                option.textContent = department;
+                departmentSelect.appendChild(option);
+              });
+              
+              var facultyPositionLabel = document.createElement("label");
+              facultyPositionLabel.textContent = "Faculty Position:";
+              var facultyPositionSelect = document.createElement("select");
+              facultyPositionSelect.id = "faculty_position";
+
+              facultyPositionSelect.innerHTML = '<option value="" selected disabled>Select a Position</option>';
+
+              json["faculty"]["Position"].forEach((position) => {
+                var option = document.createElement("option");
+                option.value = position;
+                option.textContent = position;
+                facultyPositionSelect.appendChild(option);
+              });
+              
+              form.appendChild(departmentLabel);
+              form.appendChild(departmentSelect);
+              form.appendChild(facultyPositionLabel);
+              form.appendChild(facultyPositionSelect);
+              
+              facultyForm.appendChild(form);
+            }
+
+            if (role == 5) {
+              var studentForm = document.getElementById("student_form");
+              var form = document.createElement("div");
+              
+              var yearLevelLabel = document.createElement("label");
+              yearLevelLabel.textContent = "Year Level:";
+              var yearLevelSelect = document.createElement("select");
+              yearLevelSelect.id = "year_level";
+
+              yearLevelSelect.innerHTML = '<option value="" selected disabled>Select a Year Level</option>';
+              
+              json["student"]["Year Level"].forEach((year) => {
+                var option = document.createElement("option");
+                option.value = year;
+                option.textContent = year;
+                yearLevelSelect.appendChild(option);
+              });
+              
+              var programLabel = document.createElement("label");
+              programLabel.textContent = "Program:";
+              var programSelect = document.createElement("select");
+              programSelect.id = "program";
+
+              programSelect.innerHTML = '<option value="" selected disabled>Select a Program</option>';
+
+              json["student"]["Program"].forEach((program) => {
+                var option = document.createElement("option");
+                option.value = program;
+                option.textContent = program;
+                programSelect.appendChild(option);
+              });
+              
+              var studentTypeLabel = document.createElement("label");
+              studentTypeLabel.textContent = "Type of Student:";
+              var studentTypeSelect = document.createElement("select");
+              studentTypeSelect.id = "student_type";
+
+              studentTypeSelect.innerHTML = '<option value="" selected disabled>Select Type</option>';
+              
+              json["student"]["Type"].forEach((type) => {
+                var option = document.createElement("option");
+                option.value = type;
+                option.textContent = type;
+                studentTypeSelect.appendChild(option);
+              });
+              
+              form.appendChild(yearLevelLabel);
+              form.appendChild(yearLevelSelect);
+              form.appendChild(programLabel);
+              form.appendChild(programSelect);
+              form.appendChild(studentTypeLabel);
+              form.appendChild(studentTypeSelect);
+              
+              studentForm.appendChild(form);
+            }
+          }
+    </script>
+
+    <footer>
+      <div>
+        <p>&copy; 2021 PUP Learning Management System</p>
+      </div>
+    </footer>
+  </body>
+</html>
