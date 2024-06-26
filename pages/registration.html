@@ -23,7 +23,8 @@
       <div>
         <h1>Registration</h1>
       </div>
-      <form id="first_form" onsubmit="showForm2('first_form'); return false;">
+      
+      <form id="first_form" onsubmit="showForm2('first_form'); return false;" method="POST">
         <h2>Personal Information</h2> 
 
         <label for="first_name">First Name:</label>
@@ -78,7 +79,7 @@
       </form>
 
       <!-- Sub Container (Login Details) -->
-      <form id="third_form" action="POST" onsubmit="showForm3('third_form'); return false;" style="display: none;">
+      <form id="third_form" method="POST" action="http://localhost/php-activities/pup-lms/php/registration.php" style="display: none;">
         <h2>Login Details</h2>
 
         <div class="container">
