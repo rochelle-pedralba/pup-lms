@@ -86,7 +86,7 @@
             <input id="password" name="password" type="password" minlength="8" required><br><br>
 
             <label for="confirm_password">Confirm Password:</label>
-            <input id="confirm_password" name="confirm_password" type="password" minlength="8" required><br><br>
+            <input id="confirm_password" name="confirm_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" type="password" minlength="8" required><br><br>
         </div>
 
         <input type="submit" value="Submit" id="submit">
