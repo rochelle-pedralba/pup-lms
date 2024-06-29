@@ -27,7 +27,7 @@
     <div>
       <?php
       // Connect to the database
-      $pdo = new PDO('mysql:host=localhost;dbname=pup-lms', 'root', 'root');
+      $pdo = new PDO('mysql:host=localhost;dbname=pup_lms', 'root', 'root');
 
       // Fetch the students enrolled in the course
       $query = "SELECT * FROM students WHERE course_id = :course_id";
