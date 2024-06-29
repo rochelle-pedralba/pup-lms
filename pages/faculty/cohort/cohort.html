@@ -23,8 +23,24 @@
       </div>
     </div>
 
+    <!-- List of Students -->
     <div>
+      <?php
+      // Connect to the database
+      $pdo = new PDO('mysql:host=localhost;dbname=pup-lms', 'root', 'root');
 
+      // Fetch the students enrolled in the course
+      $query = "SELECT * FROM students WHERE course_id = :course_id";
+      $stmt = $pdo->prepare($query);
+      $stmt->bindParam(':course_id', $course_id);
+      $stmt->execute();
+      $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+      // Display the list of students
+      foreach ($students as $student) {
+        echo "<p>{$student['name']}</p>";
+      }
+      ?>
     </div>
   </body>
 
