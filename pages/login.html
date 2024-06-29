@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUP eMabini | Log in</title>
+</head>
+<body>
+    <h1>PUP eMabini Login</h1>
+    <form id="loginForm" method="POST" action="includes/signin_model_inc.php">
+        <div>
+            <label for="student_ID"></label>
+            <input type="text" id="student_ID" name="student_ID" placeholder="Student ID" required>
+            <span id="studentIDError" style="color: red;"></span>
+        </div>
+        <div>
+            <label for="password"></label>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <span id="passwordError" style="color: red;"></span>
+        </div>
+        <button type="submit">Login</button>
+        <p><a href="#">Forgot Password</a></p>
+    </form>
+
+</body>
+</html>
