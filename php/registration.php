@@ -71,24 +71,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     exit;
   }
 
-  if (strlen($password) < 8) {
-    $errors[] = 'Password must be at least 8 characters long';
-  }
+  $regex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/';
 
-  if (!preg_match('/[A-Z]/', $password)) {
-    $errors[] = 'Password must contain at least one uppercase letter';
-  }
-
-  if (!preg_match('/[a-z]/', $password)) {
-    $errors[] = 'Password must contain at least one lowercase letter';
-  }
-
-  if (!preg_match('/[0-9]/', $password)) {
-    $errors[] = 'Password must contain at least one number';
-  }
-
-  if (!preg_match('/[!@#$%^&*()_+\\-=\\[\\]{};:\'",.<>\\/?|\\\\]/', $password)) {
-    $errors[] = 'Password must contain at least one special character';
+  if (!preg_match($regex, $password)) {
+    $error_message = "Password must be at least 8 characters long, and include at least one lowercase letter, one uppercase letter, and one special character.";
+    redirectWithError($error_message);
+    exit;
   }
 
   if ($password !== $confirm_password) {
