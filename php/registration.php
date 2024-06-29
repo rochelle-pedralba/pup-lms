@@ -2,7 +2,7 @@
 date_default_timezone_set('Asia/Manila');
 
 // Create connection
-$conn = new mysqli("localhost", "root", "", "pup-lms");
+$conn = new mysqli("localhost", "root", "", "pup_lms");
 
 // Check connection
 if ($conn->connect_error) {
@@ -47,15 +47,25 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
       exit;
   }
   else{
-    $sql = "INSERT INTO user_information (first_name, last_name, middle_name, date_of_birth, mobile_number, region, city, country, province, zip_Code, user_ID, email_address, password, time_Created, date_Created, ID_number, account_status)
-    VALUES ('$first_name', '$last_name', '$middle_name', '$date_of_birth', '$contact_number', '$region', '$city', '$country', '$province', '$zip_code', '$user_ID', '$email', '$password', '$time_created', '$date_created', '$id_number', '$acc_status')";
+    $sql = "INSERT INTO user_information (first_Name, last_Name, middle_Name, date_Of_Birth, mobile_Number, region, city, country, province, zip_Code, user_ID, email_Address, time_Created, date_Created, id_Number, account_Status)
+    VALUES ('$first_name', '$last_name', '$middle_name', '$date_of_birth', '$contact_number', '$region', '$city', '$country', '$province', '$zip_code', '$user_ID', '$email', '$time_created', '$date_created', '$id_number', '$acc_status')";
     
-    $sql2 = "INSERT INTO user_role (user_ID, user_role, date_assigned) VALUES ('$user_ID', '$role', '$date_created')";
-    if ($conn->query($sql) === TRUE && $conn->query($sql2) === TRUE){
-      header("Location:index.php"); //back to log in page
+    $sql2 = "INSERT INTO user_role (user_ID, user_Role, date_Assigned) VALUES ('$user_ID', '$role', '$date_created')";
+
+    $sql3 = "INSERT INTO user_access (user_ID, user_Password) VALUES ('$user_ID', '$password')";
+    if ($conn->query($sql) === TRUE) {
+      if ($conn->query($sql2) === TRUE) {
+        if ($conn->query($sql3) === TRUE) {
+          header("Location:index.html"); //back to log in page
+        } else {
+          echo "Error";
+        }
       } else {
-      echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error";
       }
+    } else {
+      echo "Error";
+    }
   }
 
   $conn->close();
