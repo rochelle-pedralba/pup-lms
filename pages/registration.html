@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title>Admin Registration</title>
+    <title>PUP eMabini | User Registration</title>
     <link rel="stylesheet" type="text/css" href="../styles/registration.css">
   </head>
 
@@ -31,7 +31,7 @@
     </div>
 
     <div class="form-container" id="registration_form">
-      <form method="GET" action="../php/registration.php">
+      <form method="POST" action="../php/registration.php">
 
         <input type="hidden" id="roleInput" name="role">
 
@@ -55,19 +55,19 @@
           <h2>Contact Information</h2>
 
             <label for="mobile">Mobile Number:</label>
-            <input type="tel" id="mobile" name="mobile" required><br><br>
-
-            <label for="region">Region:</label>
-            <input type="text" id="region" name="region" required><br><br>
+            <input type="tel" id="mobile" name="mobile" pattern="09[0-9]{9}" required><br><br>
 
             <label for="city">City:</label>
             <input type="text" id="city" name="city" required><br><br>
 
-            <label for="country">Country:</label>
-            <input type="text" id="country" name="country" required><br><br>
-    
             <label for="province">Province:</label>
             <input type="text" id="province" name="province" required><br><br>
+
+            <label for="region">Region:</label>
+            <input type="text" id="region" name="region" required><br><br>
+
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" required><br><br>
     
             <label for="zip_code">Zip Code:</label>
             <input type="text" id="zip_code" name="zip_code" required><br><br>
@@ -86,10 +86,10 @@
             <input id="password" name="password" type="password" onchange="validatePassword(this.value)" minlength="8" required><br><br>
 
             <label for="confirm_password">Confirm Password:</label>
-            <input id="confirm_password" type="password" onchange='checkPassword()' required><br><br>
+            <input id="confirm_password" name="confirm_password" type="password" minlength="8" required><br><br>
         </div>
 
-        <input type="submit" value="Submit" id="submit" disabled>
+        <input type="submit" value="Submit" id="submit">
       </form>
     </div>
 
