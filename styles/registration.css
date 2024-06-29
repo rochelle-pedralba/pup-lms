@@ -43,6 +43,11 @@ header h1 {
   display: none;
 }
 
+label:after {
+  content:" *";
+  color: red;
+}
+
 input[type="text"], input[type="email"], input[type="password"], input[type="date"] {
   margin: 5px;
   padding: 5px;

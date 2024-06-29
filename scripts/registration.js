@@ -2,13 +2,13 @@
 var footer = document.getElementById("footer");
 footer.style= "margin-top: 400px";
 
-function showForm(json) {
+function showForm() {
   var selectedRole = document.getElementById('roles').value;
   document.getElementById('roleInput').value = selectedRole;
   
   document.getElementById("registration_form").style.display = "block";
   footer.style= "margin-top: 10px";
-    }
+}
 
 function checkPassword() {
   if (document.getElementById('password').value != '') {
