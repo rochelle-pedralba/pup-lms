@@ -19,37 +19,38 @@ function showLoginInformation() {
 }
 
 var pwInput = document.getElementById("password");
+var pwConfirm = document.getElementById("confirm_password");
 var lower = document.getElementById("lower");
 var upper = document.getElementById("upper");
 var number = document.getElementById("number");
 var symbol = document.getElementById("symbol");
 var minlength = document.getElementById("minlength");
+var match = document.getElementById("match");
 
 // When the user clicks on the password field, show the message box
-pwInput.cha = function() {
+pwInput.onfocus = function() {
   document.getElementById("passwordMessage").style.display = "block";
 }
 
-pwInput.addEventListener("keyup", () => {});
+pwConfirm.onfocus = function() {
+  document.getElementById("passwordMessage").style.display = "block";
+}
 
 // When the user clicks outside of the password field, hide the message box
 pwInput.onblur = function() {
   document.getElementById("passwordMessage").style.display = "none";
 }
 
-function checkPassword() {
+pwConfirm.onblur = function() {
+  document.getElementById("passwordMessage").style.display = "none";
+}
 
-  if (document.getElementById('password').value != '') {
-    if (document.getElementById('password').value ==
-    document.getElementById('confirm_password').value) {
-      document.getElementById('submit').disabled = false;
-  } else {
-    document.getElementById('submit').disabled = true;
-    alert("Password doesn't match")
-    }
-  } else {
-    document.getElementById('submit').disabled = true;
-  }
+pwInput.onkeyup = function() {
+  validatePassword(pwInput.value);
+}
+
+pwConfirm.onkeyup = function() {
+  validatePassword(pwInput.value);
 }
 
 function validatePassword(password)
@@ -59,30 +60,62 @@ function validatePassword(password)
     var noNum = /^(?=.*\d)/;
     var noSymbol = /^(?=.*[!@#$%^&*])/;
     var minLength = /^.{8,}$/;
+    var pwValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
 
     if(noUpper.test(password)) {
       upper.classList.remove("invalid");
       upper.classList.add("valid");
+    } else {
+      upper.classList.remove("valid");
+      upper.classList.add("invalid");
     }
 
     if(noLower.test(password)) {
       lower.classList.remove("invalid");
       lower.classList.add("valid");
+    } else {
+      lower.classList.remove("valid");
+      lower.classList.add("invalid");
     }
 
     if(noNum.test(password)) {
       number.classList.remove("invalid");
       number.classList.add("valid");
+    } else {
+      number.classList.remove("valid");
+      number.classList.add("invalid");
     }
 
     if(noSymbol.test(password)) {
       symbol.classList.remove("invalid");
       symbol.classList.add("valid");
+    } else {
+      symbol.classList.remove("valid");
+      symbol.classList.add("invalid");
     }
 
     if(minLength.test(password)) {
       minlength.classList.remove("invalid");
       minlength.classList.add("valid");
+    } else {
+      minlength.classList.remove("valid");
+      minlength.classList.add("invalid");
+    }
+
+    if (pwInput.value == pwConfirm.value) {
+      match.classList.remove("invalid");
+      match.classList.add("valid");
+      document.getElementById('submit').disabled = false;
+    } else {
+      match.classList.remove("valid");
+      match.classList.add("invalid");
+      document.getElementById('submit').disabled = true;
+    }
+
+    if (pwValidation.test(password) && (pwInput.value == pwConfirm.value)) {
+      document.getElementById('submit').disabled = false;
+    } else {
+      document.getElementById('submit').disabled = true;
     }
 }
 
