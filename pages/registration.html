@@ -25,7 +25,7 @@
           <option value="5">Student</option>
         </select>
         <div>
-          <button id="show">next</button>
+          <button id="next1">next</button>
         </div>
       </div>
     </div>
@@ -33,9 +33,7 @@
     <div class="form-container" id="registration_form">
       <form method="POST" action="../php/registration.php">
 
-        <input type="hidden" id="roleInput" name="role">
-
-        <div class="personal-information">
+        <div class="personal-information" id="personal_information">
           <h2>Personal Information</h2>
 
             <label for="last_name">Last Name:</label>
@@ -48,20 +46,25 @@
             <input type="text" id="middle_name" name="middle_name"><br><br>
     
             <label for="dob">Date of Birth:</label>
-            <input type="date" id="dob" name="dob" required><br><br>    
+            <input type="date" id="dob" name="dob" required><br><br>
+            
+            <button id="next2">next</button>
         </div>
        
-        <div class="contact-details">
+        <div class="contact-details" id="contact_information">
           <h2>Contact Information</h2>
 
             <label for="mobile">Mobile Number:</label>
             <input type="tel" id="mobile" name="mobile" pattern="09[0-9]{9}" placeholder="ex. 09XX XXX XXXX" required><br><br>
 
+            <!-- If countries other than Philippines, _regions, _provinces, _cities; is the input field used -->
             <label for="countries">Country:</label>
             <select id="countries" name="countries" required>
               <option selected disabled>Select a Country</option>
             </select><br><br>
 
+            <!-- By default select option is shown, if Philippines is not selected, 
+            input field will become visible, select option will be hidden -->
             <label for="regions">Region:</label>
             <select id="regions" name="regions" required>
               <option selected disabled>Select a Region</option>
@@ -82,9 +85,11 @@
 
             <label for="zip_code">Zip Code:</label>
             <input type="text" id="zip_code" name="zip_code" required><br><br>
+
+            <button id="next3">next</button>
         </div>
 
-        <div class="login-information">
+        <div class="login-information" id="login_information">
           <h2>Login Information</h2>
 
             <label for="user_ID">User ID</label>
@@ -98,6 +103,7 @@
 
             <label for="confirm_password">Confirm Password:</label>
             <input id="confirm_password" name="confirm_password" type="password" minlength="8" required><br><br>
+
         </div>
 
         <input type="submit" value="Submit" id="submit">
