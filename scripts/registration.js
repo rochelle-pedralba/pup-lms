@@ -62,9 +62,14 @@ function loadCities(region, province) {
 
 function changeField(country){
   if (country == 'Philippines') {
-    $("#region").replaceWith(`<select id="regions" name="region" required> + <option value="" selected disabled>Select a Region</option> + </select>`);
-    $("#province").replaceWith(`<select id="provinces" name="region" required> + <option value="" selected disabled>Select a Province</option> + </select>`);
-    $("#city").replaceWith(`<select id="cities" name="cities" required> + <option value="" selected disabled>Select a City</option> + </select>`);
+
+    document.getElementById('_regions').style.display = 'none';
+    document.getElementById('_provinces').style.display = 'none';
+    document.getElementById('_cities').style.display = 'none';
+
+    document.getElementById('regions').style.display = "block";
+    document.getElementById('provinces').style.display = "block";
+    document.getElementById('cities').style.display = "block";
 
     places();
 
@@ -78,15 +83,19 @@ function changeField(country){
   } else {
     // change the select to input if not philippines
     console.log('not philippines');
-    $("#region").replaceWith('<input id="region" name="region" required/>');
-    $("#province").replaceWith('<input id="province" name="province" required/>');
-    $("#city").replaceWith('<input id="city" name="city" required/>');
+    document.getElementById('regions').style.display = "none";
+    document.getElementById('provinces').style.display = "none";
+    document.getElementById('cities').style.display = "none";
+
+    document.getElementById('_regions').style.display = 'block';
+    document.getElementById('_provinces').style.display = 'block';
+    document.getElementById('_cities').style.display = 'block';
   }
 }
 
 // populate the options in country dropdown
 function populateCountries(countries) {
-  var countrySelect = document.getElementById('country');
+  var countrySelect = document.getElementById('countries');
   countrySelect.innerHTML = '<option value="" selected disabled>Select a Country</option>';
 
   countries.forEach((country) => {
@@ -121,6 +130,9 @@ function populateProvince(places, region) {
   var provinceSelect = document.getElementById('provinces');
   provinceSelect.innerHTML = '<option value="" selected disabled>Select a Province</option>';
 
+  var citySelect = document.getElementById('cities');
+  citySelect.innerHTML = '<option value="" selected disabled>Select a City</option>';
+
   Object.keys(places[region]["province_list"]).forEach(function(province) {
     var option = document.createElement('option');
     option.value = province;
@@ -144,11 +156,13 @@ function populateCities(places, region, province) {
   });
 }
 
+loadCountries();
+
 document.getElementById("show").addEventListener("click", () => showForm());
 
-document.getElementById("country").addEventListener("change", () => {
+document.getElementById("countries").addEventListener("change", () => {
   console.log('country changed');
-  var country = document.getElementById('country').value;
+  var country = document.getElementById('countries').value;
   changeField(country);
 }, false);
 
@@ -164,8 +178,6 @@ document.getElementById("provinces").addEventListener("change", () => {
   var region = document.getElementById('regions').value;
   loadCities(region, province);
 }, false);
-
-loadCountries();
 
 
 
