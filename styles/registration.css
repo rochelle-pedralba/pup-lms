@@ -48,6 +48,10 @@ label:after {
   color: red;
 }
 
+#regions_, #_provinces, #_cities {
+  display: none;
+}
+
 input[type="text"], input[type="email"], input[type="password"], input[type="date"] {
   margin: 5px;
   padding: 5px;
