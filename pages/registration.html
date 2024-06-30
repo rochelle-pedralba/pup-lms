@@ -25,7 +25,7 @@
           <option value="5">Student</option>
         </select>
         <div>
-          <button onclick="showForm()">next</button>
+          <button id="show">next</button>
         </div>
       </div>
     </div>
@@ -57,18 +57,26 @@
             <label for="mobile">Mobile Number:</label>
             <input type="tel" id="mobile" name="mobile" pattern="09[0-9]{9}" placeholder="ex. 09XX XXX XXXX" required><br><br>
 
-            <label for="city">City:</label>
-            <input type="text" id="city" name="city" required><br><br>
-
-            <label for="province">Province:</label>
-            <input type="text" id="province" name="province" required><br><br>
-
-            <label for="region">Region:</label>
-            <input type="text" id="region" name="region" required><br><br>
-
             <label for="country">Country:</label>
-            <input type="text" id="country" name="country" required><br><br>
-    
+            <select id="country" name="country" required>
+              <option selected disabled>Select a Country</option>
+            </select>
+
+            <label for="regions">Region:</label>
+            <select id="regions" name="regions" required>
+              <option selected disabled>Select a Region</option>
+            </select>
+
+            <label for="provinces">Province:</label>
+            <select id="provinces" name="provinces" required>
+              <option selected disabled>Select a Province</option>
+            </select>
+
+            <label for="cities">City:</label>
+            <select id="cities" name="cities" required>
+              <option selected disabled>Select a City</option>
+            </select>
+
             <label for="zip_code">Zip Code:</label>
             <input type="text" id="zip_code" name="zip_code" required><br><br>
         </div>
@@ -99,7 +107,7 @@
       </div>
     </footer>
 
-    <script src="../scripts/registration.js">
-    </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="../scripts/registration.js"></script>    <script src="../scripts/registration.js"></script>
   </body>
 </html>
