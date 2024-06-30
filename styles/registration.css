@@ -69,14 +69,20 @@ input[type="submit"], input[type="button"] {
 }
 
 /* The message box is shown when the user clicks on the password field */
-#message {
+#passwordMessage {
   display:none;
-  background: #f1f1f1;
   color: #000;
   position: relative;
-  padding: 20px;
-  margin-top: 10px;
-  margin-left: 20px;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+#matchMessage {
+  display:none;
+  color: #000;
+  position: relative;
+  padding: 10px;
+  margin-left: 10px;
 }
 
 #message p {
@@ -102,7 +108,7 @@ input[type="submit"], input[type="button"] {
 
 .invalid:before {
   position: relative;
-  left: -55px;
+  left: -15px;
   content: "✖";
 }
 
