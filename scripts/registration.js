@@ -200,6 +200,12 @@ function populateCountries(countries) {
 function populateRegion(regions) {
   var regionSelect = document.getElementById('regions');
   regionSelect.innerHTML = '<option value="" selected disabled>Select a Region</option>';
+
+  var provinceSelect = document.getElementById('provinces');
+  provinceSelect.innerHTML = '<option value="" selected disabled>Select a Province</option>';
+
+  var citySelect = document.getElementById('cities');
+  citySelect.innerHTML = '<option value="" selected disabled>Select a City</option>';
   
   Object.keys(regions).forEach(function(region) {
   
