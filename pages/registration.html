@@ -99,23 +99,23 @@
             <input type="email" id="email" name="email" required><br><br>
 
             <label for="password">Password:</label>
-            <input id="password" name="password" type="password" minlength="8" required><br><br>
+            <input id="password" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required><br><br>
 
             <label for="confirm_password">Confirm Password:</label>
             <input id="confirm_password" name="confirm_password" type="password" minlength="8" required><br><br>
 
             <div id="passwordMessage">
-              <h3>Password must contain the following:</h3>
+              <h4>Password must contain the following:</h4>
               <p id="lower" class="invalid">A <b>lowercase</b> letter</p>
               <p id="upper" class="invalid">A <b>capital (uppercase)</b> letter</p>
               <p id="number" class="invalid">A <b>number</b></p>
-              <p id="symbol" class="invalid">A <b>number</b></p>
+              <p id="symbol" class="invalid">A <b>symbol</b></p>
               <p id="minlength" class="invalid">Minimum <b>8 characters</b></p>
+              <p id="match" class="invalid">Passwords <b>match</b></p>    
             </div>
-
         </div>
 
-        <input type="submit" value="Submit" id="submit">
+        <input type="submit" value="Submit" id="submit" disabled>
       </form>
     </div>
 
