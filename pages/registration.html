@@ -87,6 +87,15 @@
 
             <label for="confirm_password">Confirm Password:</label>
             <input id="confirm_password" name="confirm_password" type="password" minlength="8" required><br><br>
+
+            <div id="passwordMessage">
+              <h3>Password must contain the following:</h3>
+              <p id="lower" class="invalid">A <b>lowercase</b> letter</p>
+              <p id="upper" class="invalid">A <b>capital (uppercase)</b> letter</p>
+              <p id="number" class="invalid">A <b>number</b></p>
+              <p id="symbol" class="invalid">A <b>number</b></p>
+              <p id="minlength" class="invalid">Minimum <b>8 characters</b></p>
+            </div>
         </div>
 
         <input type="submit" value="Submit" id="submit">
