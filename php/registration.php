@@ -5,7 +5,7 @@ date_default_timezone_set('Asia/Manila');
 
 require_once 'includes/dbh_inc.php';
 require_once 'includes/execute_query_inc.php';
-require_once 'includes/return_errors_inc.php';
+require_once 'includes/error_model_inc.php';
 
 function checkUserID(object $mysqli, string $user_ID): bool
 {
@@ -31,8 +31,6 @@ function checkContactNumber(object $mysqli, string $contact_number): bool
   return $queryResult['success'] && $queryResult['result']->num_rows > 0;
 }
 
-$errors = [];
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $last_name = $_POST['last_name'];
   $first_name = $_POST['first_name'];
@@ -56,24 +54,50 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $acc_status = '1';
 
   if (checkContactNumber($mysqli, $contact_number)) {
-    $errors[] = 'The contact number is already connected to an existing account';
+    $error_message = "The contact number is already connected to an existing account";
+    redirectWithError($error_message);
+    exit;
   }
 
   if (checkUserID($mysqli, $user_ID)) {
-    $errors[] = 'User ID already exists';
+    $error_message = "User ID already exists";
+    redirectWithError($error_message);
+    exit;
   }
 
   if (checkEmailAddress($mysqli, $email)) {
-    $errors[] = 'The email address is already connected to an existing account';
+    $error_message = "The email address is already connected to an existing account";
+    redirectWithError($error_message);
+    exit;
+  }
+
+  if (strlen($password) < 8) {
+    $errors[] = 'Password must be at least 8 characters long';
+  }
+
+  if (!preg_match('/[A-Z]/', $password)) {
+    $errors[] = 'Password must contain at least one uppercase letter';
+  }
+
+  if (!preg_match('/[a-z]/', $password)) {
+    $errors[] = 'Password must contain at least one lowercase letter';
+  }
+
+  if (!preg_match('/[0-9]/', $password)) {
+    $errors[] = 'Password must contain at least one number';
+  }
+
+  if (!preg_match('/[!@#$%^&*()_+\\-=\\[\\]{};:\'",.<>\\/?|\\\\]/', $password)) {
+    $errors[] = 'Password must contain at least one special character';
   }
 
   if ($password !== $confirm_password) {
-    $errors[] = 'Passwords do not match';
+    $error_message = "Passwords do not match";
+    redirectWithError($error_message);
+    exit;
   }
 
   $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-
-  checkForErrors($errors);
 
   // Define parameters for each query
   $params_1 = [
@@ -112,33 +136,37 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $queryResult_1 = executeQuery($mysqli, $query_1, "ssssssssssssssss", $params_1);
 
   if (!$queryResult_1['success']) {
-    $errors[] = "Error inserting user information: " . $queryResult_1['error'] . ". Please contact the administrator";
+    $error_message = "An internal error has occured. Please try again later or contact the administrator";
+    redirectWithError($error_message);
+    exit;
   }
 
   $query_2 = "INSERT INTO user_role (user_ID, user_Role, date_Assigned) VALUES (?, ?, ?)";
   $queryResult_2 = executeQuery($mysqli, $query_2, "sss", $params_2);
 
   if (!$queryResult_2['success']) {
-    $errors[] = "Error inserting user role: " . $queryResult_2['error'] . ". Please contact the administrator";
+    $error_message = "An internal error has occured. Please try again later or contact the administrator";
+    redirectWithError($error_message);
+    exit;
   }
 
   $query_3 = "INSERT INTO user_access (user_ID, user_Password) VALUES (?, ?)";
   $queryResult_3 = executeQuery($mysqli, $query_3, "ss", $params_3);
 
   if (!$queryResult_3['success']) {
-    $errors[] = "Error inserting user access: " . $queryResult_3['error'] . ". Please contact the administrator";
+    $error_message = "An internal error has occured. Please try again later or contact the administrator";
+    redirectWithError($error_message);
+    exit;
   }
 
   $mysqli->close();
 
-  checkForErrors($errors);
-
   echo "<script>alert('User has been successfully registered');</script>";
-  header("Location: ../pages/login.html");
+  echo "<meta http-equiv='refresh' content='0;url=../pages/login.html'>";
   exit;
 }
 
-$errors[] = "Form submission method not allowed";
-checkForErrors($errors);
+$error_message = "Form submission method not allowed";
+redirectWithError($error_message);
 exit;
 

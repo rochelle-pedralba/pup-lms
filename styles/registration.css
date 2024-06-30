@@ -39,13 +39,17 @@ header h1 {
   width: 20%;
 }
 
-.form-container {
+.personal-information, .contact-details, .login-information, #submit {
   display: none;
 }
 
 label:after {
   content:" *";
   color: red;
+}
+
+#_regions, #_provinces, #_cities {
+  display: none;
 }
 
 input[type="text"], input[type="email"], input[type="password"], input[type="date"] {
