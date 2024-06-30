@@ -39,7 +39,7 @@ header h1 {
   width: 20%;
 }
 
-.form-container {
+.personal-information, .contact-details, .login-information, #submit {
   display: none;
 }
 
@@ -48,7 +48,7 @@ label:after {
   color: red;
 }
 
-#regions_, #_provinces, #_cities {
+#_regions, #_provinces, #_cities {
   display: none;
 }
 
