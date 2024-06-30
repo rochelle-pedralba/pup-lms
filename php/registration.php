@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $email = $_POST['email'];
   $password = $_POST['password'];
   $confirm_password = $_POST['confirm_password'];
-  $role = $_POST['role'];
+  $role = $_POST['roles'];
 
   $time_created = date("H:i:s");
   $date_created = date("Y-m-d");
