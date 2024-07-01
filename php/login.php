@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+date_default_timezone_set('Asia/Manila');
+
 require_once 'includes/dbh_inc.php';
 require_once 'includes/execute_query_inc.php';
 require_once 'includes/config_session_inc.php';
