@@ -19,7 +19,7 @@ if (!isset($_SESSION['user_ID'])) {
 
 <body>
     <h1>Welcome</h1>
-    <p><a href="profile_page.php">Profile</a></p>
+    <p><a href="profile.php">Profile</a></p>
     <p><a href="../php/includes/logout_model_inc.php">Log Out</a></p>
 </body>
 
