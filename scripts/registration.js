@@ -159,6 +159,10 @@ function changeField(country){
     document.getElementById('provinces').style.display = "block";
     document.getElementById('cities').style.display = "block";
 
+    $('#_regions').removeAttr('required', 'True');
+    $('#_provinces').removeAttr('required', 'True');
+    $('#_cities').removeAttr('required', 'True');
+
     places();
 
     function places() {
@@ -178,6 +182,10 @@ function changeField(country){
     document.getElementById('_regions').style.display = 'block';
     document.getElementById('_provinces').style.display = 'block';
     document.getElementById('_cities').style.display = 'block';
+
+    $('#regions').removeAttr('required', 'True');
+    $('#provinces').removeAttr('required', 'True');
+    $('#cities').removeAttr('required', 'True');
   }
 }
 
