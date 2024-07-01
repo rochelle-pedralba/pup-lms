@@ -68,6 +68,50 @@ input[type="submit"], input[type="button"] {
   color: white;
 }
 
+/* The message box is shown when the user clicks on the password field */
+#passwordMessage {
+  display:none;
+  color: #000;
+  position: relative;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+#matchMessage {
+  display:none;
+  color: #000;
+  position: relative;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+#message p {
+  padding: 10px 35px;
+  font-size: 18px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -15px;
+  content: "✔";
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -15px;
+  content: "✖";
+}
+
 footer div {
   position: block;
   width: 100%;

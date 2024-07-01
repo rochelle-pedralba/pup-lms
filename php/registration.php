@@ -7,83 +7,27 @@ require_once 'includes/dbh_inc.php';
 require_once 'includes/execute_query_inc.php';
 require_once 'includes/error_model_inc.php';
 
-function checkUserID(object $mysqli, string $user_ID): bool
-{
-  $query = "SELECT * FROM user_information WHERE user_ID = ?;";
-  $queryResult = executeQuery($mysqli, $query, "s", [$user_ID]);
-
-  return $queryResult['success'] && $queryResult['result']->num_rows > 0;
-}
-
-function checkEmailAddress(object $mysqli, string $email): bool
-{
-  $query = "SELECT * FROM user_information WHERE email_address = ?;";
-  $queryResult = executeQuery($mysqli, $query, "s", [$email]);
-
-  return $queryResult['success'] && $queryResult['result']->num_rows > 0;
-}
-
-function checkContactNumber(object $mysqli, string $contact_number): bool
-{
-  $query = "SELECT * FROM user_information WHERE mobile_number = ?;";
-  $queryResult = executeQuery($mysqli, $query, "s", [$contact_number]);
-
-  return $queryResult['success'] && $queryResult['result']->num_rows > 0;
-}
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $last_name = $_POST['last_name'];
   $first_name = $_POST['first_name'];
   $middle_name = $_POST['middle_name'];
   $date_of_birth = $_POST['dob'];
   $contact_number = $_POST['mobile'];
-  $region = $_POST['region'];
-  $city = $_POST['city'];
-  $country = $_POST['country'];
-  $province = $_POST['province'];
+  $region = $_POST['regions'];
+  $city = $_POST['cities'];
+  $country = $_POST['countries'];
+  $province = $_POST['provinces'];
   $zip_code = $_POST['zip_code'];
   $user_ID = $_POST['user_ID'];
   $email = $_POST['email'];
   $password = $_POST['password'];
   $confirm_password = $_POST['confirm_password'];
-  $role = $_POST['role'];
+  $role = $_POST['roles'];
 
   $time_created = date("H:i:s");
   $date_created = date("Y-m-d");
   $id_number = $_POST['user_ID'];
   $acc_status = '1';
-
-  if (checkContactNumber($mysqli, $contact_number)) {
-    $error_message = "The contact number is already connected to an existing account";
-    redirectWithError($error_message);
-    exit;
-  }
-
-  if (checkUserID($mysqli, $user_ID)) {
-    $error_message = "User ID already exists";
-    redirectWithError($error_message);
-    exit;
-  }
-
-  if (checkEmailAddress($mysqli, $email)) {
-    $error_message = "The email address is already connected to an existing account";
-    redirectWithError($error_message);
-    exit;
-  }
-
-  $regex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/';
-
-  if (!preg_match($regex, $password)) {
-    $error_message = "Password must be at least 8 characters long, and include at least one lowercase letter, one uppercase letter, and one special character.";
-    redirectWithError($error_message);
-    exit;
-  }
-
-  if ($password !== $confirm_password) {
-    $error_message = "Passwords do not match";
-    redirectWithError($error_message);
-    exit;
-  }
 
   $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 

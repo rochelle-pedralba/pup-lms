@@ -18,25 +18,104 @@ function showLoginInformation() {
   document.getElementById("submit").style.display = "block";
 }
 
-function checkPassword() {
-  if (document.getElementById('password').value != '') {
-    if (document.getElementById('password').value ==
-    document.getElementById('confirm_password').value) {
-      document.getElementById('submit').disabled = false;
-  } else {
-    document.getElementById('submit').disabled = true;
-    alert("Password doesn't match")
-    }
-  } else {
-    document.getElementById('submit').disabled = true;
-  }
+var pwInput = document.getElementById("password");
+var pwConfirm = document.getElementById("confirm_password");
+var lower = document.getElementById("lower");
+var upper = document.getElementById("upper");
+var number = document.getElementById("number");
+var symbol = document.getElementById("symbol");
+var minlength = document.getElementById("minlength");
+var match = document.getElementById("match");
+
+// When the user clicks on the password field, show the message box
+pwInput.onfocus = function() {
+  document.getElementById("passwordMessage").style.display = "block";
+}
+
+pwConfirm.onfocus = function() {
+  document.getElementById("passwordMessage").style.display = "block";
+}
+
+// When the user clicks outside of the password field, hide the message box
+pwInput.onblur = function() {
+  document.getElementById("passwordMessage").style.display = "none";
+}
+
+pwConfirm.onblur = function() {
+  document.getElementById("passwordMessage").style.display = "none";
+}
+
+pwInput.onkeyup = function() {
+  validatePassword(pwInput.value);
+}
+
+pwConfirm.onkeyup = function() {
+  validatePassword(pwInput.value);
 }
 
 function validatePassword(password)
 {
-    var re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-    if(!re.test(password)) {
-      alert('Password must contain at least 8 characters\nOne symbol\nAn uppercase letter\nA lowercase letter\nAnd a number')
+    var noUpper = /^(?=.*[A-Z])/;
+    var noLower = /^(?=.*[a-z])/;
+    var noNum = /^(?=.*\d)/;
+    var noSymbol = /^(?=.*[!@#$%^&*])/;
+    var minLength = /^.{8,}$/;
+    var pwValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+
+    if(noUpper.test(password)) {
+      upper.classList.remove("invalid");
+      upper.classList.add("valid");
+    } else {
+      upper.classList.remove("valid");
+      upper.classList.add("invalid");
+    }
+
+    if(noLower.test(password)) {
+      lower.classList.remove("invalid");
+      lower.classList.add("valid");
+    } else {
+      lower.classList.remove("valid");
+      lower.classList.add("invalid");
+    }
+
+    if(noNum.test(password)) {
+      number.classList.remove("invalid");
+      number.classList.add("valid");
+    } else {
+      number.classList.remove("valid");
+      number.classList.add("invalid");
+    }
+
+    if(noSymbol.test(password)) {
+      symbol.classList.remove("invalid");
+      symbol.classList.add("valid");
+    } else {
+      symbol.classList.remove("valid");
+      symbol.classList.add("invalid");
+    }
+
+    if(minLength.test(password)) {
+      minlength.classList.remove("invalid");
+      minlength.classList.add("valid");
+    } else {
+      minlength.classList.remove("valid");
+      minlength.classList.add("invalid");
+    }
+
+    if (pwInput.value == pwConfirm.value) {
+      match.classList.remove("invalid");
+      match.classList.add("valid");
+      document.getElementById('submit').disabled = false;
+    } else {
+      match.classList.remove("valid");
+      match.classList.add("invalid");
+      document.getElementById('submit').disabled = true;
+    }
+
+    if (pwValidation.test(password) && (pwInput.value == pwConfirm.value)) {
+      document.getElementById('submit').disabled = false;
+    } else {
+      document.getElementById('submit').disabled = true;
     }
 }
 
@@ -80,6 +159,10 @@ function changeField(country){
     document.getElementById('provinces').style.display = "block";
     document.getElementById('cities').style.display = "block";
 
+    $('#_regions').removeAttr('required', 'True');
+    $('#_provinces').removeAttr('required', 'True');
+    $('#_cities').removeAttr('required', 'True');
+
     places();
 
     function places() {
@@ -99,6 +182,10 @@ function changeField(country){
     document.getElementById('_regions').style.display = 'block';
     document.getElementById('_provinces').style.display = 'block';
     document.getElementById('_cities').style.display = 'block';
+
+    $('#regions').removeAttr('required', 'True');
+    $('#provinces').removeAttr('required', 'True');
+    $('#cities').removeAttr('required', 'True');
   }
 }
 
@@ -121,6 +208,12 @@ function populateCountries(countries) {
 function populateRegion(regions) {
   var regionSelect = document.getElementById('regions');
   regionSelect.innerHTML = '<option value="" selected disabled>Select a Region</option>';
+
+  var provinceSelect = document.getElementById('provinces');
+  provinceSelect.innerHTML = '<option value="" selected disabled>Select a Province</option>';
+
+  var citySelect = document.getElementById('cities');
+  citySelect.innerHTML = '<option value="" selected disabled>Select a City</option>';
   
   Object.keys(regions).forEach(function(region) {
   
