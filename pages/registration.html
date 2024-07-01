@@ -16,22 +16,20 @@
       </div>
     </header>
 
-    <div>
-      <div class="dropdown-container">
-        <h2>Select Roles</h2>
-        <select id="roles">
-          <option selected disabled>- Select -</option>
-          <option value="3">Faculty</option>
-          <option value="5">Student</option>
-        </select>
-        <div>
-          <button id="next1">next</button>
-        </div>
-      </div>
-    </div>
-
     <div class="form-container" id="registration_form">
       <form method="POST" action="../php/registration.php">
+
+        <div class="dropdown-container">
+          <h2>Select Roles</h2>
+          <select id="roles" name="roles">
+            <option selected disabled>- Select -</option>
+            <option value="3">Faculty</option>
+            <option value="5">Student</option>
+          </select>
+          <div>
+            <button id="next1">next</button>
+          </div>
+        </div>
 
         <div class="personal-information" id="personal_information">
           <h2>Personal Information</h2>
