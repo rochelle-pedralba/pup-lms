@@ -119,6 +119,22 @@ function validatePassword(password)
     }
 }
 
+function loadCampuses() {
+  fetch('../json/pupcampus.json')
+  .then((response) => response.json())
+  .then((campus) => {
+    populateCampuses(campus);
+  });
+}
+
+function loadDepartment() {
+  fetch('../json/course_department.json')
+    .then((response) => response.json())
+    .then((department) => {
+      populateDepartments(department.faculty.Department);
+    });
+}
+
 function loadCountries() {
   fetch('../json/countries.json')
   .then((response) => response.json())
@@ -147,7 +163,6 @@ function loadCities(region, province) {
     populateCities(places, region, province);
   });
 }
-
 function changeField(country){
   if (country == 'Philippines') {
 
@@ -187,6 +202,34 @@ function changeField(country){
     $('#provinces').removeAttr('required', 'True');
     $('#cities').removeAttr('required', 'True');
   }
+}
+
+// populate the options in campus dropdown
+function populateCampuses(campus) {
+  var campusSelect = document.getElementById('campus');
+  campusSelect.innerHTML = '<option value="" selected disabled>Select a Campus</option>';
+
+  campus.forEach((campus) => {
+    console.log(campus['cohort_Name']);
+
+    var option = document.createElement('option');
+    option.value = campus['cohort_Name'];
+    option.textContent = campus['cohort_Name'];
+    campusSelect.appendChild(option);
+  });
+}
+
+// populate the options in department dropdown
+function populateDepartments(departments) {
+  var departmentSelect = document.getElementById('department');
+  departmentSelect.innerHTML = '<option value="" selected disabled>Select a Department</option>';
+
+  departments.forEach(function(department) {
+    var option = document.createElement('option');
+    option.value = department;
+    option.textContent = department;
+    departmentSelect.appendChild(option);
+  });
 }
 
 // populate the options in country dropdown
@@ -258,6 +301,8 @@ function populateCities(places, region, province) {
   });
 }
 
+loadCampuses();
+loadDepartment();
 loadCountries();
 
 document.getElementById("next1").addEventListener("click", () => showPersonalDetails());
@@ -265,6 +310,7 @@ document.getElementById("next1").addEventListener("click", () => showPersonalDet
 document.getElementById("next2").addEventListener("click", () => showContactDetails());
 
 document.getElementById("next3").addEventListener("click", () => showLoginInformation());
+
 
 document.getElementById("countries").addEventListener("change", () => {
   console.log('country changed');
@@ -284,6 +330,7 @@ document.getElementById("provinces").addEventListener("change", () => {
   var region = document.getElementById('regions').value;
   loadCities(region, province);
 }, false);
+
 
 
 
