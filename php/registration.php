@@ -7,6 +7,21 @@ require_once 'includes/dbh_inc.php';
 require_once 'includes/execute_query_inc.php';
 require_once 'includes/error_model_inc.php';
 
+function campusID() {
+  $campus = $_POST['campus'];
+  
+  $json_data = file_get_contents('../json/pupcampus.json');
+  $campus_data = json_decode($json_data, true);
+  
+  foreach ($campus_data as $data) {
+    if ($data['cohort_Name'] === $campus) {
+      return $data['cohort_ID'];
+    }
+  }
+  
+  return null;
+}
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $last_name = $_POST['last_name'];
   $first_name = $_POST['first_name'];
@@ -23,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $password = $_POST['password'];
   $confirm_password = $_POST['confirm_password'];
   $role = $_POST['roles'];
+  $campus = $_POST['campus'];
 
   $time_created = date("H:i:s");
   $date_created = date("Y-m-d");
@@ -62,6 +78,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $hashed_password
   ];
 
+  $params_4 = [
+    $user_ID,
+    $campus,
+    $campus_id = campusID()
+  ];
+
   // Execute queries
   $query_1 = "INSERT INTO user_information (first_Name, last_Name, middle_Name, date_Of_Birth, mobile_Number, region, city, country, province, zip_Code, user_ID, email_Address, time_Created, date_Created, id_Number, account_Status)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -86,6 +108,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $queryResult_3 = executeQuery($mysqli, $query_3, "ss", $params_3);
 
   if (!$queryResult_3['success']) {
+    $error_message = "An internal error has occured. Please try again later or contact the administrator";
+    redirectWithError($error_message);
+    exit;
+  }
+
+  $query_4 = "INSERT INTO cohort (user_ID, cohort_Name, cohort_ID) VALUES (?, ?, ?)";
+  $queryResult_4 = executeQuery($mysqli, $query_4, "sss", $params_4);
+
+  if (!$queryResult_4['success']) {
     $error_message = "An internal error has occured. Please try again later or contact the administrator";
     redirectWithError($error_message);
     exit;
