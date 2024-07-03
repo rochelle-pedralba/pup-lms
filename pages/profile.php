@@ -14,7 +14,7 @@ if (!isset($_SESSION['user_ID'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <title>PUP eMabini | Profile</title>
 </head>
 
 <body>
@@ -39,7 +39,7 @@ if (!isset($_SESSION['user_ID'])) {
     <p><span id="email_Address"></span></p>
 
     <h3>Mobile Number:</h3>
-    <p><span id="mobile_Number"></span></p>
+    <p contenteditable="true"><span id="mobile_Number"></span></p>
 
     <h3>City:</h3>
     <p><span id="city"></span></p>
@@ -54,10 +54,11 @@ if (!isset($_SESSION['user_ID'])) {
     <p><span id="country"></span></p>
 
     <h3>Zip Code:</h3>
-    <p><span id="zip_Code"></span></p>
+    <p contenteditable="true"><span id="zip_Code"></span></p>
+
+    <button id="edit_Profile_Button">Edit Profile</button>
 
     <script src="../scripts/profile.js"></script>
-
 </body>
 
 </html>
