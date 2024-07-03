@@ -39,7 +39,7 @@ if (!isset($_SESSION['user_ID'])) {
     <p><span id="email_Address"></span></p>
 
     <h3>Mobile Number:</h3>
-    <p contenteditable="true"><span id="mobile_Number"></span></p>
+    <p><span id="mobile_Number"></span></p>
 
     <h3>City:</h3>
     <p><span id="city"></span></p>
@@ -54,9 +54,9 @@ if (!isset($_SESSION['user_ID'])) {
     <p><span id="country"></span></p>
 
     <h3>Zip Code:</h3>
-    <p contenteditable="true"><span id="zip_Code"></span></p>
+    <p><span id="zip_Code"></span></p>
 
-    <button id="edit_Profile_Button">Edit Profile</button>
+    <button id="edit_Profile_Button" onclick="redirectToEditProfile()">Edit Profile</button>
 
     <script src="../scripts/profile.js"></script>
 </body>

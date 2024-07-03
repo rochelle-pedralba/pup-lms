@@ -72,10 +72,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $user = getUser($mysqli, $user_ID);
 
     if ($user === null || !verifyPassword($password, $user)) {
-        $error_message = "Invalid email or password. Please try again.";
-        redirectWithError($error_message);
+        echo "<script>alert('Password incorrect. Please try again.');
+              window.location.href = '../pages/login.html'; // Redirect to your login page
+              </script>";
         exit;
     }
+
 
     if ($user['account_Status'] != '1') {
         $error_message = "Your account must be activated. Please contact the administrator.";
