@@ -20,12 +20,22 @@
       <form method="POST" action="../php/registration.php">
 
         <div class="dropdown-container">
-          <h2>Select Roles</h2>
+          <h2>University Information</h2>
           <select id="roles" name="roles" required>
             <option selected disabled>- Select -</option>
             <option value="3">Faculty</option>
             <option value="5">Student</option>
           </select>
+
+          <label for="campus">Campus/Branch:</label>
+            <select id="campus" name="campus" required>
+              <option selected disabled>Select a Campus</option>
+            </select>
+
+          <label for="department">Department:</label>
+            <select id="department" name="department" required>
+              <option selected disabled>Select a Department</option>
+            </select>
           <div>
             <button id="next1">next</button>
           </div>
