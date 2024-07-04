@@ -14,7 +14,7 @@ if (!isset($_SESSION['user_ID'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <title>PUP eMabini | Profile</title>
 </head>
 
 <body>
@@ -56,8 +56,9 @@ if (!isset($_SESSION['user_ID'])) {
     <h3>Zip Code:</h3>
     <p><span id="zip_Code"></span></p>
 
-    <script src="../scripts/profile.js"></script>
+    <button id="edit_Profile_Button" onclick="redirectToEditProfile()">Edit Profile</button>
 
+    <script src="../scripts/profile.js"></script>
 </body>
 
 </html>
