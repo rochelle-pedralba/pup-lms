@@ -22,7 +22,10 @@ function campusID() {
   return null;
 }
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+// Assuming user ID is obtained from session
+$user_ID = $_SESSION['user_ID'] ?? null;
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && $user_ID) {
   $last_name = $_POST['last_name'];
   $first_name = $_POST['first_name'];
   $middle_name = $_POST['middle_name'];
@@ -33,11 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $country = $_POST['countries'];
   $province = $_POST['provinces'];
   $zip_code = $_POST['zip_code'];
-  $user_ID = $_POST['user_ID'];
-  $email = $_POST['email'];
   $password = $_POST['password'];
   $confirm_password = $_POST['confirm_password'];
-  $role = $_POST['roles'];
   $campus = $_POST['campus'];
 
   $time_created = date("H:i:s");
@@ -59,8 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $country,
     $province,
     $zip_code,
-    $user_ID,
-    $email,
     $time_created,
     $date_created,
     $id_number,
@@ -69,25 +67,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   $params_2 = [
     $user_ID,
-    $role,
-    $date_created
-  ];
-
-  $params_3 = [
-    $user_ID,
     $hashed_password
   ];
 
-  $params_4 = [
+  $params_3 = [
     $user_ID,
     $campus,
     $campus_id = campusID()
   ];
 
   // Execute queries
-  $query_1 = "INSERT INTO user_information (first_Name, last_Name, middle_Name, date_Of_Birth, mobile_Number, region, city, country, province, zip_Code, user_ID, email_Address, time_Created, date_Created, id_Number, account_Status)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-  $queryResult_1 = executeQuery($mysqli, $query_1, "ssssssssssssssss", $params_1);
+  $query_1 = "UPDATE user_information 
+              SET first_Name = ?, last_Name = ?, middle_Name = ?, date_Of_Birth = ?, mobile_Number = ?, region = ?, city = ?, country = ?, province = ?, zip_Code = ?, user_ID = ?, time_Created = ?, date_Created = ?, account_Status = ?
+              where user_ID = ?";
+  $params_1[] = $user_ID;
+
+  $queryResult_1 = executeQuery($mysqli, $query_1, "sssssssssssssss", $params_1);
 
   if (!$queryResult_1['success']) {
     $error_message = "An internal error has occured. Please try again later or contact the administrator";
@@ -95,8 +90,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     exit;
   }
 
-  $query_2 = "INSERT INTO user_role (user_ID, user_Role, date_Assigned) VALUES (?, ?, ?)";
-  $queryResult_2 = executeQuery($mysqli, $query_2, "sss", $params_2);
+  $query_2 = "UPDATE user_access
+              SET user_Password = ?
+              WHERE user_ID = ?";
+  $params_2[] = $user_ID;
+
+  $queryResult_2 = executeQuery($mysqli, $query_2, "ss", $params_2);
 
   if (!$queryResult_2['success']) {
     $error_message = "An internal error has occured. Please try again later or contact the administrator";
@@ -104,19 +103,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     exit;
   }
 
-  $query_3 = "INSERT INTO user_access (user_ID, user_Password) VALUES (?, ?)";
-  $queryResult_3 = executeQuery($mysqli, $query_3, "ss", $params_3);
+  $query_3 = "UPDATE cohort 
+              SET cohort_Name = ?, cohort_ID = ? 
+              WHERE user_ID = ?";
+
+$params_3[] = $user_ID;
+
+  $queryResult_3 = executeQuery($mysqli, $query_3, "sss", $params_3);
 
   if (!$queryResult_3['success']) {
-    $error_message = "An internal error has occured. Please try again later or contact the administrator";
-    redirectWithError($error_message);
-    exit;
-  }
-
-  $query_4 = "INSERT INTO cohort (user_ID, cohort_Name, cohort_ID) VALUES (?, ?, ?)";
-  $queryResult_4 = executeQuery($mysqli, $query_4, "sss", $params_4);
-
-  if (!$queryResult_4['success']) {
     $error_message = "An internal error has occured. Please try again later or contact the administrator";
     redirectWithError($error_message);
     exit;
