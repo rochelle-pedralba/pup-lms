@@ -1,0 +1,65 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1, h3 {
+  text-align: center;
+}
+
+h4 {
+  text-align: right !important;
+  margin-right: 50px;
+  margin-top: 20px;
+}
+
+.year-section-container {
+  margin-top: 20px;
+}
+
+/*------------------------     ENROLL STUDENTS    ---------------------*/
+
+#enroll_students {
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(201, 201, 201);
+  height: 500px;
+  width: auto;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+#enroll_students .first-column {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  background-color: rgb(170, 170, 170);
+  margin: 20px;
+}
+
+.second-column {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  background-color: rgb(170, 170, 170);
+  margin: 20px;
+}
+
+/*------------------------     ENROLL STUDENTS    ---------------------*/
+
+#unenroll_students {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(201, 201, 201);
+  height: 500px;
+  width: auto;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+#unenroll_students h2 {
+  text-align: center;
+  margin-top: 20px;
+}
