@@ -19,24 +19,24 @@ function getUserData($mysqli, $user_ID): ?array
 $user_ID = $_SESSION['user_ID'] ?? null;
 
 if ($user_ID) {
-    $userData = getUserData($mysqli, $user_ID);
+    $user_Data = getUserData($mysqli, $user_ID);
 
-    if ($userData) {
-        $formattedDate = date("Y-m-d", strtotime($userData['date_Of_Birth']));
+    if ($user_Data) {
+        $formatted_Date = date("Y-m-d", strtotime($user_Data['date_Of_Birth']));
         echo json_encode([
-            'user_ID' => $userData['user_ID'],
-            'id_Number' => $userData['id_Number'],
-            'first_Name' => $userData['first_Name'],
-            'middle_Name' => $userData['middle_Name'],
-            'last_Name' => $userData['last_Name'],
-            'date_Of_Birth' => $formattedDate,
-            'email_Address' => $userData['email_Address'],
-            'mobile_Number' => $userData['mobile_Number'],
-            'city' => $userData['city'],
-            'province' => $userData['province'],
-            'region' => $userData['region'],
-            'country' => $userData['country'],
-            'zip_Code' => $userData['zip_Code']
+            'user_ID' => $user_Data['user_ID'],
+            'id_Number' => $user_Data['id_Number'],
+            'first_Name' => $user_Data['first_Name'],
+            'middle_Name' => $user_Data['middle_Name'],
+            'last_Name' => $user_Data['last_Name'],
+            'date_Of_Birth' => $formatted_Date,
+            'email_Address' => $user_Data['email_Address'],
+            'mobile_Number' => $user_Data['mobile_Number'],
+            'city' => $user_Data['city'],
+            'province' => $user_Data['province'],
+            'region' => $user_Data['region'],
+            'country' => $user_Data['country'],
+            'zip_Code' => $user_Data['zip_Code']
         ]);
     } else {
         redirectWithError('User Not Found Error. Please try again later or contact the administrator.');

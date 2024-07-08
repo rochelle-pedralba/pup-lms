@@ -6,7 +6,6 @@ require_once 'includes/execute_query_inc.php';
 require_once 'includes/config_session_inc.php';
 require_once 'includes/error_model_inc.php';
 
-// Function to update user data
 function updateUserData($mysqli, $user_ID, $mobile, $email, $country, $region, $province, $city, $zip_code)
 {
     $query = "UPDATE user_information 
@@ -17,11 +16,9 @@ function updateUserData($mysqli, $user_ID, $mobile, $email, $country, $region, $
     return $queryResult;
 }
 
-// Assuming user ID is obtained from session
 $user_ID = $_SESSION['user_ID'] ?? null;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && $user_ID) {
-    // Collect form data
     $mobile = $_POST['mobile'];
     $email = $_POST['email'];
     $zip_code = $_POST['zip_code'];
@@ -40,7 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $user_ID) {
 
     $queryResult = updateUserData($mysqli, $user_ID, $mobile, $email, $country, $region, $province, $city, $zip_code);
 
-    // Update user data in the database
     if ($queryResult['success']) {
         echo json_encode(['status' => 'success', 'message' => 'Profile updated successfully']);
     } else {
