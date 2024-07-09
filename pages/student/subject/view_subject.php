@@ -5,7 +5,7 @@
   require_once '../../../php/includes/execute_query_inc.php';
   require_once '../../../php/includes/error_model_inc.php';
 
-  $creator_ID = "2021XXXXXXXX";
+  $creator_ID = "202110273MN0";
 
   // creator_ID yung user_ID ng professor
   // Palagyan nalang din muna sa db niyo sa subject table, di ko pa naiinform sa grp nila jasper
@@ -91,10 +91,11 @@
         <h3>Semester  A.Y.</h3>
       </div>
       <div class="button-container">
-        <button>Edit Class</button>
+        <button>View Classmates</button>
       </div>
     </div>
 
+    <!-- Nilagyan ko lang laman para malagyan ng css -->
     <div class="placeholder-container">
       <div class="content-placeholder">
       </div>
