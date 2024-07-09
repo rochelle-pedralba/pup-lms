@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUP | Admin's Overview</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="../../styles/admin_overview.css">
+    <script src="../../scripts/admin_overview.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Admin's Overview</h1>
+            <h2>Welcome, Admin!</h2>
+        </div>
+        <div class="overview-grid" id="overview-grid">
+            <div class="overview-item" onclick="createSubject()">
+                <div class="overview-header">
+                    <h3>Create Subject</h3>
+                </div>
+                <div class="overview-description">
+                    <p>Set up new subjects and assign faculty members with this feature.
+                        Ensure each subject has a designated instructor and all required parts, such as academic year and year and section</p>
+                </div>
+            </div>
+            <div class="overview-item" onclick="updateSubject()">
+                <div class="overview-header">
+                    <h3>Update Subject</h3>
+                </div>
+                <div class="overview-description">
+                    <p>Manage and revise existing subjects with the Update Subject feature. Assign or reassign faculty members, update course description, etc. 
+                        to ensure the subject remains current and meets educational standards. </p>
+                </div>
+            </div>
+            <div class="overview-item" onclick="updateCourse()">
+                <div class="overview-header">
+                    <h3>Update Course</h3>
+                </div>
+                <div class="overview-description">
+                    <p>Keep your academic offerings up-to-date with the Update Course Lists feature. 
+                        Modify, add, or remove courses such as BSCS or BSIT to reflect the latest curriculum changes.</p>
+                </div>
+            </div>
+            <div class="overview-item" onclick="updateCohort()">
+                <div class="overview-header">
+                    <h3>Update Cohort</h3>
+                </div>
+                <div class="overview-description">
+                    <p>Maintain accurate records of the branches and campuses with the Update Cohort Lists feature. 
+                        Add, modify, or remove cohort details to reflect the current organizational structure.</p>
+                </div>
+            </div>
+            <div class="overview-item" onclick="updateDepartment()">
+                <div class="overview-header">
+                    <h3>Update Department</h3>
+                </div>
+                <div class="overview-description">
+                    <p>Manage various colleges with the Update Departments feature. 
+                        Add, edit, or remove department details to keep your academic structure up-to-date. </p>
+                </div>
+            </div>
+            <div class="overview-item" onclick="enrollStudent()">
+                <div class="overview-header">
+                    <h3>Enroll Student</h3>
+                </div>
+                <div class="overview-description">
+                    <p>Officially enroll students in their designated courses, 
+                        ensuring they are registered for the correct classes and schedules</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>                
