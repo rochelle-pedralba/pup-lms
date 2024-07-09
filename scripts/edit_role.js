@@ -5,19 +5,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const hiddenUserIDField = document.getElementById('user_ID_hidden');
 
     const roles = [
-        { value: '1', label: 'Manager' },
-        { value: '2', label: 'Course Creator' },
-        { value: '3', label: 'Course Specialist' },
-        { value: '4', label: 'Non-Editing Teacher' },
-        { value: '5', label: 'Student' }
+        { value: '1', label: 'Admin' },
+        { value: '2', label: 'Faculty' },
+        { value: '3', label: 'None-Editing Teacher' },
+        { value: '4', label: 'Student' },
     ];
 
     const roleMappings = {
-        '1': 'Manager',
-        '2': 'Course Creator',
-        '3': 'Course Specialist',
-        '4': 'Non-Editing Teacher',
-        '5': 'Student',
+        '1': 'Admin',
+        '2': 'Faculty',
+        '3': 'Non-Editing Teacher',
+        '4': 'Student',
         'NONE': 'NONE'
     };
 
