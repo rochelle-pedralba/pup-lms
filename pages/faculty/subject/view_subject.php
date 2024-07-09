@@ -91,7 +91,7 @@
         <h3>Semester  A.Y.</h3>
       </div>
       <div class="button-container">
-        <button>Enroll Student</button>
+        <button>Edit Class</button>
       </div>
     </div>
 
