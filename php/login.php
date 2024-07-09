@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($user === null || !verifyPassword($password, $user)) {
         echo "<script>alert('Password incorrect. Please try again.');
-              window.location.href = '../pages/login.html'; // Redirect to your login page
+              window.location.href = '../pages/login.html'; 
               </script>";
         exit;
     }
@@ -93,6 +93,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($user['first_Access'] === null) {
         setFirstAccess($mysqli, $user_ID);
+        header("Location: ../pages/registration.html");
+        $mysqli->close();
+        exit;
+    }
+
+    if ($_SESSION["user_Role"] === '1') {
+        header("Location: ../pages/index_manager.php");
+        $mysqli->close();
+        exit;
     }
 
     header("Location: ../pages/index.php");
@@ -100,6 +109,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     exit;
 }
 
-$error_message = "Form submission method not allowed";
+$error_message = "Invalid submission method. Form submission method not allowed";
 redirectWithError($error_message);
 exit;
