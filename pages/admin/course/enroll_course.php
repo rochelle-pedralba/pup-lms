@@ -44,18 +44,39 @@
         <div class="selected-student-container">
           <div class="title">
             <h3>Selected Student</h3>
-            <input type="text" id="ay" name="sy" placeholder="Enter School Year" pattern="\d{4}" title="Enter a valid School Year" onblur="validateSY(this);">
-            <div id="syError" class="error"></div>
+            <div>
+              <input type="text" id="ay" name="sy" placeholder="Enter School Year" pattern="\d{4}" title="Enter a valid School Year" onblur="validateSY(this);">
+              <div id="syError" class="error"></div>
 
-            <input type="text" id="semester" name="semester" placeholder="Enter Semester" pattern="\d{1}" title="Enter the semester" onblur="validateSemester(this);">
-            <div id="semesterError" class="error"></div>
-            <input id="enroll_student" type="submit" value="Enroll Student" disabled/>
+              <input type="text" id="semester" name="semester" placeholder="Enter Semester" pattern="\d{1}" title="Enter the semester" onblur="validateSemester(this);">
+              <div id="semesterError" class="error"></div>
+              <input id="enroll_student" type="submit" value="Enroll Student" disabled/>
+            </div>
           </div>
           <div id="selected_student"></div>
         </div>
+
+        <div id="unenroll_students">
+          <div class="first-column">
+          <h2>Student Enrolled</h2>
+          <div id = "search_student_">
+            <form method="POST">
+            <input type="text" name="studentID" placeholder="Enter Student ID">
+            <button type="submit">Search</button>
+            </form>
+        </div>
+
+        <div id="searchedStudentInfo">
+          <div class="display-student">
+            <div id="student_list_">
+              <?php
+                require_once '../../../php/unenroll_in_course.php'; 
+              ?>
+            </div>
+          </div>
+        </div>
+    </div>
     </div>
 
-    <div id="unenroll_students">
-    </div>
   </body>
 </html>
