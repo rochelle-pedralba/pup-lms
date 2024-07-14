@@ -19,7 +19,7 @@ $_SESSION['semester'] = $semester;
 <html>
 <head>
   <link rel="stylesheet" href="../../styles/update_class.css">
-  <script src="../../scripts/unenroll_course.js"></script>
+  <script src="../../../scripts/unenroll_course.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
@@ -57,7 +57,7 @@ $_SESSION['semester'] = $semester;
   </div>
 
     <div id="unenroll_students">
-        <div class="first-column">
+      <div class="first-column">
         <h2>Student Enrolled</h2>
         <div id = search_student>
             <form method="POST">

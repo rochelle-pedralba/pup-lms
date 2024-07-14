@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../../../styles/admin_add.css">
+    </head>
+
+    <body>
+        <header>
+            <div class="logo">
+              <img src="../../../assets/PUP_logo.png" alt="PUP Logo">
+            </div>
+            <div class="title">
+              <h1>PUP Learning Management System</h1>
+            </div>
+        </header>
+
+        <div class="add-container">
+            <div class="college_info">
+                <form method="POST" action="../../../php/add_college.php">
+                    <h2>Add a New College</h2>
+
+                    <label for="college_ID">College ID:</label>
+                    <input type="text" id="college_ID" name="college_ID" maxlength="10" placeholder="ex.: CCIS" required><br><br>
+
+                    <label for="college_name">College Name:</label>
+                    <input type="text" id="college_name" name="college_name" maxlength="50" required><br><br>
+
+                    <label for="college_desc">College Description:</label>
+                    <input type="text" id="college_desc" name="college_desc" maxlength="100" required><br><br>
+
+                <input type="submit" value="Submit" id="submit">
+                </form>
+            </div>
+        </div>
+
+        <footer id="footer">
+            <div>
+              <p>&copy; 2021 PUP Learning Management System</p>
+            </div>
+        </footer>
+    </body>
+</html> 
