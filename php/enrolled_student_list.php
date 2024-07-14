@@ -40,37 +40,6 @@
         echo "Student with ID " . htmlspecialchars($studentID) . " is not existing or is already enrolled in the subject.";
     }
 
-    if (isset($data['action']) && $data['action'] === 'enroll') {
-      $studentData = $data['studentData'];
-  
-      $responses = []; // Initialize an array to store responses for each student
-  
-      foreach ($studentData as $student) {
-
-        if (!isset($student['studentID'])) {
-            $responses[] = ['studentID' => $student['studentID'], 'status' => 'error', 'message' => 'Missing studentID'];
-            continue; // Skip this iteration if studentID is missing
-        }
-  
-        $studentID = $student['studentID'];
-        $insertQuery = "INSERT INTO subject_enrolled (course_ID, subject_ID, cohort_ID, ay, semester, year, section, student_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-  
-        if ($stmt = $mysqli->prepare($insertQuery)) {
-            $stmt->bind_param("ssssssss", $courseID, $subjectID, $cohortID, $ay, $semester, $year, $section, $studentID);
-  
-            if ($stmt->execute()) {
-                $responses[] = ['studentID' => $studentID, 'status' => 'success', 'message' => 'Data inserted successfully.'];
-            } else {
-                $responses[] = ['studentID' => $studentID, 'status' => 'error', 'message' => 'Failed to insert data.'];
-            }
-            $stmt->close();
-        } else {
-            $responses[] = ['studentID' => $studentID, 'status' => 'error', 'message' => 'Failed to prepare the database statement.'];
-        }
-      }
-      echo json_encode($responses);
-    }
-
 } else {
     echo "Student ID not provided.";
 }
