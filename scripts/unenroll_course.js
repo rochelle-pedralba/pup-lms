@@ -3,6 +3,6 @@ function unenrollFunc(studentName) {
     if (unenroll) {
         var encodedStudentName = encodeURIComponent(studentName);  
         // Redirect to PHP script with encoded studentName as a query parameter
-        window.location.href = '../../php/archive_enrolled_course.php?studentName=' + encodedStudentName;
+        window.location.href = '../../../php/archive_enrolled_course.php?studentName=' + encodedStudentName;
     }
 }
