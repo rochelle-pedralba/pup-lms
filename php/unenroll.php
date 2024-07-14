@@ -18,7 +18,7 @@ $params_1 = [$subjectID, $semester, $year, $section, $course_ID, $cohort_ID];
 function EnrolledStudent($mysqli, $params_1): ?array
 {
     $query = "SELECT user_ID FROM subject_enrolled 
-              WHERE subject_ID = ? AND semester = ? AND year_Level = ? AND section = ? AND course_ID = ? AND cohort_ID = ?";
+              WHERE subject_ID = ? AND semester = ? AND year = ? AND section = ? AND course_ID = ? AND cohort_ID = ?";
     $queryResult = executeQuery($mysqli, $query, "ssssss", $params_1);
     
     if (!$queryResult['success']) {
