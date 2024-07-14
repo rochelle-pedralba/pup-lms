@@ -37,42 +37,6 @@ session_start();
         echo "Student with ID " . htmlspecialchars($studentID) . " is not existing or is already enrolled in the course.";
     }
 
-    if (isset($data['action']) && $data['action'] === 'enroll') {
-
-        $ay = $_POST['ay'] ?? '';
-        $semester = $_POST['semester'] ?? '';
-        $studentData = $_POST['studentData'] ?? '';
-
-        $responses = []; // Initialize an array to store responses for each student
-    
-        foreach ($studentData as $student) {
-            // Check if 'studentID' key exists in the $student array
-            if (!isset($student['studentID'])) {
-                $responses[] = ['studentID' => '', 'status' => 'error', 'message' => 'Missing studentID'];
-                continue; // Skip this iteration if 'studentID' is missing
-            }
-        
-            $studentID = $student['studentID'];
-            // Assuming $courseID, $ay, $semester, and $cohortID are defined elsewhere in your script
-            $insertQuery = "INSERT INTO course_enrolled (user_ID, course_ID, ay, semester, cohort_ID) VALUES (?, ?, ?, ?, ?)";
-        
-            if ($stmt = $mysqli->prepare($insertQuery)) {
-                // Bind the correct variables. Ensure these are defined and hold the correct values.
-                $stmt->bind_param("sssss", $studentID, $courseID, $ay, $semester, $cohortID);
-        
-                if ($stmt->execute()) {
-                    $responses[] = ['studentID' => $studentID, 'status' => 'success', 'message' => 'Data inserted successfully.'];
-                } else {
-                    $responses[] = ['studentID' => $studentID, 'status' => 'error', 'message' => 'Failed to insert data.'];
-                }
-                $stmt->close();
-            } else {
-                $responses[] = ['studentID' => $studentID, 'status' => 'error', 'message' => 'Failed to prepare the database statement.'];
-            }
-        }
-        echo json_encode($responses);
-      }
-
 } else {
     echo "Student ID not provided.";
 }
