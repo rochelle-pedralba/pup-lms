@@ -13,7 +13,6 @@
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $studentID = $_POST['studentID'];
-    echo $studentID;
 
     // Query to check if the student is enrolled in the course but not in the subject
     $query = "SELECT ce.user_ID, ui.first_Name, last_Name, ui.email_Address 
@@ -39,7 +38,7 @@
         echo "</table>";
         echo "</div>";
     } else {
-        echo "No student found with ID " . htmlspecialchars($studentID) . " who is enrolled in the course but not in the subject.";
+        echo "Student with ID " . htmlspecialchars($studentID) . " is not existing or is already enrolled in the subject.";
     }
 } else {
     echo "Student ID not provided.";
