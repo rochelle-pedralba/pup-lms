@@ -154,9 +154,23 @@ $(document).ready(function() {
     
     if (isConfirmed) {
       if (studentData) {
-        // Convert the data to JSON format if it's not already
         try {
           studentData = JSON.parse(studentData);
+
+          console.log("Enrolling students: " + JSON.stringify(studentData));
+
+          const xhr = new XMLHttpRequest();
+          xhr.open('POST', '../../../php/enroll_subject.php', true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onreadystatechange = function() {
+              if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+
+                  localStorage.removeItem('chosenStudents');
+                  window.location.reload();
+              }
+          }
+          xhr.send(JSON.stringify({studentData, action: 'enroll'}));
+
         } catch (e) {
           console.error("Error parsing data from local storage:", e);
           return;
@@ -165,22 +179,7 @@ $(document).ready(function() {
             alert("No selected students.");
         }
     }
-    $.ajax({
-      url: '', // Replace with the path to your PHP script
-      type: 'POST',
-      contentType: 'application/json', // Specify the content type as JSON
-      data: {
-        studentData: JSON.stringify(studentData),
-        action: 'enroll'
-      },
-      success: function(response) {
-        alert('Student enrolled successfully');
-      },
-      error: function(xhr, status, error) {
-        // Handle error
-        console.error('Error:', error);
-        }
-    });
 });
 });
+
 
