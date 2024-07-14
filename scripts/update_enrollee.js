@@ -126,24 +126,18 @@ $(document).ready(function() {
     var studentID = $("#studentSearch").val();
 
     if (studentID) {
-      try {
-        studentData = JSON.parse(studentData);
-  
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', '../php/student_list.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onreadystatechange = function() {
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                localStorage.removeItem('chosenStudents');
-                //window.location.reload();
+        $.ajax({
+            url: '', // Assuming the AJAX handler is in the same file
+            type: 'POST',
+            data: {
+              studentID: studentID,},
+            success: function(response) {
+              console.log("Success");
+            },
+            error: function(xhr, status, error) {
+                alert("Error searching for student.");
             }
-        }
-        xhr.send(JSON.stringify({action: 'search', studentID}));
-  
-      } catch (e) {
-        console.error("Error parsing data from local storage:", e);
-        return;
-      }  
+        });
     } else {
         alert("Please enter a student ID.");
     }
@@ -167,7 +161,7 @@ $(document).ready(function() {
           studentData = JSON.parse(studentData);
 
           const xhr = new XMLHttpRequest();
-          xhr.open('POST', '../../../php/student_list.php', true);
+          xhr.open('POST', '../../../php/enroll_course.php', true);
           xhr.setRequestHeader('Content-Type', 'application/json');
           xhr.onreadystatechange = function() {
               if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
