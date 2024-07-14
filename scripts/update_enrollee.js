@@ -166,7 +166,7 @@ $(document).ready(function() {
           xhr.onreadystatechange = function() {
               if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                   localStorage.removeItem('chosenStudents');
-                  window.location.reload();
+                  //window.location.reload();
               }
           }
           xhr.send(JSON.stringify({studentData, action: 'enroll', ay, semester}));
