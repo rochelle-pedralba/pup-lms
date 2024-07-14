@@ -1,26 +1,15 @@
-<!--<?php
+<?php 
 
-  require_once '../../../php/includes/dbh_inc.php';
-  require_once '../../../php/includes/execute_query_inc.php';
-  require_once '../../../php/includes/error_model_inc.php';
+  session_start();
 
-  $creator_ID = "202110273MN0";
-
-  $querySubject = "SELECT subject_Name, subject_ID FROM subject WHERE creator_ID = ?";
-  $queryResult = executeQuery($mysqli, $querySubject, "s", [$creator_ID]);
-
-  if (!$queryResult['success']) {
-    $error_message = "An error has occured. Please try again later or contact the administrator.";
-    redirectWithError($error_message);
-    exit;
-  }
-
-  $row = $queryResult['result']->fetch_assoc();
-
-  $subjectName = $row['subject_Name'];
-  $subjectID = $row['subject_ID'];
-
-?>-->
+  $_SESSION["course_ID"] = "BSCS";
+  $_SESSION["subject_ID"] = "COMP10173";
+  $_SESSION["cohort_ID"] = "PUPSJ";
+  $_SESSION["ay"] = "2324";
+  $_SESSION["semester"] = "2";
+  $_SESSION["year"] = "3";
+  $_SESSION["section"] = "5";
+?>
 
 <!DOCTYPE html>
 <html>
@@ -35,40 +24,40 @@
       </div>
       <div>
         <h3 class="year-section-container">Year and Section</h3>
-        <h1><?php echo $subjectID.': '.$subjectName; ?></h1>
+        <h1>Subject ID: Subject Name</h1>
         <h3>Semester  A.Y.</h3>
       </div>
     </div>
 
     <div id="enroll_students">
-      <div class="first-column">
-        <div>
-          <input type="search">
-          <select>
-            <option value="1">Student ID</option>
-            <option value="2">Email Address</option>
-            <option value="3">Last Name</option>
-          </select>
+      <div class="first-row">
+        <!-- Display all BSCS students -->
+        <div id="search_student">
+        <form method="POST">
+          <input type="text" id="studentSearch" name="studentID" placeholder="Enter Student ID">
+          <button type="submit" id="searchBtn">Search</button>
+        </form>
+        <div id="searchedStudentInfo"></div>
+
+          <div class="display-student">
+            <div id="student_list">
+              <?php
+                require_once '../../../php/student_list.php'; 
+              ?>
+            </div>
+          </div>
         </div>
 
-        <table id="student_list">
-        </table>
-      </div>
-
-      <div class="second-column">
-        <table id="selected_students">
-          <h2>Selected Students</h2>
-        </table>
-      </div>
+        <div class="selected-student-container">
+          <div class="title">
+            <h3>Selected Student</h3>
+            <button id="enroll_student">Enroll</button>
+          </div>
+          <div id="selected_student"></div>
+        </div>
     </div>
 
     <div id="unenroll_students">
-      <div class="first-column">
-        <h2>Student Enrolled</h2>
-        <table id="enrolled_student">
-        </table>
-      </div>
     </div>
   </body>
-</html>
 </html>
