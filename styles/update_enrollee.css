@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -22,9 +23,12 @@ h4 {
 
 #enroll_students {
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center ;
   background-color: rgb(201, 201, 201);
-  height: 500px;
-  width: auto;
+  height: 100%;
+  width: 100%;
   margin: 20px;
   border-radius: 10px;
 }
@@ -35,7 +39,7 @@ h4 {
   justify-content: space-between;
   margin: 20px;
   height: 85vh;
-  width: 100%;
+  width: 80%;
 }
 
 #search_student {
@@ -77,7 +81,7 @@ h4 {
 
 .selected-student-container .title {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   padding: 10px;
 }
@@ -112,68 +116,11 @@ h4 {
   padding: 10px;
 }
 
-/*------------------------     ENROLL STUDENTS    ---------------------*/
-.display-student {
-  display: flex;
-  flex-direction: column;
-  height: 80%;
-  width: 100%;
-  padding: 10px;
+#enroll_student {
+  height: 20px;
 }
 
-.display-student table {
-  width: 100%;
-  padding: 10px;
-}
-
-.display-student .checkBox {
-  width: 10px !important;
-}
-
-.selected-student-container {
-  display: flex;
-  flex-direction: column;
-  height: 95%;
-  width: 100%;
-  margin-top: 20px;
-  background-color: rgb(171, 171, 171);
-  border-radius: 10px;
-}
-
-.selected-student-container .title {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 10px;
-}
-
-#selected_student .removeStudent {
-  display: absolute;
-  width: 10px !important;
-}
-
-.student-information {
-  display: absolute;
-  flex-direction: row;
-  padding: 10px;
-}
-
-#selected_student {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  width: 100%;
-  padding: 10px;
-}
-
-.row-selected-student {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  padding: 10px;
-}
-
-.row-selected-student, td, tr {
+.semester-sy-form input {
   padding: 10px;
 }
 
@@ -183,37 +130,32 @@ h4 {
   display: flex;
   flex-direction: column;
   background-color: rgb(201, 201, 201);
-  height: 95%;
-  width: 70%;
+  height: 200px;
+  width: auto;
   margin: 20px;
   border-radius: 10px;
 }
 
-#unenroll_students h2 {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.unenroll-student-container {
+#student_list_ {
   display: flex;
   flex-direction: column;
+  margin: 20px;
   height: 95%;
   width: 100%;
-  margin-top: 20px;
   background-color: rgb(171, 171, 171);
   border-radius: 10px;
 }
 
-#enrolled_student{
+#search_student_ {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  width: 100%;
-  padding: 5px;
+  height: 100px;
+  border-radius: 10px;
 }
 
-#enrolled_student tr{
+.row-selected-student {
+  display: flex;
+  flex-direction: row;
   justify-content: space-evenly;
-  width: 100%;
-  padding: 0px;
+  padding: 10px;
 }
