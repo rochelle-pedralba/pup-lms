@@ -22,7 +22,7 @@ function updateUserRole($mysqli, $user_ID, $new_Role, $current_Role)
 }
 
 if ($_SESSION['user_Role'] !== '1') {
-    $error_message = "Permission denied. Only a manager can modify user role.";
+    $error_message = "Permission denied. Only an admin can modify user role.";
     redirectWithError($error_message);
     exit;
 }

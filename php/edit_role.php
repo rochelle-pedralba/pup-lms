@@ -44,7 +44,7 @@ $editor_ID = $_SESSION['user_ID'] ?? null;
 $editor_data = getEditorData($mysqli, $editor_ID);
 
 if ($editor_data['user_Role'] != '1') {
-    echo json_encode(['error' => 'Permission denied. Only a manager can modify user role.']);
+    echo json_encode(['error' => 'Permission denied. Only an admin can modify user role.']);
     exit;
 }
 
