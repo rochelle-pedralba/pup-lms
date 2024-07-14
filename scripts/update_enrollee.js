@@ -161,7 +161,7 @@ $(document).ready(function() {
           studentData = JSON.parse(studentData);
 
           const xhr = new XMLHttpRequest();
-          xhr.open('POST', '../../../php/enroll_course.php', true);
+          xhr.open('POST', '../../../php/update_student_course.php', true);
           xhr.setRequestHeader('Content-Type', 'application/json');
           xhr.onreadystatechange = function() {
               if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
