@@ -24,28 +24,98 @@ h4 {
 #enroll_students {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center ;
   background-color: rgb(201, 201, 201);
-  height: 500px;
-  width: auto;
+  height: 100%;
+  width: 100%;
   margin: 20px;
   border-radius: 10px;
 }
 
-#enroll_students .first-column {
+.first-row {
   display: flex;
-  flex-direction: column;
-  width: 50%;
-  background-color: rgb(170, 170, 170);
+  flex-direction: row;
+  justify-content: space-between;
   margin: 20px;
+  height: 85vh;
+  width: 100%;
 }
 
-.second-column {
+#search_student {
   display: flex;
   flex-direction: column;
-  width: 50%;
-  background-color: rgb(170, 170, 170);
   margin: 20px;
+  height: 95%;
+  width: 100%;
+  background-color: rgb(171, 171, 171);
+  border-radius: 10px;
 }
+
+.display-student {
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  width: 100%;
+  padding: 10px;
+}
+
+.display-student table {
+  width: 100%;
+  padding: 10px;
+}
+
+.display-student .checkBox {
+  width: 10px !important;
+}
+
+.selected-student-container {
+  display: flex;
+  flex-direction: column;
+  height: 95%;
+  width: 100%;
+  margin-top: 20px;
+  background-color: rgb(171, 171, 171);
+  border-radius: 10px;
+}
+
+.selected-student-container .title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+#selected_student .removeStudent {
+  display: absolute;
+  width: 10px !important;
+}
+
+.student-information {
+  display: absolute;
+  flex-direction: row;
+  padding: 10px;
+}
+
+#selected_student {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 100%;
+  padding: 10px;
+}
+
+.row-selected-student {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 10px;
+}
+
+.row-selected-student, td, tr {
+  padding: 10px;
+}
+
 
 /*------------------------     ENROLL STUDENTS    ---------------------*/
 
@@ -57,9 +127,4 @@ h4 {
   width: auto;
   margin: 20px;
   border-radius: 10px;
-}
-
-#unenroll_students h2 {
-  text-align: center;
-  margin-top: 20px;
 }
