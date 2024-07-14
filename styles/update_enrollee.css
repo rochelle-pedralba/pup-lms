@@ -1,0 +1,137 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1, h3 {
+  text-align: center;
+}
+
+h4 {
+  text-align: right !important;
+  margin-right: 50px;
+  margin-top: 20px;
+}
+
+.year-section-container {
+  margin-top: 20px;
+}
+
+/*------------------------     ENROLL STUDENTS    ---------------------*/
+
+#enroll_students {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center ;
+  background-color: rgb(201, 201, 201);
+  height: 100%;
+  width: 100%;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+.first-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px;
+  height: 85vh;
+  width: 100%;
+}
+
+#search_student {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  height: 95%;
+  width: 100%;
+  background-color: rgb(171, 171, 171);
+  border-radius: 10px;
+}
+
+.display-student {
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  width: 100%;
+  padding: 10px;
+}
+
+.display-student table {
+  width: 100%;
+  padding: 10px;
+}
+
+.display-student .checkBox {
+  width: 10px !important;
+}
+
+.selected-student-container {
+  display: flex;
+  flex-direction: column;
+  height: 95%;
+  width: 100%;
+  margin-top: 20px;
+  background-color: rgb(171, 171, 171);
+  border-radius: 10px;
+}
+
+.selected-student-container .title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+#selected_student .removeStudent {
+  display: absolute;
+  width: 10px !important;
+}
+
+.student-information {
+  display: absolute;
+  flex-direction: row;
+  padding: 10px;
+}
+
+#selected_student {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 100%;
+  padding: 10px;
+}
+
+.row-selected-student {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 10px;
+}
+
+.row-selected-student, td, tr {
+  padding: 10px;
+}
+
+#enroll_student {
+  height: 20px;
+}
+
+.semester-sy-form input {
+  padding: 10px;
+}
+
+/*------------------------     ENROLL STUDENTS    ---------------------*/
+
+#unenroll_students {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(201, 201, 201);
+  height: 500px;
+  width: auto;
+  margin: 20px;
+  border-radius: 10px;
+}
