@@ -1,4 +1,5 @@
 <?php 
+
 require_once 'includes/dbh_inc.php';
 require_once 'includes/execute_query_inc.php';
 require_once 'includes/error_model_inc.php';
@@ -47,7 +48,7 @@ function EnrolledStudentCourse($mysqli, $params_1) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $course_ID = $_SESSION["course"];
+    $course_ID = $_SESSION["course_ID"];
     $ay = $_SESSION["ay"];
     $semester = $_SESSION["semester"];
     $user_ID = $_POST["studentID"];
