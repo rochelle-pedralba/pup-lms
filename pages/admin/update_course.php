@@ -57,7 +57,7 @@ $_SESSION['semester'] = $semester;
   </div>
 
     <div id="unenroll_students">
-        <div class="first-column">
+      <div class="first-column">
         <h2>Student Enrolled</h2>
         <div id = search_student>
             <form method="POST">
