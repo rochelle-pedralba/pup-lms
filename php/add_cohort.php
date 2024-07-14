@@ -12,7 +12,7 @@ function sanitize_input($data) {
 }
 
 $cohort_ID = isset($_POST['cohort_ID']) ? sanitize_input($_POST['cohort_ID']) : null;
-$user_ID = isset($_POST['user_ID']) ? sanitize_input($_POST['user_ID']) : null;
+$creator_ID = isset($_POST['creator_ID']) ? sanitize_input($_POST['creator_ID']) : null;
 $cohort_name = isset($_POST['cohort_name']) ? sanitize_input($_POST['cohort_name']) : null;
 $cohort_size = isset($_POST['cohort_size']) ? sanitize_input($_POST['cohort_size']) : null;
 
@@ -25,17 +25,17 @@ function record_exists($mysqli, $table, $column, $value) {
     return $count > 0;
 }
 
-function add_cohort($mysqli, $cohort_ID, $user_ID, $cohort_name, $cohort_size) {
-    if (!record_exists($mysqli, 'USER_INFORMATION', 'user_ID', $user_ID)) {
-        return "Error: USER ID does not exist.";
+function add_cohort($mysqli, $cohort_ID, $creator_ID, $cohort_name, $cohort_size) {
+    if (!record_exists($mysqli, 'COHORT', 'creator_ID', $creator_ID)) {
+        return "Error: CREATOR ID does not exist.";
     }
 
     if (record_exists($mysqli, 'COHORT', 'cohort_ID', $cohort_ID)) {
         return "Error: COHORT already exists.";
     }
 
-    $sql = $mysqli->prepare("INSERT INTO COHORT (cohort_ID, user_ID, cohort_Name, cohort_Size) VALUES (?, ?, ?, ?)");
-    $sql->bind_param("ssss", $cohort_ID, $user_ID, $cohort_name, $cohort_size);
+    $sql = $mysqli->prepare("INSERT INTO COHORT (cohort_ID, creator_ID, cohort_Name, cohort_Size) VALUES (?, ?, ?, ?)");
+    $sql->bind_param("ssss", $cohort_ID, $creator_ID, $cohort_name, $cohort_size);
     
     if ($sql->execute()) {
         return true;
@@ -45,9 +45,9 @@ function add_cohort($mysqli, $cohort_ID, $user_ID, $cohort_name, $cohort_size) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ($cohort_ID && $user_ID && $cohort_name && $cohort_size) {
+    if ($cohort_ID && $creator_ID && $cohort_name && $cohort_size) {
         if (isset($mysqli) && $mysqli) {
-            $result = add_cohort($mysqli, $cohort_ID, $user_ID, $cohort_name, $cohort_size);
+            $result = add_cohort($mysqli, $cohort_ID, $creator_ID, $cohort_name, $cohort_size);
             
             if ($result === true) {
                 echo "<script>alert('Cohort has been successfully created');</script>";
