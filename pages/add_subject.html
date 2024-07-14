@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Subject</title>
+    <style>
+        #subject_form{
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            width: 20%;
+        }
+
+        #subject_form{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 12;
+        }
+
+        .section-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            position: relative;
+        }
+        .remove_section {
+            position: relative;
+            top: 10px;
+            right: 10px;
+            background-color: #c86760;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1> ADD SUBJECT </h1>
+    <form method="POST" action="../php/add_subject.php" id="subject_form">
+        
+        <label for="department"> Department: </label>
+        <select id="department" name="department" required>
+            <option selected disabled>Select Department</option>
+        </select>
+        
+        <label for="program"> Program:</label>
+        <select id="program" name="program" required>
+            <option selected disabled>Select Program</option>
+        </select>
+
+        <label for="subject_code"> Subject Code:</label>
+        <input type="text" id="subject_code" name="subject_code" placeholder="COSC 10023" required>
+
+        <label for="subject"> Subject:</label>
+        <input type="text" id="subject" name="subject" placeholder="Web Development" required>
+
+        <div id="sections-container">
+        <!-- Input field for adding sections her-->
+        </div>
+
+        <button type="button" id="add_section">+ Add Section</button>
+
+        <div class="error-message" id="error-message"></div>
+
+        <button type="submit">SUBMIT</button>
+    </form>
+
+    <script src="../scripts/add_subject.js"></script>
+    </body>
+</html>
