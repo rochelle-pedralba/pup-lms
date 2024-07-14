@@ -164,7 +164,6 @@ $(document).ready(function() {
           xhr.setRequestHeader('Content-Type', 'application/json');
           xhr.onreadystatechange = function() {
               if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-
                   localStorage.removeItem('chosenStudents');
                   window.location.reload();
               }
