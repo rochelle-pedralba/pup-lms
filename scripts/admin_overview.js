@@ -16,3 +16,6 @@ function updateDepartment(){
 function enrollStudent(){
     window.location.href = '../../../pages/enroll_student.html' //change to the real path
 }
+function enrollStudentCourse(){
+    window.location.href = '../../../pages/enroll_student.html' //change to the real path
+}
