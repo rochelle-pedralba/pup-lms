@@ -39,7 +39,7 @@ h4 {
   justify-content: space-between;
   margin: 20px;
   height: 85vh;
-  width: 100%;
+  width: 80%;
 }
 
 #search_student {
@@ -81,7 +81,7 @@ h4 {
 
 .selected-student-container .title {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   padding: 10px;
 }
@@ -124,14 +124,38 @@ h4 {
   padding: 10px;
 }
 
-/*------------------------     ENROLL STUDENTS    ---------------------*/
+/*------------------------     UNENROLL STUDENTS    ---------------------*/
 
 #unenroll_students {
   display: flex;
   flex-direction: column;
   background-color: rgb(201, 201, 201);
-  height: 500px;
+  height: 200px;
   width: auto;
   margin: 20px;
   border-radius: 10px;
+}
+
+#student_list_ {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  height: 95%;
+  width: 100%;
+  background-color: rgb(171, 171, 171);
+  border-radius: 10px;
+}
+
+#search_student_ {
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  border-radius: 10px;
+}
+
+.row-selected-student {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 10px;
 }
