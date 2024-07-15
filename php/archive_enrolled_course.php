@@ -6,7 +6,7 @@ require_once 'includes/execute_query_inc.php';
 require_once 'includes/error_model_inc.php';
 
 function getInformation($mysqli, $user_ID){
-    $query = "SELECT user_ID, course_ID, ay, semester FROM course_enrolled WHERE user_ID = ?";
+    $query = "SELECT user_ID, course_ID, ay, semester, cohort_ID FROM course_enrolled WHERE user_ID = ?";
     $queryResult = executeQuery($mysqli, $query, "s", [$user_ID]);
     $row = $queryResult['result']->fetch_assoc();
     return $row;
@@ -26,9 +26,9 @@ if (isset($_GET['studentName'])) {
 
         $info = getInformation($mysqli, $userID);
 
-        $archiveQuery = "INSERT INTO course_enrolled_archive (user_ID, course_ID, ay, semester) VALUES (?, ?, ?, ?)";
-        $archiveParams = [$info['user_ID'], $info['course_ID'], $info['ay'], $info['semester']];
-        $archiveResult = executeQuery($mysqli, $archiveQuery, "ssss", $archiveParams);
+        $archiveQuery = "INSERT INTO course_enrolled_archive (user_ID, course_ID, ay, semester, cohort_ID) VALUES (?, ?, ?, ?, ?)";
+        $archiveParams = [$info['user_ID'], $info['course_ID'], $info['ay'], $info['semester'], $info['cohort_ID']];
+        $archiveResult = executeQuery($mysqli, $archiveQuery, "sssss", $archiveParams);
 
         $deleteQuery = "DELETE FROM course_enrolled WHERE user_ID = ?";
         $deleteResult = executeQuery($mysqli, $deleteQuery, "s", [$userID]);

@@ -27,8 +27,8 @@ function name_searching($mysqli, $studentID) {
 function EnrolledStudentCourse($mysqli, $params_1) {
     $students = [];
     $query = "SELECT user_ID FROM course_enrolled
-            WHERE course_ID = ? AND ay = ? AND semester = ? AND user_ID = ?"; 
-    $queryResult = executeQuery($mysqli, $query, "ssss", $params_1);
+            WHERE course_ID = ? AND ay = ? AND semester = ? AND user_ID = ? AND cohort_ID = ?"; 
+    $queryResult = executeQuery($mysqli, $query, "sssss", $params_1);
 
     if (!$queryResult['success']) {
         $error_message = "An error has occurred. Please try again later or contact the administrator.";
@@ -52,8 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ay = $_SESSION["ay"];
     $semester = $_SESSION["semester"];
     $user_ID = $_POST["studentID"];
+    $cohort_ID = $_SESSION["cohort_ID"];
 
-    $params_1 = [$course_ID, $ay, $semester, $user_ID];
+    $params_1 = [$course_ID, $ay, $semester, $user_ID, $cohort_ID];
 
     $studentDetails = EnrolledStudentCourse($mysqli, $params_1);
     
