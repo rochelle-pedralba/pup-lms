@@ -8,14 +8,13 @@ require_once 'includes/execute_query_inc.php';
 require_once 'includes/config_session_inc.php';
 require_once 'includes/error_model_inc.php';
 
-session_start();
-
 function getUser(object $mysqli, string $user_ID): ?array
 {
-    $query = "SELECT ua.*, ui.account_Status, ur.user_Role, ua.first_Access
+    $query = "SELECT ua.*, ui.account_Status, ur.user_Role, ua.first_Access, pm.login_Attempt, pm.lockout_time
               FROM USER_ACCESS ua
               JOIN USER_INFORMATION ui ON ua.user_ID = ui.user_ID
               LEFT JOIN USER_ROLE ur ON ua.user_ID = ur.user_ID
+              LEFT JOIN PASSWORD_MAINTENANCE pm ON ua.user_ID = pm.user_ID
               WHERE ua.user_ID = ? 
               AND (ui.account_Status = ? OR ui.account_Status = ?)";
 
@@ -67,66 +66,79 @@ function setFirstAccess(object $mysqli, string $user_ID)
     }
 }
 
-function incrementLoginAttempt()
+function incrementLoginAttempt(object $mysqli, string $user_ID)
 {
-    if (!isset($_SESSION['login_attempts'])) {
-        $_SESSION['login_attempts'] = 1;
-    } else {
-        $_SESSION['login_attempts']++;
+    $query = "UPDATE PASSWORD_MAINTENANCE 
+              SET login_Attempt = login_Attempt + 1, 
+                  lockout_time = CASE WHEN login_Attempt >= 2 THEN NOW() ELSE lockout_time END 
+              WHERE user_ID = ?";
+    $params = [$user_ID];
+    $result = executeQuery($mysqli, $query, "s", $params);
+
+    if (!$result['success']) {
+        $error_message = "An internal error has occurred. Please try again later or contact the administrator.";
+        redirectWithError($error_message);
+        exit;
     }
 }
 
-function getLoginAttempts()
+function resetLoginAttempts(object $mysqli, string $user_ID)
 {
-    return $_SESSION['login_attempts'] ?? 0;
+    $query = "UPDATE PASSWORD_MAINTENANCE 
+              SET login_Attempt = 0, 
+                  lockout_time = NULL 
+              WHERE user_ID = ?";
+    $params = [$user_ID];
+    $result = executeQuery($mysqli, $query, "s", $params);
+
+    if (!$result['success']) {
+        $error_message = "An internal error has occurred. Please try again later or contact the administrator.";
+        redirectWithError($error_message);
+        exit;
+    }
 }
 
-function resetLoginAttempts()
+function isAccountLocked(?array $user): bool
 {
-    unset($_SESSION['login_attempts']);
-}
+    if ($user && isset($user['lockout_time'])) {
+        $lockout_time = strtotime($user['lockout_time']);
+        $current_time = time();
+        $lock_duration = 24 * 60 * 60; // 24 hours
 
-function lockAccount()
-{
-    $_SESSION['account_locked'] = true;
-    $_SESSION['lockout_time'] = time();
-}
-
-function isAccountLocked()
-{
-    $maxAttempts = 3;
-    $lockoutTime = 3600; // 1 hour in seconds
-
-    if (getLoginAttempts() >= $maxAttempts) {
-        if (!isset($_SESSION['account_locked'])) {
-            lockAccount();
-        } elseif (time() - $_SESSION['lockout_time'] > $lockoutTime) {
-            resetLoginAttempts();
-            unset($_SESSION['account_locked']);
+        if (($current_time - $lockout_time) < $lock_duration) {
+            return true;
         }
     }
-
-    return isset($_SESSION['account_locked']) && (time() - $_SESSION['lockout_time'] < $lockoutTime);
+    return false;
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $user_ID = $_POST['user_ID'];
     $password = $_POST["password"];
 
-    if (isAccountLocked()) {
-        echo "<script>alert('Locked due to too many failed login attempts. Please try again after 1 hour.');
+    $user = getUser($mysqli, $user_ID);
+
+    if ($user === null || isAccountLocked($user)) {
+        echo "<script>alert('Account is locked due to too many failed login attempts. Please try again after 24 hours.');
               window.location.href = '../pages/login.html'; 
               </script>";
         exit;
     }
 
-    $user = getUser($mysqli, $user_ID);
+    $attempts_left = 3 - $user['login_Attempt'];
 
-    if ($user === null || !verifyPassword($password, $user)) {
-        incrementLoginAttempt();
-        echo "<script>alert('Password incorrect. Please try again.');
-              window.location.href = '../pages/login.html'; 
-              </script>";
+    if (!verifyPassword($password, $user)) {
+        incrementLoginAttempt($mysqli, $user_ID);
+
+        if ($attempts_left - 1 == 1) {
+            echo "<script>alert('Password incorrect. You have 1 attempt left. Consider resetting your password.');
+                  window.location.href = '../pages/login.html'; 
+                  </script>";
+        } else {
+            echo "<script>alert('Password incorrect. You have $attempts_left attempts left.');
+                  window.location.href = '../pages/login.html'; 
+                  </script>";
+        }
         exit;
     }
 
@@ -136,7 +148,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
-    resetLoginAttempts();
+    resetLoginAttempts($mysqli, $user_ID);
 
     session_start();
     $_SESSION['user_ID'] = $user["user_ID"];
