@@ -21,43 +21,31 @@ $semester = $_SESSION["semester"];
 $year = $_SESSION["year"];
 $section = $_SESSION["section"];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['course_ID'])) {
   $data = json_decode(file_get_contents('php://input'), true);
 
   // Assuming the action is to enroll students
   if (isset($data['action']) && $data['action'] === 'enroll') {
-    $studentData = $data['studentData'];
+      $studentData = $data['studentData'];
 
-    $responses = []; // Initialize an array to store responses for each student
+      $responses = []; // Initialize an array to store responses for each student
 
-    foreach ($studentData as $student) {
-      // Check if 'studentID' key exists
-      if (!isset($student['studentID'])) {
-          $responses[] = ['studentID' => $student['studentID'], 'status' => 'error', 'message' => 'Missing studentID'];
-          continue; // Skip this iteration if studentID is missing
-      }
-
-      $studentID = $student['studentID'];
-
-      // Prepare the SQL INSERT statement
-      $insertQuery = "INSERT INTO subject_enrolled (course_ID, subject_ID, cohort_ID, ay, semester, year, section, user_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-      // Execute the query
-      if ($stmt = $mysqli->prepare($insertQuery)) {
-          $stmt->bind_param("ssssssss", $courseID, $subjectID, $cohortID, $ay, $semester, $year, $section, $studentID);
-
-          if ($stmt->execute()) {
-              $responses[] = ['studentID' => $studentID, 'status' => 'success', 'message' => 'Data inserted successfully.'];
-          } else {
-              $responses[] = ['studentID' => $studentID, 'status' => 'error', 'message' => 'Failed to insert data.'];
+      foreach ($studentData as $student) {
+          // Check if 'studentID' key exists
+          if (!isset($student['studentID'])) {
+              $responses[] = ['studentID' => $student['studentID'], 'status' => 'error', 'message' => 'Missing studentID'];
+              continue; // Skip this iteration if studentID is missing
           }
-          $stmt->close();
-      } else {
-          $responses[] = ['studentID' => $studentID, 'status' => 'error', 'message' => 'Failed to prepare the database statement.'];
-      }
-    }
 
-    // Optionally, you can return the $responses array as a JSON response
-    echo json_encode($responses);
+          $studentID = $student['studentID'];
+
+          // Prepare the SQL INSERT statement
+          $insertQuery = "INSERT INTO subject_enrolled (course_ID, subject_ID, cohort_ID, ay, semester, year, section, user_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+          // Execute the query
+          if ($stmt = $mysqli->prepare($insertQuery)) {
+              // Bind parameters and execute statement...
+          }
+      }
   }
 }

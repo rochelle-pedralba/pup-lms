@@ -12,10 +12,11 @@ function sanitize_input($data) {
 }
 
 $course_ID = isset($_POST['course_ID']) ? sanitize_input($_POST['course_ID']) : null;
+$creator_ID = isset($_POST['creator_ID']) ? sanitize_input($_POST['creator_ID']) : null;
+$cohort_ID = isset($_POST['cohort_ID']) ? sanitize_input($_POST['cohort_ID']) : null;
 $course_desc = isset($_POST['course_desc']) ? sanitize_input($_POST['course_desc']) : null;
 $college_ID = isset($_POST['college_ID']) ? sanitize_input($_POST['college_ID']) : null;
 $no_of_years = isset($_POST['no_of_years']) ? sanitize_input($_POST['no_of_years']) : null;
-$cohort_ID = isset($_POST['cohort_ID']) ? sanitize_input($_POST['cohort_ID']) : null;
 
 function record_exists($mysqli, $table, $column, $value) {
     $sql = $mysqli->prepare("SELECT COUNT(*) FROM $table WHERE $column = ?");
@@ -26,17 +27,22 @@ function record_exists($mysqli, $table, $column, $value) {
     return $count > 0;
 }
 
-function add_course($mysqli, $course_ID, $course_desc, $college_ID, $no_of_years, $cohort_ID) {
+function add_course($mysqli, $course_ID, $creator_ID, $cohort_ID, $course_desc, $college_ID, $no_of_years) {
     if (!record_exists($mysqli, 'COLLEGE', 'college_ID', $college_ID)) {
         return "Error: COLLEGE does not exist.";
     }
-
     if (!record_exists($mysqli, 'COHORT', 'cohort_ID', $cohort_ID)) {
         return "Error: COHORT does not exist.";
     }
+    if (!record_exists($mysqli, 'COURSE', 'creator_ID', $creator_ID)) {
+        return "Error: CREATOR ID does not exist.";
+    }
+    if (record_exists($mysqli, 'COURSE', 'course_ID', $course_ID)) {
+        return "Error: COURSE already exists.";
+    }
 
-    $sql = $mysqli->prepare("INSERT INTO COURSE (course_ID, course_Description, college_ID, no_Of_Years, cohort_ID) VALUES (?, ?, ?, ?, ?)");
-    $sql->bind_param("sssis", $course_ID, $course_desc, $college_ID, $no_of_years, $cohort_ID);
+    $sql = $mysqli->prepare("INSERT INTO COURSE (course_ID, creator_ID, cohort_ID, course_Description, college_ID, no_Of_Years) VALUES (?, ?, ?, ?, ?, ?)");
+    $sql->bind_param("sssssi", $course_ID, $creator_ID, $cohort_ID, $course_desc, $college_ID, $no_of_years);
     
     if ($sql->execute()) {
         return true;
@@ -46,9 +52,9 @@ function add_course($mysqli, $course_ID, $course_desc, $college_ID, $no_of_years
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ($course_ID && $course_desc && $college_ID && $no_of_years && $cohort_ID) {
+    if ($course_ID && $creator_ID && $cohort_ID && $course_desc && $college_ID && $no_of_years) {
         if (isset($mysqli) && $mysqli) {
-            $result = add_course($mysqli, $course_ID, $course_desc, $college_ID, $no_of_years, $cohort_ID);
+            $result = add_course($mysqli, $course_ID, $creator_ID, $cohort_ID, $course_desc, $college_ID, $no_of_years);
             
             if ($result === true) {
                 echo "<script>alert('Course has been successfully created');</script>";

@@ -50,8 +50,8 @@ function sendResetEmail(string $email, string $resetToken)
         // Content
         $mail->isHTML(true);
         $mail->Subject = 'Password Reset Request';
-        $mail->Body = 'Please click the following link to reset your password: <a href="http://yourdomain.com/reset_password.php?token=' . $resetToken . '">Reset Password</a>';
-        $mail->AltBody = 'Please click the following link to reset your password: http://yourdomain.com/reset_password.php?token=' . $resetToken;
+        $mail->Body = 'Please click the following link to reset your password: <a href="http://localhost/pup-lms/pages/reset_pass.html?token=' . $resetToken . '">Reset Password</a>';
+        $mail->AltBody = 'Please click the following link to reset your password: http://localhost/pup-lms/pages/reset_pass.html?token=' . $resetToken;
 
         $mail->send();
         echo 'Message has been sent';
