@@ -3,6 +3,8 @@
   require_once 'includes/execute_query_inc.php';
   require_once 'includes/error_model_inc.php';
 
+    session_start();
+
   $course_ID = $_SESSION["course_ID"];
   $subjectID = $_SESSION["subject_ID"];
   $cohortID = $_SESSION["cohort_ID"];
@@ -11,7 +13,7 @@
   $year = $_SESSION["year"];
   $section = $_SESSION["section"];
 
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['studentID'])) {
     
     $studentID = $_POST['studentID'];
     $query = "SELECT ce.user_ID, ui.first_Name, last_Name, ui.email_Address 
