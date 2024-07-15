@@ -23,9 +23,6 @@
         <h4>Professor Name</h4>
       </div>
       <div>
-        <h3 class="year-section-container"><?php echo $_SESSION['year']."-".$_SESSION['section']?></h3>
-        <h1><?php echo $_SESSION['subject_ID'].": Subject Name"?></h1>
-        <h3>Semester <? echo $_SESSION['semester'].$_SESSION['ay']?></h3>
         <h3 class="year-section-container">Year and Section</h3>
         <h1>Subject ID: Subject Name</h1>
         <h3>Semester  A.Y.</h3>
