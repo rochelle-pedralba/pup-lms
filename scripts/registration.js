@@ -1,22 +1,4 @@
 var footer = document.getElementById("footer");
-footer.style= "margin-top: 400px";
-
-function showPersonalDetails() {  
-  document.getElementById("personal_information").style.display = "block";
-  footer.style= "margin-top: 150px";
-}
-
-function showContactDetails() {
-  document.getElementById("contact_information").style.display = "block";
-  footer.style= "margin-top: 100px";
-}
-
-function showLoginInformation() {
-  document.getElementById("login_information").style.display = "block";
-  footer.style= "margin-top: 40px";
-
-  document.getElementById("submit").style.display = "block";
-}
 
 var pwInput = document.getElementById("password");
 var pwConfirm = document.getElementById("confirm_password");
@@ -304,12 +286,6 @@ function populateCities(places, region, province) {
 loadCampuses();
 loadDepartment();
 loadCountries();
-
-document.getElementById("next1").addEventListener("click", () => showPersonalDetails());
-
-document.getElementById("next2").addEventListener("click", () => showContactDetails());
-
-document.getElementById("next3").addEventListener("click", () => showLoginInformation());
 
 
 document.getElementById("countries").addEventListener("change", () => {
