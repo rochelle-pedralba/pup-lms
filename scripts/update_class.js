@@ -157,8 +157,6 @@ $(document).ready(function() {
         try {
           studentData = JSON.parse(studentData);
 
-          console.log("Enrolling students: " + JSON.stringify(studentData));
-
           const xhr = new XMLHttpRequest();
           xhr.open('POST', '../../../php/enroll_subject.php', true);
           xhr.setRequestHeader('Content-Type', 'application/json');
