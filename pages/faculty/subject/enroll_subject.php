@@ -8,6 +8,7 @@
   $_SESSION["semester"] = "2";
   $_SESSION["year"] = "3";
   $_SESSION["section"] = "5";
+
 ?>
 
 <!DOCTYPE html>
