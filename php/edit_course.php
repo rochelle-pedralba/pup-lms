@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql->bind_param("ssssis", $creator_ID, $cohort_ID, $course_desc, $college_ID, $no_of_years, $course_ID);
             if ($sql->execute()) {
                 echo "<script>alert('Course has been successfully updated.');</script>";
-                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/update_course.php?>";
+                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/update_student_course.php?>";
                 exit;
             } else {
                 echo "<script>alert('Error: " . $sql->error . "');</script>";
