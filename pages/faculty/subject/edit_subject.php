@@ -72,6 +72,11 @@ $section = $row['section'];
         <input type="submit" value="Submit">
     </form>
 
+    <form method="post" action="../../../php/archive_subject.php">
+            <input type="hidden" name="subject_id" value="<?php echo htmlspecialchars($subjectID); ?>">
+            <button type="submit">Archive</button>
+        </form>
+
 </body>
 
 </html>
