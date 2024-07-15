@@ -33,14 +33,14 @@ if ($cohort_ID) {
     </head>
 
     <body>
-        <header>
+        <!-- <header>
             <div class="logo">
               <img src="../../../assets/PUP_logo.png" alt="PUP Logo">
             </div>
             <div class="title">
               <h1>PUP Learning Management System</h1>
             </div>
-        </header>
+        </header> -->
 
     
         <div class="edit_container">
@@ -63,10 +63,10 @@ if ($cohort_ID) {
             </form>
         </div>
 
-        <footer id="footer">
+        <!-- <footer id="footer">
             <div>
               <p>&copy; 2021 PUP Learning Management System</p>
             </div>
-        </footer>
+        </footer> -->
     </body>
 </html>
