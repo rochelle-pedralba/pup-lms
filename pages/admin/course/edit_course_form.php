@@ -74,10 +74,10 @@ if ($course_ID) {
             </form>
         </div>
 
-        <footer id="footer">
+        <!-- <footer id="footer">
             <div>
               <p>&copy; 2021 PUP Learning Management System</p>
             </div>
-        </footer>
+        </footer> -->
     </body>
 </html>
