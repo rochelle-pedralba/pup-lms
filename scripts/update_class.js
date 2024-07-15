@@ -150,7 +150,7 @@ $(document).ready(function() {
   $('#enroll_student').click(function() {
 
     var studentData = localStorage.getItem('chosenStudents');
-    const isConfirmed = confirm("Are you sure you want to enroll the selected student?" + studentData);
+    const isConfirmed = confirm("Are you sure you want to enroll the selected student?");
     
     if (isConfirmed) {
       if (studentData) {
