@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             if ($result === true) {
                 echo "<script>alert('College has been successfully created');</script>";
-                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/cohort/add_college.html'>";
+                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/college/add_college.html'>";
                 exit;
             } else {
                 echo "<script>alert('$result');</script>";

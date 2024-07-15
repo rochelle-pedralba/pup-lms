@@ -11,7 +11,7 @@
   $year = $_SESSION["year"];
   $section = $_SESSION["section"];
 
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['studentID'])) {
     
     $studentID = $_POST['studentID'];
     $query = "SELECT ce.user_ID, ui.first_Name, last_Name, ui.email_Address 
