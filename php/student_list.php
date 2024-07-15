@@ -1,7 +1,5 @@
 <?php 
 
-session_start();
-
   require_once 'includes/dbh_inc.php';
   require_once 'includes/execute_query_inc.php';
   require_once 'includes/error_model_inc.php';
@@ -41,7 +39,3 @@ session_start();
     echo "Student ID not provided.";
 }
 ?>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="../../../scripts/update_enrollee.js">
-</script>
