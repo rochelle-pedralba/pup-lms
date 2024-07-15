@@ -39,8 +39,8 @@
             <input type="text" id="studentSearch" name="studentID" placeholder="Enter Student ID">
             <button type="submit" id="searchBtn">Search</button>
           </form>
-          <div id="searchedStudentInfo"></div>
-
+          
+        <div id="searchedStudentInfo"></div>
             <div class="display-student">
               <div id="student_list">
                 <?php
@@ -60,7 +60,9 @@
             <div id="selected_student"></div>
           </div>
         </div>
-        
+      </div>
+
+    <div id="unenroll_students">
         <div class="column column-three" style="background-color:#ccc;">
           <div id="unenroll_students">
           <div class="unenroll-student-container">

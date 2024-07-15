@@ -11,7 +11,7 @@ function sanitize_input($data) {
     return htmlspecialchars(trim($data));
 }
 
-$college_ID = 'CCIS';
+$college_ID = isset($_GET['college_ID']) ? sanitize_input($_GET['college_ID']) : null;
 
 if ($college_ID) {
     $sql = $mysqli->prepare("SELECT college_name, description FROM COLLEGE WHERE college_ID = ?");
@@ -47,7 +47,7 @@ if ($college_ID) {
             <form action="../../../php/edit_college.php" method="POST">
                 <h2>Edit College</h2><br>
 
-                <label for="college_ID">College ID: <?= $college_ID ?></label>
+                <label for="college_ID">College ID: <p><?= $college_ID ?></p></label>
                 <input type="hidden" name="college_ID" value="<?= $college_ID ?>"><br>
 
                 <label for="college_name">College Name:</label>

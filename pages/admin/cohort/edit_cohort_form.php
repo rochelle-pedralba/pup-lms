@@ -11,7 +11,7 @@ function sanitize_input($data) {
     return htmlspecialchars(trim($data));
 }
 
-$cohort_ID = 'pupsj';
+$cohort_ID = isset($_GET['cohort_ID']) ? sanitize_input($_GET['cohort_ID']) : null;
 
 if ($cohort_ID) {
     $sql = $mysqli->prepare("SELECT creator_ID, cohort_Name, cohort_Size FROM COHORT WHERE cohort_ID = ?");
@@ -46,8 +46,8 @@ if ($cohort_ID) {
         <div class="edit_container">
             <form action="../../../php/edit_cohort.php" method="POST">
                 <h2>Edit Cohort</h2>
-
-                <label for="cohort_ID">Cohort ID: <?= $cohort_ID ?></label><br><br>
+                
+                <label for="cohort_ID">Cohort ID: <p><?= $cohort_ID ?></p></label><br><br>
                 <input type="hidden" name="cohort_ID" value="<?= $cohort_ID ?>">
 
                 <label for="creator_ID">Creator ID:</label>

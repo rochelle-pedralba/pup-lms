@@ -12,14 +12,15 @@ $year = $_SESSION['year'];
 $section = $_SESSION['section'];
 $course_ID = $_SESSION['course_ID'];
 $cohort_ID = $_SESSION['cohort_ID'];
+$ay = $_SESSION['ay'];
 
-$params_1 = [$subjectID, $semester, $year, $section, $course_ID, $cohort_ID];
+$params_1 = [$subjectID, $semester, $year, $section, $course_ID, $cohort_ID, $ay];
 
 function EnrolledStudent($mysqli, $params_1): ?array
 {
     $query = "SELECT user_ID FROM subject_enrolled 
-              WHERE subject_ID = ? AND semester = ? AND year = ? AND section = ? AND course_ID = ? AND cohort_ID = ?";
-    $queryResult = executeQuery($mysqli, $query, "ssssss", $params_1);
+              WHERE subject_ID = ? AND semester = ? AND year = ? AND section = ? AND course_ID = ? AND cohort_ID = ? AND ay = ?";
+    $queryResult = executeQuery($mysqli, $query, "sssssss", $params_1);
     
     if (!$queryResult['success']) {
         $error_message = "An error has occured. Please try again later or contact the administrator.";
