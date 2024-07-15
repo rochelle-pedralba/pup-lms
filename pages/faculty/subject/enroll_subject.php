@@ -14,6 +14,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="../../../styles/update_class.css">
+    <script src="../../../scripts/unenroll.js"></script>
   </head>
 
   <body>
@@ -57,6 +58,13 @@
     </div>
 
     <div id="unenroll_students">
+          <div class="unenroll-student-container">
+            <h3>Student Enrolled</h3>
+            <table id="enrolled_student">
+                <?php require_once '../../../php/unenroll.php'; ?>
+            </table>
+          </div> 
+        </div>
     </div>
   </body>
 </html>

@@ -16,10 +16,9 @@
     $studentID = $_POST['studentID'];
     $query = "SELECT ce.user_ID, ui.first_Name, last_Name, ui.email_Address 
               FROM course_enrolled ce
-              JOIN user_Information ui ON ce.user_ID = ui.user_ID
-              LEFT JOIN subject_enrolled se ON ce.user_ID = se.student_ID
-              WHERE ce.course_ID = ? AND ce.user_ID = ? AND se.student_ID IS NULL";
-
+              JOIN user_information ui ON ce.user_ID = ui.user_ID
+              LEFT JOIN subject_enrolled se ON ce.user_ID = se.user_ID
+              WHERE ce.course_ID = ? AND ce.user_ID = ? AND se.user_ID IS NULL";
     $result = executeQuery($mysqli, $query, "ss", [$course_ID, $studentID]);
 
     if ($result['success'] && $result['result']->num_rows > 0) {

@@ -1,7 +1,5 @@
 <?php 
 
-session_start();
-
   require_once 'includes/dbh_inc.php';
   require_once 'includes/execute_query_inc.php';
   require_once 'includes/error_model_inc.php';
@@ -9,8 +7,8 @@ session_start();
   $course_ID = $_SESSION["course_ID"];
   $cohort_ID = $_SESSION["cohort_ID"];
 
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+  if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['studentID'])) {
+    
     $studentID = $_POST['studentID'];
     $query = "SELECT ui.user_ID, ui.email_Address, ui.first_Name, ui.last_Name
           FROM user_information ui
@@ -41,7 +39,3 @@ session_start();
     echo "Student ID not provided.";
 }
 ?>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="../../../scripts/update_enrollee.js">
-</script>

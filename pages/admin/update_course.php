@@ -19,7 +19,7 @@ $_SESSION['semester'] = $semester;
 <html>
 <head>
   <link rel="stylesheet" href="../../styles/update_class.css">
-  <script src="../../scripts/unenroll_course.js"></script>
+  <script src="../../../scripts/unenroll_course.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 

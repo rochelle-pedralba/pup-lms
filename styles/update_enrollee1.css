@@ -1,0 +1,50 @@
+h1, h3 {
+  text-align: center;
+}
+
+h4 {
+  text-align: right !important;
+  margin-right: 50px;
+  margin-top: 20px;
+}
+
+.year-section-container {
+  margin-top: 20px;
+}
+
+.row-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 30%;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
+  height: 500px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
