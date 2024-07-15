@@ -7,8 +7,8 @@
   $course_ID = $_SESSION["course_ID"];
   $cohort_ID = $_SESSION["cohort_ID"];
 
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+  if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['studentID'])) {
+    
     $studentID = $_POST['studentID'];
     $query = "SELECT ui.user_ID, ui.email_Address, ui.first_Name, ui.last_Name
           FROM user_information ui

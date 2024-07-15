@@ -4,7 +4,8 @@
 
   $_SESSION["course_ID"] = "BSCS";
   $_SESSION["cohort_ID"] = "PUPMN";
-
+  $_SESSION["ay"] = "2324";
+  $_SESSION["semester"] = "2";
 ?>
 
 <!DOCTYPE html>

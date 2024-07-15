@@ -14,6 +14,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="../../../styles/update_class.css">
+    <script src="../../../scripts/unenroll.js"></script>
   </head>
 
   <body>
@@ -22,6 +23,9 @@
         <h4>Professor Name</h4>
       </div>
       <div>
+        <h3 class="year-section-container"><?php echo $_SESSION['year']."-".$_SESSION['section']?></h3>
+        <h1><?php echo $_SESSION['subject_ID'].": Subject Name"?></h1>
+        <h3>Semester <? echo $_SESSION['semester'].$_SESSION['ay']?></h3>
         <h3 class="year-section-container">Year and Section</h3>
         <h1>Subject ID: Subject Name</h1>
         <h3>Semester  A.Y.</h3>
@@ -57,6 +61,13 @@
     </div>
 
     <div id="unenroll_students">
+          <div class="unenroll-student-container">
+            <h3>Student Enrolled</h3>
+            <table id="enrolled_student">
+                <?php require_once '../../../php/unenroll.php'; ?>
+            </table>
+          </div> 
+        </div>
     </div>
   </body>
 </html>
