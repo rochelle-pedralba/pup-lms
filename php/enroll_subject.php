@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $studentID = $student['studentID'];
 
       // Prepare the SQL INSERT statement
-      $insertQuery = "INSERT INTO subject_enrolled (course_ID, subject_ID, cohort_ID, ay, semester, year, section, student_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+      $insertQuery = "INSERT INTO subject_enrolled (course_ID, subject_ID, cohort_ID, ay, semester, year, section, user_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
       // Execute the query
       if ($stmt = $mysqli->prepare($insertQuery)) {

@@ -19,7 +19,6 @@
               JOIN user_information ui ON ce.user_ID = ui.user_ID
               LEFT JOIN subject_enrolled se ON ce.user_ID = se.user_ID
               WHERE ce.course_ID = ? AND ce.user_ID = ? AND se.user_ID IS NULL";
-
     $result = executeQuery($mysqli, $query, "ss", [$course_ID, $studentID]);
 
     if ($result['success'] && $result['result']->num_rows > 0) {
