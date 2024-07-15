@@ -114,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = $_POST["password"];
 
     if (isAccountLocked()) {
-        echo "<script>alert('Account locked due to too many failed login attempts. Please try again after 1 hour.');
+        echo "<script>alert('Locked due to too many failed login attempts. Please try again after 1 hour.');
               window.location.href = '../pages/login.html'; 
               </script>";
         exit;
