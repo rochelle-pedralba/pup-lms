@@ -154,6 +154,9 @@ $(document).ready(function() {
     
     var ay = $('#ay').val();
     var semester = $('#semester').val();
+
+    console.log("AY: " + ay);
+    console.log("Semester: " + semester);
     
     if (isConfirmed) {
       if (studentData) {
@@ -161,7 +164,7 @@ $(document).ready(function() {
           studentData = JSON.parse(studentData);
 
           const xhr = new XMLHttpRequest();
-          xhr.open('POST', '../../../php/update_student_course.php', true);
+          xhr.open('POST', '../../../php/enroll_course.php', true);
           xhr.setRequestHeader('Content-Type', 'application/json');
           xhr.onreadystatechange = function() {
               if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
@@ -182,23 +185,29 @@ $(document).ready(function() {
 });
 });
 
+const schoolYearInput = document.getElementById('ay');
+const semesterInput = document.getElementById('semester');
+const enrollButton = document.getElementById('enroll_student');
+
+function updateButtonState() {
+  if (schoolYearInput.value && semesterInput.value) {
+      enrollButton.disabled = false;
+  } else {
+      enrollButton.disabled = true;
+  }
+}
+
+if (schoolYearInput && semesterInput) {
+  schoolYearInput.addEventListener('input', updateButtonState);
+  semesterInput.addEventListener('input', updateButtonState);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   const schoolYearInput = document.getElementById('ay');
   const semesterInput = document.getElementById('semester');
   const enrollButton = document.getElementById('enroll_student');
 
-  function updateButtonState() {
-      if (schoolYearInput.value && semesterInput.value) {
-          enrollButton.disabled = false;
-      } else {
-          enrollButton.disabled = true;
-      }
-  }
-
-  if (schoolYearInput && semesterInput) {
-      schoolYearInput.addEventListener('input', updateButtonState);
-      semesterInput.addEventListener('input', updateButtonState);
-  }
+  updateButtonState();
 });
 
 function validateSY(input) {
