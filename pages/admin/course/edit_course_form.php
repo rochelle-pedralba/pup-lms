@@ -11,7 +11,7 @@ function sanitize_input($data) {
     return htmlspecialchars(trim($data));
 }
 
-$course_ID = isset($_GET['course_ID']) ? sanitize_input($_GET['course_ID']) : null;;
+$course_ID = isset($_GET['course_ID']) ? sanitize_input($_GET['course_ID']) : null;
 
 if ($course_ID) {
     $sql = $mysqli->prepare("SELECT creator_ID, cohort_ID, course_Description, college_ID, no_Of_Years FROM COURSE WHERE course_ID = ?");
@@ -33,21 +33,20 @@ if ($course_ID) {
     </head>
 
     <body>
-        <!-- <header>
+        <header>
             <div class="logo">
               <img src="../../../assets/PUP_logo.png" alt="PUP Logo">
             </div>
             <div class="title">
               <h1>PUP Learning Management System</h1>
             </div>
-        </header> -->
+        </header>
 
-    
         <div class="edit_container">
             <form action="../../../php/edit_course.php" method="POST">
                 <h2>Edit Course</h2><br>
 
-                <label for="course_ID">Course ID: <?= $course_ID ?></label><br>
+                <label for="course_ID">Course ID: <p><?= $course_ID ?></p></label><br>
                 <input type="hidden" name="course_ID" value="<?= $course_ID ?>">
 
                 <label for="creator_ID">Creator ID:</label>
@@ -74,10 +73,10 @@ if ($course_ID) {
             </form>
         </div>
 
-        <!-- <footer id="footer">
+        <footer id="footer">
             <div>
               <p>&copy; 2021 PUP Learning Management System</p>
             </div>
-        </footer> -->
+        </footer>
     </body>
 </html>

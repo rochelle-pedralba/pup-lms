@@ -11,7 +11,7 @@ function sanitize_input($data) {
     return htmlspecialchars(trim($data));
 }
 
-$college_ID = 'CCIS';
+$college_ID = isset($_GET['college_ID']) ? sanitize_input($_GET['college_ID']) : null;
 
 if ($college_ID) {
     $sql = $mysqli->prepare("SELECT college_name, description FROM COLLEGE WHERE college_ID = ?");
@@ -33,21 +33,21 @@ if ($college_ID) {
     </head>
 
     <body>
-        <!-- <header>
+        <header>
             <div class="logo">
               <img src="../../../assets/PUP_logo.png" alt="PUP Logo">
             </div>
             <div class="title">
               <h1>PUP Learning Management System</h1>
             </div>
-        </header> -->
+        </header>
 
     
         <div class="edit_container">
             <form action="../../../php/edit_college.php" method="POST">
                 <h2>Edit College</h2><br>
 
-                <label for="college_ID">College ID: <?= $college_ID ?></label>
+                <label for="college_ID">College ID: <p><?= $college_ID ?></p></label>
                 <input type="hidden" name="college_ID" value="<?= $college_ID ?>"><br>
 
                 <label for="college_name">College Name:</label>
@@ -60,10 +60,10 @@ if ($college_ID) {
             </form>
         </div>
 
-        <!-- <footer id="footer">
+        <footer id="footer">
             <div>
               <p>&copy; 2021 PUP Learning Management System</p>
             </div>
-        </footer> -->
+        </footer>
     </body>
 </html>
