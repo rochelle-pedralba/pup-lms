@@ -118,7 +118,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $user = getUser($mysqli, $user_ID);
 
-    if ($user === null || isAccountLocked($user)) {
+    if ($user === null) {
+        echo "<script>alert('Invalid user ID or password.');
+              window.location.href = '../pages/login.html'; 
+              </script>";
+        exit;
+    }
+
+    if (isAccountLocked($user)) {
         echo "<script>alert('Account is locked due to too many failed login attempts. Please try again after 24 hours.');
               window.location.href = '../pages/login.html'; 
               </script>";
