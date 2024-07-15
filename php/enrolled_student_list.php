@@ -3,8 +3,6 @@
   require_once 'includes/execute_query_inc.php';
   require_once 'includes/error_model_inc.php';
 
-    session_start();
-
   $course_ID = $_SESSION["course_ID"];
   $subjectID = $_SESSION["subject_ID"];
   $cohortID = $_SESSION["cohort_ID"];
