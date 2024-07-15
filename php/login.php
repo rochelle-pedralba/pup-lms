@@ -10,7 +10,7 @@ require_once 'includes/error_model_inc.php';
 
 function getUser(object $mysqli, string $user_ID): ?array
 {
-    $query = "SELECT ua.*, ui.account_Status, ur.user_Role, ua.first_Access, pm.login_Attempt, pm.lockout_time
+    $query = "SELECT ua.*, ui.account_Status, ur.user_Role, ua.first_Access, pm.login_Attempt, pm.lockout_Time
               FROM USER_ACCESS ua
               JOIN USER_INFORMATION ui ON ua.user_ID = ui.user_ID
               LEFT JOIN USER_ROLE ur ON ua.user_ID = ur.user_ID
@@ -70,7 +70,7 @@ function incrementLoginAttempt(object $mysqli, string $user_ID)
 {
     $query = "UPDATE PASSWORD_MAINTENANCE 
               SET login_Attempt = login_Attempt + 1, 
-                  lockout_time = CASE WHEN login_Attempt >= 2 THEN NOW() ELSE lockout_time END 
+                  lockout_Time = CASE WHEN login_Attempt >= 2 THEN NOW() ELSE lockout_Time END 
               WHERE user_ID = ?";
     $params = [$user_ID];
     $result = executeQuery($mysqli, $query, "s", $params);
@@ -86,7 +86,7 @@ function resetLoginAttempts(object $mysqli, string $user_ID)
 {
     $query = "UPDATE PASSWORD_MAINTENANCE 
               SET login_Attempt = 0, 
-                  lockout_time = NULL 
+                  lockout_Time = NULL 
               WHERE user_ID = ?";
     $params = [$user_ID];
     $result = executeQuery($mysqli, $query, "s", $params);
@@ -100,12 +100,12 @@ function resetLoginAttempts(object $mysqli, string $user_ID)
 
 function isAccountLocked(?array $user): bool
 {
-    if ($user && isset($user['lockout_time'])) {
-        $lockout_time = strtotime($user['lockout_time']);
+    if ($user && isset($user['lockout_Time'])) {
+        $lockout_Time = strtotime($user['lockout_Time']);
         $current_time = time();
         $lock_duration = 24 * 60 * 60; // 24 hours
 
-        if (($current_time - $lockout_time) < $lock_duration) {
+        if (($current_time - $lockout_Time) < $lock_duration) {
             return true;
         }
     }
