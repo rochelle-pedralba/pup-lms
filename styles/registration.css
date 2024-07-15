@@ -32,6 +32,11 @@ header h1 {
   text-align: center;
 }
 
+.regform-title {
+  margin-top: 50px;
+  text-align: center;
+}
+
 .form-container {
   display: flex;
   flex-direction: column;
