@@ -14,7 +14,7 @@ function getUser(object $mysqli, string $user_ID): ?array
               FROM USER_ACCESS ua
               JOIN USER_INFORMATION ui ON ua.user_ID = ui.user_ID
               LEFT JOIN USER_ROLE ur ON ua.user_ID = ur.user_ID
-              LEFT JOIN PASSWORD_MAINTENANCE pm ON ua.user_ID = pm.user_ID
+              LEFT JOIN password_maintenance pm ON ua.user_ID = pm.user_ID
               WHERE ua.user_ID = ? 
               AND (ui.account_Status = ? OR ui.account_Status = ?)";
 
@@ -68,7 +68,7 @@ function setFirstAccess(object $mysqli, string $user_ID)
 
 function updateLoginAttempt(object $mysqli, string $user_ID, int $attempts)
 {
-    $query = "UPDATE PASSWORD_MAINTENANCE SET login_Attempt = ? WHERE user_ID = ?";
+    $query = "UPDATE password_maintenance SET login_Attempt = ? WHERE user_ID = ?";
     $params_update_attempt = [$attempts, $user_ID];
     $update_result = executeQuery($mysqli, $query, "is", $params_update_attempt);
 
@@ -81,7 +81,7 @@ function updateLoginAttempt(object $mysqli, string $user_ID, int $attempts)
 
 function isAccountLocked(object $mysqli, string $user_ID): bool
 {
-    $query = "SELECT login_Attempt, last_Access, time_Access FROM PASSWORD_MAINTENANCE WHERE user_ID = ?";
+    $query = "SELECT login_Attempt, last_Access, time_Access FROM password_maintenance WHERE user_ID = ?";
     $queryResult = executeQuery($mysqli, $query, "s", [$user_ID]);
 
     if (!$queryResult['success']) {
