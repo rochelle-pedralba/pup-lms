@@ -81,7 +81,7 @@ function updateLoginAttempt(object $mysqli, string $user_ID, int $attempts)
 
 function isAccountLocked(object $mysqli, string $user_ID): bool
 {
-    $query = "SELECT login_Attempt, last_Access, time_Access FROM PASSWORD_MAINTENANCE WHERE user_ID = ?";
+    $query = "SELECT login_Attempt, last_Access, time_Access FROM USER_ACCESS WHERE user_ID = ?";
     $queryResult = executeQuery($mysqli, $query, "s", [$user_ID]);
 
     if (!$queryResult['success']) {
