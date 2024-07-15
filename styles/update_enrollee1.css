@@ -22,6 +22,16 @@ h4 {
   border-radius: 10px;
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+
 /* Create three equal columns that floats next to each other */
 .column {
   float: left;
@@ -35,6 +45,6 @@ h4 {
 /* Clear floats after the columns */
 .row:after {
   content: "";
-  display: table !important;
+  display: table;
   clear: both;
 }
