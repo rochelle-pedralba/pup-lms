@@ -217,14 +217,20 @@ function populateDepartments(departments) {
 // populate the options in country dropdown
 function populateCountries(countries) {
   var countrySelect = document.getElementById('countries');
-  countrySelect.innerHTML = '<option value="" selected disabled>Select a Country</option>';
+  countrySelect.innerHTML = '<option value="">Select a Country</option>';
 
   countries.forEach((country) => {
     console.log(country['name']);
-
     var option = document.createElement('option');
     option.value = country['name'];
     option.textContent = country['name'];
+
+    // Step 4: Set Default Option
+    if (country['name'] == 'Philippines') {
+      option.selected = true;
+      changeField('Philippines');
+    }
+
     countrySelect.appendChild(option);
   });
 }

@@ -55,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql2 = "INSERT INTO user_role (user_ID, user_Role, date_Assigned, previous_Role, date_Change) VALUES (?, ?, ?, ?, ?)";
         $stmt2 = $mysqli->prepare($sql2);
         $stmt2->bind_param("sisss", $user_id, $user_Role, $date_Assigned, $previous_Role, $date_Change);
-
         $stmt2->execute();
 
         // Commit transaction

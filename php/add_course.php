@@ -17,6 +17,7 @@ $cohort_ID = isset($_POST['cohort_ID']) ? sanitize_input($_POST['cohort_ID']) : 
 $course_desc = isset($_POST['course_desc']) ? sanitize_input($_POST['course_desc']) : null;
 $college_ID = isset($_POST['college_ID']) ? sanitize_input($_POST['college_ID']) : null;
 $no_of_years = isset($_POST['no_of_years']) ? sanitize_input($_POST['no_of_years']) : null;
+$course_name = isset($_POST['course_name']) ? sanitize_input($_POST['course_name']) : null;
 
 function record_exists($mysqli, $table, $column, $value) {
     $sql = $mysqli->prepare("SELECT COUNT(*) FROM $table WHERE $column = ?");
@@ -27,7 +28,7 @@ function record_exists($mysqli, $table, $column, $value) {
     return $count > 0;
 }
 
-function add_course($mysqli, $course_ID, $creator_ID, $cohort_ID, $course_desc, $college_ID, $no_of_years) {
+function add_course($mysqli, $course_ID, $creator_ID, $cohort_ID, $course_desc, $college_ID, $no_of_years, $course_name) {
     if (!record_exists($mysqli, 'COLLEGE', 'college_ID', $college_ID)) {
         return "Error: COLLEGE does not exist.";
     }
