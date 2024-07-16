@@ -63,15 +63,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         try {
             // Server settings
             $mail->isSMTP();
-            $mail->Host = 'pedralbarochellean@gmail.com'; // Set the SMTP server to send through
+            $mail->Host = 'smtp.gmail.com'; // Set the SMTP server to send through
             $mail->SMTPAuth = true;
-            $mail->Username = $email; // SMTP username
-            $mail->Password = $password; // SMTP password
+            $mail->Username = ''; // SMTP username
+            $mail->Password = ''; // SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
             // Recipients
-            $mail->setFrom('pedralbarochellean@gmail.com', 'PUP LMS');
+            $mail->setFrom('', 'PUP LMS');
             $mail->addAddress($email);
 
             // Content
