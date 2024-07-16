@@ -9,6 +9,15 @@
     <script src="../../scripts/admin_overview.js"></script>
 </head>
 <body>
+    <header class="head">
+        <div class="logo">
+          <img src="../../assets/PUP_logo.png" alt="PUP Logo">
+        </div>
+        <div class="title">
+          <h1>PUP Learning Management System</h1>
+        </div>
+    </header>
+
     <div class="container">
         <div class="header">
             <h1>Admin's Overview</h1>
@@ -33,7 +42,7 @@
                         to ensure the subject remains current and meets educational standards. </p>
                 </div>
             </div>
-            <div class="overview-item" onclick="updateCourse()">
+            <div class="overview-item" onclick="window.location.href='course_overview.php'">
                 <div class="overview-header">
                     <h3>Update Course</h3>
                 </div>
@@ -42,6 +51,7 @@
                         Modify, add, or remove courses such as BSCS or BSIT to reflect the latest curriculum changes.</p>
                 </div>
             </div>
+            
             <div class="overview-item" onclick="updateCohort()">
                 <div class="overview-header">
                     <h3>Update Cohort</h3>
@@ -80,5 +90,11 @@
             </div>
         </div>
     </div>
+
+    <footer id="footer">
+        <div>
+          <p>&copy; 2021 PUP Learning Management System</p>
+        </div>
+    </footer>
 </body>
 </html>                
