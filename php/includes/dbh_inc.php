@@ -1,12 +1,12 @@
 <?php
-    $dbhost = "localhost:3307";
-    $dbuser = "root";
-    $dbpass = "";
-    $dbname = "pup_lms";
+$dbhost = "localhost";
+$dbuser = "root";
+$dbpass = "";
+$dbname = "pup_lms";
 
-    $mysqli = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+$mysqli = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
-    if (!is_null($mysqli->connect_error)) {
-        throw new Exception('Connection failed: ' . $mysqli->connect_error);
-    }
+if (!is_null($mysqli->connect_error)) {
+    throw new Exception('Connection failed: ' . $mysqli->connect_error);
+}
 ?>
