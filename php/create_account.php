@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $date_Change = date('Y-m-d');
     $last_Access = $first_Access = $date_Assigned;
     $time_Access = date('H:i:s');
-    
+
     // Prepare user_information values
     $date_Created = $date_Assigned;
     $time_Created = $time_Access;
@@ -44,9 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt3->execute();
 
         // Insert into user_access table
-        $sql1 = "INSERT INTO user_access (user_ID, user_Password, last_Access, time_Access, first_Access) VALUES (?, ?, ?, ?, ?)";
+        //$sql1 = "INSERT INTO user_access (user_ID, user_Password, last_Access, time_Access, first_Access) VALUES (?, ?, ?, ?, ?)";
+        $sql1 = "INSERT INTO user_access (user_ID, user_Password) VALUES (?, ?)";
         $stmt1 = $mysqli->prepare($sql1);
-        $stmt1->bind_param("sssss", $user_id, $hashed_password, $last_Access, $time_Access, $first_Access);
+        //$stmt1->bind_param("sssss", $user_id, $hashed_password, $last_Access, $time_Access, $first_Access);
+        $stmt1->bind_param("ss", $user_id, $hashed_password);
         $stmt1->execute();
 
         // Insert into user_role table
