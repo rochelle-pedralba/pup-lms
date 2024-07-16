@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // Prepare role values
-    $user_Role = $role === 'faculty' ? 1 : 2;
+    $user_Role = $role === 'faculty' ? 2 : 4;
     $previous_Role = 0;
     $date_Assigned = date('Y-m-d');
     $date_Change = date('Y-m-d');
@@ -29,8 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Prepare user_information values
     $date_Created = $date_Assigned;
     $time_Created = $time_Access;
-    $account_Status = 1; // Assuming 1 means active
-    $id_Number = $user_id; // Assuming id_Number is same as user_ID or generate if different
+    $account_Status = 1;
+    $id_Number = $user_id;
 
     // Start transaction
     $mysqli->begin_transaction();
@@ -38,9 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     try {
 
         // Insert into user_information table
-        $sql3 = "INSERT INTO user_information (user_ID, account_Status, date_Created, time_Created, id_Number) VALUES (?, ?, ?, ?, ?)";
+        $sql3 = "INSERT INTO user_information (user_ID, account_Status, date_Created, time_Created, id_Number, email_Address) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt3 = $mysqli->prepare($sql3);
-        $stmt3->bind_param("sisss", $user_id, $account_Status, $date_Created, $time_Created, $id_Number);
+        $stmt3->bind_param("sissss", $user_id, $account_Status, $date_Created, $time_Created, $id_Number, $email);
         $stmt3->execute();
 
         // Insert into user_access table
