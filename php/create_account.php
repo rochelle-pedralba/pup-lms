@@ -36,6 +36,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $mysqli->begin_transaction();
 
     try {
+
+        // Insert into user_information table
+        $sql3 = "INSERT INTO user_information (user_ID, account_Status, date_Created, time_Created, id_Number) VALUES (?, ?, ?, ?, ?)";
+        $stmt3 = $mysqli->prepare($sql3);
+        $stmt3->bind_param("sisss", $user_id, $account_Status, $date_Created, $time_Created, $id_Number);
+        $stmt3->execute();
+
         // Insert into user_access table
         $sql1 = "INSERT INTO user_access (user_ID, user_Password, last_Access, time_Access, first_Access) VALUES (?, ?, ?, ?, ?)";
         $stmt1 = $mysqli->prepare($sql1);
@@ -48,12 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt2->bind_param("sisss", $user_id, $user_Role, $date_Assigned, $previous_Role, $date_Change);
 
         $stmt2->execute();
-        
-        // Insert into user_information table
-        $sql3 = "INSERT INTO user_information (user_ID, account_Status, date_Created, time_Created, id_Number) VALUES (?, ?, ?, ?, ?)";
-        $stmt3 = $conn->prepare($sql3);
-        $stmt3->bind_param("sisss", $user_id, $account_Status, $date_Created, $time_Created, $id_Number);
-        $stmt3->execute();
 
         // Commit transaction
         $mysqli->commit();
@@ -65,13 +66,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com'; // Set the SMTP server to send through
             $mail->SMTPAuth = true;
-            $mail->Username = ''; // SMTP username
-            $mail->Password = ''; // SMTP password
+            $mail->Username = 'tobayerichelleann@gmail.com'; // SMTP username
+            $mail->Password = 'bpsu ezxp xbga elxc'; // SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
             // Recipients
-            $mail->setFrom('', 'PUP LMS');
+            $mail->setFrom('tobayerichelleann@gmail.com', 'PUP LMS');
             $mail->addAddress($email);
 
             // Content
@@ -93,7 +94,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt1->close();
     $stmt2->close();
     $stmt3->close();
-    $conn->close();
     $mysqli->close();
 }
 ?>
