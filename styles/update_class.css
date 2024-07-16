@@ -1,9 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 h1, h3 {
   text-align: center;
 }
@@ -18,203 +12,38 @@ h4 {
   margin-top: 20px;
 }
 
-/*------------------------     ENROLL STUDENTS    ---------------------*/
-
-#enroll_students {
+.row {
   display: flex;
-  background-color: rgb(201, 201, 201);
+  flex-direction: row;
+  align-items: center;;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  margin-left: -100px;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 30%;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
   height: 500px;
-  width: auto;
-  margin: 20px;
-  padding-bottom: 20px;
-  border-radius: 10px;
 }
 
-.first-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 20px;
-  height: 95%;
-  width: 100%;
-}
-
-#search_student {
-  display: flex;
-  flex-direction: column;
-  margin: 20px;
-  height: 95%;
-  width: 100%;
-  background-color: rgb(171, 171, 171);
-  border-radius: 10px;
-}
-
-.display-student {
-  display: flex;
-  flex-direction: column;
-  height: 80%;
-  width: 100%;
+.column-three {
+  width:  150%;
   padding: 10px;
-}
-
-.display-student table {
-  width: 100%;
-  padding: 10px;
-}
-
-.display-student .checkBox {
-  width: 10px !important;
-}
-
-.selected-student-container {
-  display: flex;
-  flex-direction: column;
+  border-radius: 10px;
+  margin: 10px;
   height: 500px;
-  width: 100%;
-  margin-top: 20px;
-  background-color: rgb(171, 171, 171);
-  border-radius: 10px;
 }
 
-.selected-student-container .title {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 10px;
-}
-
-#selected_student .removeStudent {
-  display: absolute;
-  width: 10px !important;
-}
-
-.student-information {
-  display: absolute;
-  flex-direction: row;
-  padding: 10px;
-}
-
-#selected_student {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  width: 100%;
-  padding: 10px;
-}
-
-.row-selected-student {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  padding: 10px;
-}
-
-.row-selected-student, td, tr {
-  padding: 10px;
-}
-
-/*------------------------     ENROLL STUDENTS    ---------------------*/
-.display-student {
-  display: flex;
-  flex-direction: column;
-  height: 80%;
-  width: 100%;
-  padding: 10px;
-}
-
-.display-student table {
-  width: 100%;
-  padding: 10px;
-}
-
-.display-student .checkBox {
-  width: 10px !important;
-}
-
-.selected-student-container {
-  display: flex;
-  flex-direction: column;
-  height: 95%;
-  width: 100%;
-  margin-top: 20px;
-  background-color: rgb(171, 171, 171);
-  border-radius: 10px;
-}
-
-.selected-student-container .title {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 10px;
-}
-
-#selected_student .removeStudent {
-  display: absolute;
-  width: 10px !important;
-}
-
-.student-information {
-  display: absolute;
-  flex-direction: row;
-  padding: 10px;
-}
-
-#selected_student {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  width: 100%;
-  padding: 10px;
-}
-
-.row-selected-student {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  padding: 10px;
-}
-
-.row-selected-student, td, tr {
-  padding: 10px;
-}
-
-/*------------------------     UNENROLL STUDENTS    ---------------------*/
-
-#unenroll_students {
-  display: flex;
-  flex-direction: column;
-  background-color: rgb(201, 201, 201);
-  height: 95%;
-  width: 100%;
-  margin: 20px;
-  border-radius: 10px;
-}
-
-#unenroll_students h2 {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.unenroll-student-container {
-  display: flex;
-  flex-direction: column;
-  height: 95%;
-  width: 100%;
-  margin-top: 20px;
-  background-color: rgb(171, 171, 171);
-  border-radius: 10px;
-}
-
-#enrolled_student{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  width: 100%;
-  padding: 5px;
-}
-
-#enrolled_student tr{
-  justify-content: space-evenly;
-  width: 100%;
-  padding: 0px;
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
