@@ -1,7 +1,7 @@
 <?php
-include_once '../includes/config_session_inc.php';
-include_once '../includes/dbh_inc.php';
-include_once '../includes/error_model_inc.php';
+include_once 'includes/config_session_inc.php';
+include_once 'includes/dbh_inc.php';
+include_once 'includes/error_model_inc.php';
 include_once '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
 include_once '../vendor/phpmailer/phpmailer/src/SMTP.php';
 include_once '../vendor/phpmailer/phpmailer/src/Exception.php';
