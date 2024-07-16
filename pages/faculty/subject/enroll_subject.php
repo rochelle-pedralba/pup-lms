@@ -33,7 +33,7 @@
     <div class="row-container">
       <div class="row">
         
-      <div class="column column-one" style="background-color:#aaa;">
+      <div class="column" style="background-color:#aaa;">
         <div id="search_student">
           <form method="POST">
             <input type="text" id="studentSearch" name="studentID" placeholder="Enter Student ID">
@@ -51,7 +51,7 @@
           </div>
         </div>
         
-        <div class="column column-two" style="background-color:#bbb;">
+        <div class="column" style="background-color:#bbb;">
           <div class="selected-student-container">
             <div class="title">
               <h3>Selected Student</h3>
@@ -60,10 +60,9 @@
             <div id="selected_student"></div>
           </div>
         </div>
-      </div>
 
-    <div id="unenroll_students">
-        <div class="column column-three" style="background-color:#ccc;">
+        <div id="unenroll_students">
+        <div class="column" style="background-color:#ccc;">
           <div id="unenroll_students">
           <div class="unenroll-student-container">
             <h3>Student Enrolled</h3>
@@ -84,6 +83,9 @@
           </div>
         </div>
       </div>
+      </div>
+
+
     </div>
   </body>
 </html>
