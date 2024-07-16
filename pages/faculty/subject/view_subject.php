@@ -97,7 +97,7 @@ $lastName = $row['last_Name'];
             <h4>Professor: <?php echo htmlspecialchars($firstName) . " " . htmlspecialchars($lastName); ?></h4>
 
         </div>
-        
+
         <div>
             <h3 class="year-section-container"><?php echo htmlspecialchars($courseID) . " " . htmlspecialchars($year) . "-" . htmlspecialchars($section); ?></h3>
             <h1><?php echo htmlspecialchars($subjectID) . ': ' . htmlspecialchars($subjectName); ?></h1>
@@ -106,7 +106,7 @@ $lastName = $row['last_Name'];
 
         <div class="button-container">
             <button>View Classmates</button>
-            <button href="edit_subject.php?subjectID=<?php echo urlencode($subjectID); ?>" class="btn btn-primary">Edit</a>
+            <a href="edit_subject.php?subject_id=<?php echo urlencode($subjectID); ?>" class="edit-button">Edit</a>
         </div>
     </div>
 
