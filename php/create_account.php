@@ -25,6 +25,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $date_Change = date('Y-m-d');
     $last_Access = $first_Access = $date_Assigned;
     $time_Access = date('H:i:s');
+    
+    // Prepare user_information values
+    $date_Created = $date_Assigned;
+    $time_Created = $time_Access;
+    $account_Status = 1; // Assuming 1 means active
+    $id_Number = $user_id; // Assuming id_Number is same as user_ID or generate if different
 
     // Start transaction
     $conn->begin_transaction();
@@ -41,6 +47,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt2 = $conn->prepare($sql2);
         $stmt2->bind_param("sisss", $user_id, $user_Role, $date_Assigned, $previous_Role, $date_Change);
         $stmt2->execute();
+        
+        // Insert into user_information table
+        $sql3 = "INSERT INTO user_information (user_ID, account_Status, date_Created, time_Created, id_Number) VALUES (?, ?, ?, ?, ?)";
+        $stmt3 = $conn->prepare($sql3);
+        $stmt3->bind_param("sisss", $user_id, $account_Status, $date_Created, $time_Created, $id_Number);
+        $stmt3->execute();
 
         // Commit transaction
         $conn->commit();
@@ -79,6 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $stmt1->close();
     $stmt2->close();
+    $stmt3->close();
     $conn->close();
 }
 ?>
