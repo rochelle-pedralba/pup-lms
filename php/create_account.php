@@ -41,10 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt2 = $mysqli->prepare($sql2);
         $stmt2->bind_param("sisss", $user_id, $user_Role, $date_Assigned, $previous_Role, $date_Change);
 
-        if (!$stmt2->execute()) {
-            throw new Exception("Failed to insert into user_information");
-        }
-
         $stmt2->execute();
 
         // Commit transaction
