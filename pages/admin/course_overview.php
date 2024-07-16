@@ -7,64 +7,29 @@ $dbname = "pup_lms";
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 if (!$conn) {
-  echo "Connection failed: " . mysqli_connect_error();
+    echo "Connection failed: " . mysqli_connect_error();
 } else {
     // Retrieve courses from database
-    $sql = "SELECT course_ID, course_Name, course_Description, no_Of_Years FROM course";
+    $sql = "SELECT course_ID, course_Name, course_Description, cohort_ID, college_ID, no_Of_Years FROM course";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
         $courses = array();
         while ($row = mysqli_fetch_assoc($result)) {
-            // // Check if course is archived
-            // if ($row["isArchived"] != '1') {
-                $courses[] = array(
-                    "course_id" => $row["course_ID"], 
-                    "course_name" => $row["course_Name"],
-                    "course_desc" => $row["course_Description"],
-                    "no_of_years" => $row["no_Of_Years"] . " Years",
-                );
-            // }
+            $courses[] = array(
+                "id" => $row["course_ID"],
+                "name" => $row["course_Name"],
+                "description" => $row["course_Description"],
+                "cohort" => $row["cohort_ID"],
+                "college" => $row["college_ID"],
+                "duration" => $row["no_Of_Years"] . " Years"
+            );
         }
     } else {
-        echo "No active courses found in the database.";
+        $courses = [];
     }
 }
 
-// // Handle POST request to update course
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//     if (isset($_POST['action']) && $_POST['action'] == 'archive') {
-//         $course_id = $_POST['course-id'];
-
-//         // Update the course in the database to set isArchived = 1
-//         $update_sql = "UPDATE course SET isArchived='1' WHERE course_ID='$course_id'";
-
-//         if (mysqli_query($conn, $update_sql)) {
-//             echo "Course archived successfully.";
-//             exit();
-//         } else {
-//             echo "Error updating course: " . mysqli_error($conn);
-//         }
-//     }
-// }
-
-// // Handle POST request to update course
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//     $course_id = $_POST['courseid'];
-//     $course_name = $_POST['course_name'];
-//     $course_desc = $_POST['course_desc'];
-//     $course_duration = $_POST['no_of_years'];
-
-//     // Update the course in the database
-//     $update_sql = "UPDATE course SET course_Name='$course_name', course_Description='$course_desc', no_Of_Years='$no_of_years' WHERE course_ID='$course_id'";
-
-//     if (mysqli_query($conn, $update_sql)) {
-//         header("Location: Faculty.php");
-//         exit();
-//     } else {
-//         echo "Error updating course: " . mysqli_error($conn);
-//     }
-// }
 mysqli_close($conn);
 ?>
 
@@ -119,34 +84,6 @@ mysqli_close($conn);
         </main>
     </div>
 
-
-    <!-- Modal -->
-    <!-- <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Edit Course</h2>
-            <form id="edit-course-form" action="Faculty.php" method="POST">
-            <input type="hidden" id="course-id" name="course-id">
-                <div class="form-group">
-                    <label for="course-name">Course Name:</label>
-                    <input type="text" id="course-name" name="course-name" required>
-                </div>
-                <div class="form-group">
-                    <label for="course-code">Course Code:</label>
-                    <input type="text" id="course-code" name="course-code" required>
-                </div>
-              
-                <div class="form-group">
-                    <label for="course-description">Description:</label>
-                    <textarea id="course-description" name="course-description" rows="4" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="course-duration">Duration:</label>
-                    <input type="text" id="course-duration" name="course-duration" required>
-                </div>
-                <button type="submit">Save Changes</button>
-            </form>
-        </div> -->
     </div>
 
     <footer id="footer">
