@@ -25,11 +25,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $date_Change = date('Y-m-d');
     $last_Access = $first_Access = $date_Assigned;
     $time_Access = date('H:i:s');
+    
+    // Prepare user_information values
+    $date_Created = $date_Assigned;
+    $time_Created = $time_Access;
+    $account_Status = 1; // Assuming 1 means active
+    $id_Number = $user_id; // Assuming id_Number is same as user_ID or generate if different
 
     // Start transaction
     $mysqli->begin_transaction();
 
     try {
+
+        // Insert into user_information table
+        $sql3 = "INSERT INTO user_information (user_ID, account_Status, date_Created, time_Created, id_Number) VALUES (?, ?, ?, ?, ?)";
+        $stmt3 = $mysqli->prepare($sql3);
+        $stmt3->bind_param("sisss", $user_id, $account_Status, $date_Created, $time_Created, $id_Number);
+        $stmt3->execute();
+
         // Insert into user_access table
         $sql1 = "INSERT INTO user_access (user_ID, user_Password, last_Access, time_Access, first_Access) VALUES (?, ?, ?, ?, ?)";
         $stmt1 = $mysqli->prepare($sql1);
@@ -40,7 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql2 = "INSERT INTO user_role (user_ID, user_Role, date_Assigned, previous_Role, date_Change) VALUES (?, ?, ?, ?, ?)";
         $stmt2 = $mysqli->prepare($sql2);
         $stmt2->bind_param("sisss", $user_id, $user_Role, $date_Assigned, $previous_Role, $date_Change);
-
         $stmt2->execute();
 
         // Commit transaction
@@ -51,15 +63,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         try {
             // Server settings
             $mail->isSMTP();
-            $mail->Host = 'pedralbarochellean@gmail.com'; // Set the SMTP server to send through
+            $mail->Host = 'smtp.gmail.com'; // Set the SMTP server to send through
             $mail->SMTPAuth = true;
-            $mail->Username = $email; // SMTP username
-            $mail->Password = $password; // SMTP password
+            $mail->Username = 'tobayerichelleann@gmail.com'; // SMTP username
+            $mail->Password = 'bpsu ezxp xbga elxc'; // SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
             // Recipients
-            $mail->setFrom('pedralbarochellean@gmail.com', 'PUP LMS');
+            $mail->setFrom('tobayerichelleann@gmail.com', 'PUP LMS');
             $mail->addAddress($email);
 
             // Content
@@ -80,6 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $stmt1->close();
     $stmt2->close();
+    $stmt3->close();
     $mysqli->close();
 }
 ?>

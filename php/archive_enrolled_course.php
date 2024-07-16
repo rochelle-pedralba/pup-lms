@@ -35,7 +35,7 @@ if (isset($_GET['studentName'])) {
 
 
         if ($deleteResult['success'] && $archiveResult['success']) {
-            header('Location: ../pages/admin/update_course.php');
+            header('Location: ../pages/admin/course/update_student_course.php');
         } else {
             $error_message = "An error has occured. Please try again later or contact the administrator.";
             redirectWithError($error_message);
