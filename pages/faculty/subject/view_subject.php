@@ -1,40 +1,27 @@
 <?php
-// Include the necessary files for database connection and query execution
-require_once '../../../php/includes/dbh_inc.php';
+
+// Itong tatlo for the connection lang ng db, dito sa file na to lahat ng pang display ng data sa sub
+require_once '../../../php/includes/dbh_inc.php'; // for db connection
 require_once '../../../php/includes/execute_query_inc.php';
 require_once '../../../php/includes/error_model_inc.php';
 
-$year = isset($_GET['year']) ? $_GET['year'] : '';
-$section = isset($_GET['section']) ? $_GET['section'] : '';
-$academicYear = isset($_GET['ay']) ? $_GET['ay'] : '';
-$semester = isset($_GET['semester']) ? $_GET['semester'] : '';
+$user_ID = "FA0123561212";
 
-// echo "Year: $year, Section: $section, AY: $academicYear, Semester: $semester<br>";
+// change into something like FA0123561212
+// user_ID yung user_ID ng professor
+// Palagyan nalang din muna sa db niyo sa subject table, di ko pa naiinform sa grp nila jasper
 
-if (empty($year) || empty($section) || empty($academicYear) || empty($semester)) {
-    echo "Missing parameters.";
-    exit;
-}
-
-// Query to fetch subject data based on year, section, academic year, and semester
-$querySubject = "SELECT s.course_ID, s.subject_Name, s.subject_ID, s.semester, s.ay, s.year, s.section, s.subject_Description, u.first_Name, u.last_Name 
-                FROM subject s 
-                JOIN user_information u ON s.user_ID = u.user_ID 
-                WHERE s.year = ? AND s.section = ? AND s.ay = ? AND s.semester = ?";
-$queryResult = executeQuery($mysqli, $querySubject, "ssss", [$year, $section, $academicYear, $semester]);
+// s for subject, u for user_information
+$querySubject = "SELECT s.course_ID, s.subject_Name, s.subject_ID, s.semester, s.ay, s.year, s.section, s.subject_Description, u.first_Name, u.last_Name FROM subject s JOIN user_information u ON s.user_ID = u.user_ID WHERE s.user_ID = ?";
+$queryResult = executeQuery($mysqli, $querySubject, "s", [$user_ID]);
 
 if (!$queryResult['success']) {
-    $error_message = "An error has occurred. Please try again later or contact the administrator.";
+    $error_message = "An error has occured. Please try again later or contact the administrator.";
     redirectWithError($error_message);
     exit;
 }
 
 $row = $queryResult['result']->fetch_assoc();
-
-if (!$row) {
-    echo "No subjects found for the specified criteria.";
-    exit;
-}
 
 $subjectName = $row['subject_Name'];
 $subjectID = $row['subject_ID'];
@@ -50,8 +37,8 @@ $firstName = $row['first_Name'];
 $lastName = $row['last_Name'];
 ?>
 
-
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -108,6 +95,7 @@ $lastName = $row['last_Name'];
     <div>
         <div>
             <h4>Professor: <?php echo htmlspecialchars($firstName) . " " . htmlspecialchars($lastName); ?></h4>
+
         </div>
 
         <div>
@@ -118,15 +106,15 @@ $lastName = $row['last_Name'];
 
         <div class="button-container">
             <button>View Classmates</button>
+            <a href="edit_subject.php?subject_id=<?php echo urlencode($subjectID); ?>" class="edit-button">Edit</a>
         </div>
     </div>
 
     <div class="placeholder-container">
         <div class="content-placeholder">
-            <h3><?php echo htmlspecialchars($subjectDescription); ?></h3>
+            <h3><?php echo $subjectDescription ?></h3>
         </div>
     </div>
 </body>
-</html>
 
 </html>

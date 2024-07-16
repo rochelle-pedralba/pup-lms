@@ -10,7 +10,7 @@ require_once 'includes/error_model_inc.php';
 
 function getUser(object $mysqli, string $user_ID): ?array
 {
-    $query = "SELECT ua.*, ui.account_Status, ur.user_Role, ua.first_Access, pm.login_Attempt
+    $query = "SELECT ua.*, ui.account_Status, ur.user_Role, ua.first_Access, pm.login_Attempt, pm.lockout_Time
               FROM USER_ACCESS ua
               JOIN USER_INFORMATION ui ON ua.user_ID = ui.user_ID
               LEFT JOIN USER_ROLE ur ON ua.user_ID = ur.user_ID
@@ -21,7 +21,7 @@ function getUser(object $mysqli, string $user_ID): ?array
     $queryResult = executeQuery($mysqli, $query, "sss", [$user_ID, '1', '0']);
 
     if (!$queryResult['success']) {
-        $error_message = "An error has occured. Please try again later or contact the administrator.";
+        $error_message = "An error has occurred. Please try again later or contact the administrator.";
         redirectWithError($error_message);
         exit;
     }
@@ -46,7 +46,7 @@ function updateLastAccess(object $mysqli, string $user_ID)
     $update_result = executeQuery($mysqli, $query, "sss", $params_update_access);
 
     if (!$update_result['success']) {
-        $error_message = "An internal error has occured. Please try again later or contact the administrator.";
+        $error_message = "An internal error has occurred. Please try again later or contact the administrator.";
         redirectWithError($error_message);
         exit;
     }
@@ -60,44 +60,53 @@ function setFirstAccess(object $mysqli, string $user_ID)
     $update_result = executeQuery($mysqli, $query, "ss", $params_update_access);
 
     if (!$update_result['success']) {
-        $error_message = "An internal error has occured. Please try again later or contact the administrator.";
+        $error_message = "An internal error has occurred. Please try again later or contact the administrator.";
         redirectWithError($error_message);
         exit;
     }
 }
 
-function updateLoginAttempt(object $mysqli, string $user_ID, int $attempts)
+function incrementLoginAttempt(object $mysqli, string $user_ID)
 {
-    $query = "UPDATE PASSWORD_MAINTENANCE SET login_Attempt = ? WHERE user_ID = ?";
-    $params_update_attempt = [$attempts, $user_ID];
-    $update_result = executeQuery($mysqli, $query, "is", $params_update_attempt);
+    $query = "UPDATE PASSWORD_MAINTENANCE 
+              SET login_Attempt = login_Attempt + 1, 
+                  lockout_Time = CASE WHEN login_Attempt >= 2 THEN NOW() ELSE lockout_Time END 
+              WHERE user_ID = ?";
+    $params = [$user_ID];
+    $result = executeQuery($mysqli, $query, "s", $params);
 
-    if (!$update_result['success']) {
-        $error_message = "An internal error has occured. Please try again later or contact the administrator.";
+    if (!$result['success']) {
+        $error_message = "An internal error has occurred. Please try again later or contact the administrator.";
         redirectWithError($error_message);
         exit;
     }
 }
 
-function isAccountLocked(object $mysqli, string $user_ID): bool
+function resetLoginAttempts(object $mysqli, string $user_ID)
 {
-    $query = "SELECT login_Attempt, last_Access, time_Access FROM PASSWORD_MAINTENANCE WHERE user_ID = ?";
-    $queryResult = executeQuery($mysqli, $query, "s", [$user_ID]);
+    $query = "UPDATE PASSWORD_MAINTENANCE 
+              SET login_Attempt = 0, 
+                  lockout_Time = NULL 
+              WHERE user_ID = ?";
+    $params = [$user_ID];
+    $result = executeQuery($mysqli, $query, "s", $params);
 
-    if (!$queryResult['success']) {
-        $error_message = "An internal error has occured. Please try again later or contact the administrator.";
+    if (!$result['success']) {
+        $error_message = "An internal error has occurred. Please try again later or contact the administrator.";
         redirectWithError($error_message);
         exit;
     }
+}
 
-    $result = $queryResult['result']->fetch_assoc();
+function isAccountLocked(?array $user): bool
+{
+    if ($user && isset($user['lockout_Time'])) {
+        $lockout_Time = strtotime($user['lockout_Time']);
+        $current_time = time();
+        $lock_duration = 24 * 60 * 60; // 24 hours
 
-    if ($result['login_Attempt'] >= 3) {
-        $lastAccessTime = strtotime($result['last_Access'] . ' ' . $result['time_Access']);
-        if ((time() - $lastAccessTime) < 3600) {
+        if (($current_time - $lockout_Time) < $lock_duration) {
             return true;
-        } else {
-            updateLoginAttempt($mysqli, $user_ID, 0);
         }
     }
     return false;
@@ -107,21 +116,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $user_ID = $_POST['user_ID'];
     $password = $_POST["password"];
 
-    if (isAccountLocked($mysqli, $user_ID)) {
-        echo "<script>alert('Account locked due to too many failed login attempts. Please try again after 1 hour.');
+    $user = getUser($mysqli, $user_ID);
+
+    if ($user === null) {
+        echo "<script>alert('Invalid user ID or password.');
               window.location.href = '../pages/login.html'; 
               </script>";
         exit;
     }
 
-    $user = getUser($mysqli, $user_ID);
-
-    if ($user === null || !verifyPassword($password, $user)) {
-        $loginAttempts = $user['login_Attempt'] ?? 0;
-        updateLoginAttempt($mysqli, $user_ID, $loginAttempts + 1);
-        echo "<script>alert('Password incorrect. Please try again.');
+    if (isAccountLocked($user)) {
+        echo "<script>alert('Account is locked due to too many failed login attempts. Please try again after 24 hours.');
               window.location.href = '../pages/login.html'; 
               </script>";
+        exit;
+    }
+
+    $attempts_left = 3 - $user['login_Attempt'];
+
+    if (!verifyPassword($password, $user)) {
+        incrementLoginAttempt($mysqli, $user_ID);
+
+        if ($attempts_left - 1 == 1) {
+            echo "<script>alert('Password incorrect. You have 1 attempt left. Consider resetting your password.');
+                  window.location.href = '../pages/login.html'; 
+                  </script>";
+        } else {
+            echo "<script>alert('Password incorrect. You have $attempts_left attempts left.');
+                  window.location.href = '../pages/login.html'; 
+                  </script>";
+        }
         exit;
     }
 
@@ -130,6 +154,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         redirectWithError($error_message);
         exit;
     }
+
+    resetLoginAttempts($mysqli, $user_ID);
 
     session_start();
     $_SESSION['user_ID'] = $user["user_ID"];
@@ -158,3 +184,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 $error_message = "Invalid submission method. Form submission method not allowed";
 redirectWithError($error_message);
 exit;
+?>
