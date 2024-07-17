@@ -64,10 +64,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             if ($result === true) {
                 echo "<script>alert('Course has been successfully created');</script>";
-                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/course/add_course.html'>";
+                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/course_overview.php'>";
                 exit;
             } else {
                 echo "<script>alert('$result');</script>";
+                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/course_overview.php'>";
+                exit;
             }
         } else {
             echo "<script>alert('Database connection error.');</script>";

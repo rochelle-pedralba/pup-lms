@@ -26,15 +26,15 @@ function populateCourses() {
 
         const editOption = document.createElement('li');
         const editLink = document.createElement('a');
-        editLink.href = '../admin/course/edit_course_form.php'
+        editLink.href = `../admin/course/edit_course_form.php?course_ID=${course.id}`;
         editLink.textContent = 'Edit';
         editOption.appendChild(editLink);
 
         const archiveOption = document.createElement('li');
         const archiveLink = document.createElement('a');
-        archiveLink.href = '../admin/course/archive_course.php';
+        archiveLink.href = '#';
         archiveLink.textContent = 'Archive';
-        archiveLink.onclick = (event) => archiveCourse(event, course.id);
+        archiveLink.onclick = () => showArchiveModal(course.id);
         archiveOption.appendChild(archiveLink);
 
         optionsList.appendChild(editOption);
@@ -103,11 +103,10 @@ function searchCourses() {
         course.description.toLowerCase().includes(searchInput)
     );
 
-    // Update course grid with filtered courses
     const courseGrid = document.getElementById('course-grid');
     courseGrid.innerHTML = ''; // Clear existing content
+
     filteredCourses.forEach(course => {
-        // Repopulate filtered courses
         const courseItem = document.createElement('article');
         courseItem.classList.add('course-item');
 
@@ -131,15 +130,15 @@ function searchCourses() {
 
         const editOption = document.createElement('li');
         const editLink = document.createElement('a');
-        editLink.href = '../admin/course/edit_course_form.php'
+        editLink.href = `../admin/course/edit_course_form.php?course_ID=${course.id}`;
         editLink.textContent = 'Edit';
         editOption.appendChild(editLink);
 
         const archiveOption = document.createElement('li');
         const archiveLink = document.createElement('a');
-        archiveLink.href = '../admin/course/archive_course.php';
+        archiveLink.href = '#';
         archiveLink.textContent = 'Archive';
-        archiveLink.onclick = (event) => archiveCourse(event, course.id);
+        archiveLink.onclick = () => showArchiveModal(cohort.id);
         archiveOption.appendChild(archiveLink);
 
         optionsList.appendChild(editOption);
@@ -204,6 +203,33 @@ function toggleView() {
         document.getElementById('course-grid').classList.remove('list-view');
     } else if (viewType === 'list') {
         document.getElementById('course-grid').classList.add('list-view');
+    }
+}
+
+function showArchiveModal(courseId) {
+    const modal = document.getElementById('archiveModal');
+    const span = document.getElementsByClassName('close')[0];
+    const confirmBtn = document.getElementById('confirmArchive');
+    const cancelBtn = document.getElementById('cancelArchive');
+
+    modal.style.display = 'block';
+
+    span.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    cancelBtn.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    confirmBtn.onclick = function() {
+        window.location.href = `../admin/course/archive_course.php?course_ID=${courseId}`;
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
     }
 }
 

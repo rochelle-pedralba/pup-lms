@@ -96,5 +96,14 @@ mysqli_close($mysqli);
     </script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="../../scripts/course_overview.js"></script>
+
+    <div id="archiveModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Are you sure you want to archive this course?</p>
+            <button id="confirmArchive">Yes</button>
+            <button id="cancelArchive">No</button>
+        </div>
+    </div>
 </body>
 </html>

@@ -49,6 +49,7 @@ if (isset($_GET['cohort_ID'])) {
                 exit;
             } else {
                 echo "<script>alert('Error: " . $delete_sql->error . "');</script>";
+                echo "<meta http-equiv='refresh' content='0;url=../cohort_overview.php'>";
             }
             $delete_sql->close();
         } else {

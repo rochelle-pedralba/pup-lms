@@ -46,10 +46,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             if ($result === true) {
                 echo "<script>alert('College has been successfully created');</script>";
-                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/college/add_college.html'>";
+                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/college_overview.php'>";
                 exit;
             } else {
                 echo "<script>alert('$result');</script>";
+                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/college_overview.php'>";
+                exit;
             }
         } else {
             echo "<script>alert('Database connection error.');</script>";

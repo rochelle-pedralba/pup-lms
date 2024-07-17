@@ -21,7 +21,7 @@ if (isset($_GET['college_ID'])) {
 
     if ($reference_count > 0) {
         echo "<script>alert('Error: College cannot be archived because it is referenced in another table.');</script>";
-        echo "<meta http-equiv='refresh' content='0;url=update_student_college.php'>";
+        echo "<meta http-equiv='refresh' content='0;url=../college_overview.php'>";
         exit;
     }
 
@@ -31,11 +31,11 @@ if (isset($_GET['college_ID'])) {
     $result = $sql->get_result();
 
     if ($result->num_rows > 0) {
-        $cohort = $result->fetch_assoc();
+        $college = $result->fetch_assoc();
         $sql->close();
 
         $archive_sql = $mysqli->prepare("INSERT INTO college_archive (college_ID, college_Name, description) VALUES (?, ?, ?)");
-        $archive_sql->bind_param("sss", $cohort['college_ID'], $cohort['college_Name'], $cohort['description']);
+        $archive_sql->bind_param("sss", $college['college_ID'], $college['college_Name'], $college['description']);
 
         if ($archive_sql->execute()) {
             $archive_sql->close();
@@ -45,10 +45,11 @@ if (isset($_GET['college_ID'])) {
 
             if ($delete_sql->execute()) {
                 echo "<script>alert('College has been successfully archived');</script>";
-                echo "<meta http-equiv='refresh' content='0;url=update_student_college.php'>";
+                echo "<meta http-equiv='refresh' content='0;url=../college_overview.php'>";
                 exit;
             } else {
                 echo "<script>alert('Error: " . $delete_sql->error . "');</script>";
+                echo "<meta http-equiv='refresh' content='0;url=../college_overview.php'>";
             }
             $delete_sql->close();
         } else {

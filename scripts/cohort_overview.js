@@ -32,8 +32,9 @@ function populateCohorts() {
 
         const archiveOption = document.createElement('li');
         const archiveLink = document.createElement('a');
-        archiveLink.href = `../admin/cohort/archive_cohort.php?cohort_ID=${cohort.id}`;
+        archiveLink.href = '#';
         archiveLink.textContent = 'Archive';
+        archiveLink.onclick = () => showArchiveModal(cohort.id);
         archiveOption.appendChild(archiveLink);
 
         optionsList.appendChild(editOption);
@@ -65,32 +66,6 @@ function populateCohorts() {
     cohortGrid.appendChild(addCohortItem);
 }
 
-function showArchiveModal(cohortId) {
-    const modal = document.getElementById('archiveModal');
-    const span = document.getElementsByClassName('close')[0];
-    const confirmBtn = document.getElementById('confirmArchive');
-    const cancelBtn = document.getElementById('cancelArchive');
-
-    modal.style.display = 'block';
-
-    span.onclick = function() {
-        modal.style.display = 'none';
-    }
-
-    cancelBtn.onclick = function() {
-        modal.style.display = 'none';
-    }
-
-    confirmBtn.onclick = function() {
-        window.location.href = `../admin/cohort/archive_cohort.php?cohort_ID=${cohortId}`;
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    }
-}
 
 // Function to toggle display of options (Edit, Archive) for each course
 function toggleOptions(button) {
@@ -183,6 +158,33 @@ function toggleView() {
         document.getElementById('cohort-grid').classList.remove('list-view');
     } else if (viewType === 'list') {
         document.getElementById('cohort-grid').classList.add('list-view');
+    }
+}
+
+function showArchiveModal(cohortId) {
+    const modal = document.getElementById('archiveModal');
+    const span = document.getElementsByClassName('close')[0];
+    const confirmBtn = document.getElementById('confirmArchive');
+    const cancelBtn = document.getElementById('cancelArchive');
+
+    modal.style.display = 'block';
+
+    span.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    cancelBtn.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    confirmBtn.onclick = function() {
+        window.location.href = `../admin/cohort/archive_cohort.php?cohort_ID=${cohortId}`;
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
     }
 }
 
