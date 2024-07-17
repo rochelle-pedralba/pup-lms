@@ -9,9 +9,8 @@ function sanitize_input($data) {
     return htmlspecialchars(trim($data));
 }
 
-$cohort_ID = 'pupsm'; 
-
-if ($cohort_ID) {
+if (isset($_GET['cohort_ID'])) {
+    $cohort_ID = sanitize_input($_GET['cohort_ID']);
 
     $reference_check_sql = $mysqli->prepare("SELECT COUNT(*) as count FROM COURSE WHERE cohort_ID = ?");
     $reference_check_sql->bind_param("s", $cohort_ID);
@@ -22,7 +21,7 @@ if ($cohort_ID) {
 
     if ($reference_count > 0) {
         echo "<script>alert('Error: Cohort cannot be archived because it is referenced in another table.');</script>";
-        echo "<meta http-equiv='refresh' content='0;url=update_student_cohort.php'>";
+        echo "<meta http-equiv='refresh' content='0;url=../cohort_overview.php'>";
         exit;
     }
 
@@ -46,7 +45,7 @@ if ($cohort_ID) {
 
             if ($delete_sql->execute()) {
                 echo "<script>alert('Cohort has been successfully archived');</script>";
-                echo "<meta http-equiv='refresh' content='0;url=update_student_cohort.php'>";
+                echo "<meta http-equiv='refresh' content='0;url=../cohort_overview.php'>";
                 exit;
             } else {
                 echo "<script>alert('Error: " . $delete_sql->error . "');</script>";
