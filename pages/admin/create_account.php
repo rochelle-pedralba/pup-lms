@@ -1,11 +1,29 @@
+<?php
+require_once '../../php/includes/config_session_inc.php';
+require_once '../../php/includes/error_model_inc.php';
+
+if (!isset($_SESSION['user_ID'])) {
+    header("Location: login.html");
+    exit;
+}
+
+if ($_SESSION['user_Role'] != '1') {
+    $error_message = "Permission denied. Only a manager can access this page.";
+    redirectWithError($error_message);
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Account</title>
     <link rel="stylesheet" href="../../../styles/admin_create.css">
 </head>
+
 <body>
     <h2>Create Account</h2>
     <form action="../../php/create_account.php" method="POST">
@@ -31,4 +49,5 @@
         <button type="submit">Create Account</button>
     </form>
 </body>
+
 </html>

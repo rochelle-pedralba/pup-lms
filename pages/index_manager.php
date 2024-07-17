@@ -24,9 +24,10 @@ if ($_SESSION['user_Role'] != '1') {
 </head>
 
 <body>
-    <h1>Welcome, Manager</h1>
+    <h1>Welcome, Admin</h1>
     <p><a href="profile.php">Profile</a></p>
     <p><a href="edit_role.php">Edit Role of a User</a></p>
+    <p><a href="admin/create_account.php">Create an account</a></p>
     <p><a href="../php/includes/logout_model_inc.php">Log Out</a></p>
 </body>
 
