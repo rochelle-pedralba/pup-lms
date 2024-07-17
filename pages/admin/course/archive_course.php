@@ -21,8 +21,8 @@ if (isset($_GET['course_ID'])) {
         $course = $result->fetch_assoc();
         $sql->close();
 
-        $archive_sql = $mysqli->prepare("INSERT INTO course_archive (course_ID, creator_ID, cohort_ID, course_Description, college_ID, no_Of_Years) VALUES (?, ?, ?, ?, ?, ?)");
-        $archive_sql->bind_param("sssssi", $course['course_ID'], $course['creator_ID'], $course['cohort_ID'], $course['course_Description'], $course['college_ID'], $course['no_Of_Years']);
+        $archive_sql = $mysqli->prepare("INSERT INTO course_archive (course_ID, creator_ID, cohort_ID, course_Description, college_ID, no_Of_Years, course_Name) VALUES (?, ?, ?, ?, ?, ?)");
+        $archive_sql->bind_param("sssssis", $course['course_ID'], $course['creator_ID'], $course['cohort_ID'], $course['course_Description'], $course['college_ID'], $course['no_Of_Years'], $course['course_name']);
 
         if ($archive_sql->execute()) {
             $archive_sql->close();

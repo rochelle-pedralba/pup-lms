@@ -10,14 +10,8 @@ function populateCourses() {
         const courseHeader = document.createElement('header');
         courseHeader.classList.add('course-header');
         const courseID = document.createElement('h3');
-        courseID.textContent = course.id;
+        courseID.textContent = course.id + ' - ' + course.name;
         courseHeader.appendChild(courseID);
-
-        const courseHead = document.createElement('header');
-        courseHead.classList.add('course-header');
-        const courseName = document.createElement('h3');
-        courseName.textContent = course.name;
-        courseHeader.appendChild(courseName);
 
         const courseOptions = document.createElement('div');
         courseOptions.classList.add('course-options');
@@ -121,14 +115,8 @@ function searchCourses() {
         const courseHeader = document.createElement('header');
         courseHeader.classList.add('course-header');
         const courseID = document.createElement('h3');
-        courseID.textContent = course.id;
+        courseID.textContent = course.id + ' - ' + course.name;
         courseHeader.appendChild(courseID);
-
-        const courseHead = document.createElement('header');
-        courseHead.classList.add('course-header');
-        const courseName = document.createElement('h3');
-        courseName.textContent = course.name;
-        courseHeader.appendChild(courseName);
 
         const courseOptions = document.createElement('div');
         courseOptions.classList.add('course-options');
