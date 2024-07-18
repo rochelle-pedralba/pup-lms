@@ -176,6 +176,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
+    if ($_SESSION["user_Role"] === '2') {
+        header("Location: ../pages/index_faculty.php");
+        $mysqli->close();
+        exit;
+    }
+
     header("Location: ../pages/index.php");
     $mysqli->close();
     exit;

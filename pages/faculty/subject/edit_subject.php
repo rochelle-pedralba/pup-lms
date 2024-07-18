@@ -50,32 +50,35 @@ $section = $row['section'];
 
     <form action="../../../php/update_subject.php" method="POST">
         <input type="hidden" name="subject_id" value="<?php echo htmlspecialchars($subject_ID); ?>">
-        
+
         <label for="subject_name">Subject Name:</label><br>
-        <input type="text" id="subject_name" name="subject_name" value="<?php echo htmlspecialchars($subjectName); ?>"><br><br>
-        
+        <input type="text" id="subject_name" name="subject_name"
+            value="<?php echo htmlspecialchars($subjectName); ?>"><br><br>
+
         <label for="semester">Semester:</label><br>
         <input type="text" id="semester" name="semester" value="<?php echo htmlspecialchars($semester); ?>"><br><br>
-        
+
         <label for="academic_year">Academic Year:</label><br>
-        <input type="text" id="academic_year" name="academic_year" value="<?php echo htmlspecialchars($academicYear); ?>"><br><br>
-        
+        <input type="text" id="academic_year" name="academic_year"
+            value="<?php echo htmlspecialchars($academicYear); ?>"><br><br>
+
         <label for="year">Year:</label><br>
         <input type="text" id="year" name="year" value="<?php echo htmlspecialchars($year); ?>"><br><br>
-        
+
         <label for="section">Section:</label><br>
         <input type="text" id="section" name="section" value="<?php echo htmlspecialchars($section); ?>"><br><br>
-        
+
         <label for="subject_description">Subject Description:</label><br>
-        <textarea id="subject_description" name="subject_description" rows="4" cols="50"><?php echo htmlspecialchars($subjectDescription); ?></textarea><br><br>
-        
+        <textarea id="subject_description" name="subject_description" rows="4"
+            cols="50"><?php echo htmlspecialchars($subjectDescription); ?></textarea><br><br>
+
         <input type="submit" value="Submit">
     </form>
 
-    <form method="post" action="../../../php/archive_subject.php">
+    <!-- <form method="post" action="../../../php/archive_subject.php">
             <input type="hidden" name="subject_id" value="<?php echo htmlspecialchars($subjectID); ?>">
             <button type="submit">Archive</button>
-        </form>
+        </form> -->
 
 </body>
 
