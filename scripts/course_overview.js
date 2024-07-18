@@ -5,6 +5,10 @@ function populateCourses() {
     courses.forEach(course => {
         const courseItem = document.createElement('article');
         courseItem.classList.add('course-item');
+        courseItem.onclick = () => {
+            // Change the location to the course detail page
+            window.location.href = `../admin/course/update_student_course.php`;
+            };
 
         // Course header
         const courseHeader = document.createElement('header');
@@ -82,6 +86,7 @@ function populateCourses() {
     const addCourseItem = document.createElement('article');
     addCourseItem.classList.add('course-item', 'add-course-item');
     addCourseItem.onclick = () => { window.location.href = '../admin/course/add_course.html'; };
+
     const addCourseContent = document.createElement('div');
     addCourseContent.innerHTML = '<p>+ Add Course</p>';
     addCourseItem.appendChild(addCourseContent);
