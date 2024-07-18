@@ -1,6 +1,11 @@
 <?php 
 
-echo id;
+require_once '../../../php/includes/config_session_inc.php';
+
+$_SESSION["course_ID"] = "BSCS";
+$_SESSION["cohort_ID"] = "PUPSJ";
+$_SESSION["ay"] = "2324";
+$_SESSION["semester"] = "1";
 
 ?>
 
