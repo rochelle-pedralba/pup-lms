@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set('Asia/Manila');
 
-$dbhost = "localhost";
+$dbhost = "localhost:3307";
 $dbuser = "root";
 $dbpass = "";
 $dbname = "pup_lms";
@@ -128,5 +128,10 @@ $mysqli->close();
             <p>Your record has been added to the database.</p>
         </div>
     <?php endif; ?>
+    <script>
+        setTimeout(function() {
+        window.location.href = '../pages/faculty/faculty_view.html';
+            }, 2000);
+    </script>
 </body>
 </html>
