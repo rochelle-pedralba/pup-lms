@@ -1,6 +1,5 @@
 <?php
-
-$dbhost = "localhost:3307";
+$dbhost = "localhost";
 $dbuser = "root";
 $dbpass = "";
 $dbname = "pup_lms";

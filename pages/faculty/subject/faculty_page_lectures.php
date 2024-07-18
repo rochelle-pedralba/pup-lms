@@ -1,5 +1,5 @@
 <?php
-$servername = "localhost:3307";
+$servername = "localhost:3306";
 $username = "root";
 $password = "";
 $dbname = "pup_lms";
@@ -29,12 +29,14 @@ $conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faculty Lectures Page</title>
     <link rel="stylesheet" href="../../../styles/faculty_page_lectures.css">
 </head>
+
 <body>
     <h1>Faculty Side - Lectures Page</h1>
 
@@ -61,9 +63,11 @@ $conn->close();
             <div class="lecture">
                 <h2><?php echo htmlspecialchars($lecture['name']); ?></h2>
                 <p>Date: <?php echo htmlspecialchars($lecture['date']); ?></p>
-                <a href="faculty_edit_lectures.php?lecture_ID=<?php echo urlencode($lecture['lecture_ID']); ?>" class="button">Edit Lecture</a>
+                <a href="faculty_edit_lectures.php?lecture_ID=<?php echo urlencode($lecture['lecture_ID']); ?>"
+                    class="button">Edit Lecture</a>
             </div>
         <?php endforeach; ?>
     </div>
 </body>
+
 </html>

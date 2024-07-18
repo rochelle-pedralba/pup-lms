@@ -1,18 +1,9 @@
-<?php
-require_once '../../../php/includes/config_session_inc.php';
-
-if (!isset($_SESSION['user_ID'])) {
-    header("Location: login.html");
-    exit;
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Subject</title>
+    <title>Add a Subject</title>
     <style>
         body {
             display: flex;
@@ -68,9 +59,9 @@ if (!isset($_SESSION['user_ID'])) {
 <body>
     <div id="subject_form">
         <h1>ADD SUBJECT</h1>
-        <form method="POST" action="../../../php/add_subject.php" id="subject_form">
-            <label for="cohort_ID">Campus:</label>
-            <select id="cohort_ID" name="cohort_ID" required>
+        <form method="POST" action="../../../php/add_subject.php">
+            <label for="cohort_name">Campus:</label>
+            <select id="cohort_name" name="cohort_name">
                 <option selected disabled>Select Campus</option>
             </select>
 
@@ -104,7 +95,8 @@ if (!isset($_SESSION['user_ID'])) {
             <button type="submit">SUBMIT</button>
         </form>
     </div>
-
-    <script src="/scripts/add_subject.js"></script>
+    <script src="../../../scripts/add_subject.js">
+        
+    </script>    
 </body>
 </html>
