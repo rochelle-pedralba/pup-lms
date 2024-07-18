@@ -12,12 +12,12 @@ if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 }
 
-require_once 'includes/execute_query_inc.php'; // Assuming this file contains your executeQuery function
+require_once 'includes/execute_query_inc.php';
 
 $insertSuccess = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Assuming these are your form field names
+
     $user_ID = "FA0123561212"; 
     $cohort_ID = $_POST['cohort_ID'];
     $subject_ID = $_POST['subject_ID'];
@@ -29,7 +29,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $year = $_POST['year'];
     $section = $_POST['section'];
 
-    // Insert query using prepared statements to prevent SQL injection
     $queryInsert = "INSERT INTO subject
                     (user_ID, cohort_ID, subject_ID, subject_Name, subject_Description, ay, semester, course_ID, year, section) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
