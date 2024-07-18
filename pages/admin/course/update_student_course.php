@@ -1,15 +1,39 @@
 <?php 
+date_default_timezone_set('Asia/Manila');
 
-require_once '../../../php/includes/config_session_inc.php';
+require_once '../../../php/includes/dbh_inc.php'; 
+require_once '../../../php/includes/execute_query_inc.php';
+require_once '../../../php/includes/error_model_inc.php';
 
-session_start();
+if (!$mysqli) {
+    echo "Connection failed: " . mysqli_connect_error();
+    exit();
+} else {
+    // Retrieve courses and cohort from database
+    $course_query = "SELECT course_ID FROM course";
+    $cohort_query = "SELECT cohort_ID FROM cohort";
 
-$_SESSION["course_ID"] = "BSCS";
-$_SESSION["cohort_ID"] = "PUPSJ";
+    $course_result = mysqli_query($mysqli, $course_query);
+    $cohort_result = mysqli_query($mysqli, $cohort_query);
 
-$courseID = $_SESSION["course_ID"];
-$cohortID = $_SESSION["cohort_ID"];
+    if (!$course_result || !$cohort_result) {
+        echo "Error retrieving data: " . mysqli_error($mysqli);
+        exit();
+    }
 
+    $course_IDs = [];
+    while ($row = mysqli_fetch_assoc($course_result)) {
+        $course_IDs[] = $row['course_ID'];
+    }
+
+    $cohort_IDs = [];
+    while ($row = mysqli_fetch_assoc($cohort_result)) {
+        $cohort_IDs[] = $row['cohort_ID'];
+    }
+
+    mysqli_free_result($course_result);
+    mysqli_free_result($cohort_result);
+}
 ?>
 
 <!DOCTYPE html>
@@ -94,7 +118,7 @@ $cohortID = $_SESSION["cohort_ID"];
       </div>
       <div class="back-item" onclick="window.location.href='../overview.html'">
             <div class="back-header">
-                <h3>Back</h3>
+                <button>Back</button>
             </div>
         </div> 
     </div>
