@@ -38,7 +38,7 @@ mysqli_close($mysqli);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | Cohort Overview</title>
+    <title>Admin | Course Overview</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" type="text/css" href="../../styles/course_overview.css">
 </head>
