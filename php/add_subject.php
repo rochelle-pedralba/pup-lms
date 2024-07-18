@@ -8,6 +8,8 @@ $dbname = "pup_lms";
 
 $mysqli = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
+$user_ID = $_SESSION['user_ID'];
+
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 }
@@ -18,7 +20,6 @@ $insertSuccess = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Assuming these are your form field names
-    $user_ID = "FA0123561212"; 
     $cohort_ID = $_POST['cohort_ID'];
     $subject_ID = $_POST['subject_ID'];
     $subject_Name = $_POST['subject_name'];
