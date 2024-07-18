@@ -81,7 +81,7 @@ function populatesubjects() {
     // Add 'Add subject' button item at the end
     const addsubjectItem = document.createElement('article');
     addsubjectItem.classList.add('subject-item', 'add-subject-item');
-    addsubjectItem.onclick = () => { window.location.href = '../admin/subject/add_subject.html'; };
+    addsubjectItem.onclick = () => { window.location.href = 'add_subject.html'; };
     const addsubjectContent = document.createElement('div');
     addsubjectContent.innerHTML = '<p>+ Add subject</p>';
     addsubjectItem.appendChild(addsubjectContent);
