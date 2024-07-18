@@ -53,13 +53,13 @@ mysqli_close($mysqli);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faculty | Subject Overview</title>
     <link rel="icon" type="image/png" href="logo.png">
-    <link rel="stylesheet" type="text/css" href="../../../styles/course_overview.css">
+    <link rel="stylesheet" type="text/css" href="../../../styles/subject_overview.css">
 </head>
 
 <body>
     <header class="head">
             <div class="logo">
-              <img src="../../assets/PUP_logo.png" alt="PUP Logo">
+              <img src="../../../assets/PUP_logo.png" alt="PUP Logo">
             </div>
             <div class="title">
               <h1>PUP Learning Management System</h1>
