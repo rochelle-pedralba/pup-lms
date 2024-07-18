@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set('Asia/Manila');
 
-$dbhost = "localhost:3306";
+$dbhost = "localhost";
 $dbuser = "root";
 $dbpass = "";
 $dbname = "pup_lms";
@@ -17,7 +17,7 @@ require_once 'includes/execute_query_inc.php';
 $insertSuccess = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
+  
     $user_ID = "FA0123561212"; 
     $cohort_ID = $_POST['cohort_ID'];
     $subject_ID = $_POST['subject_ID'];
@@ -57,4 +57,5 @@ if ($result->num_rows > 0) {
 $mysqli->close();
 
 header('Content-Type: application/json');
+echo json_encode($cohorts);
 ?>
