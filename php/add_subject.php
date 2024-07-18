@@ -130,7 +130,7 @@ $mysqli->close();
     <?php endif; ?>
     <script>
         setTimeout(function() {
-        window.location.href = '../pages/faculty/faculty_view.html';
+        window.location.href = '../pages/faculty/subject/subject_view_list.php';
             }, 2000);
     </script>
 </body>
