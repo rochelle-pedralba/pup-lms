@@ -3,9 +3,12 @@
   require_once 'includes/dbh_inc.php';
   require_once 'includes/execute_query_inc.php';
   require_once 'includes/error_model_inc.php';
+
+  $_SESSION["course_ID"] = "BSCS";
+    $_SESSION["cohort_ID"] = "PUPSJ";
   
-  $course_ID = $_SESSION["course_ID"];
-  $cohort_ID = $_SESSION["cohort_ID"];
+  $courseID = $_SESSION["course_ID"];
+  $cohortID = $_SESSION["cohort_ID"];
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['studentID'])) {
     
@@ -15,7 +18,7 @@
           LEFT JOIN course_enrolled ce ON ui.user_ID = ce.user_ID AND ce.course_ID = ?
           WHERE ui.user_ID = ? AND ce.user_ID IS NULL;";
 
-    $result = executeQuery($mysqli, $query, "ss", [$course_ID, $studentID]);
+    $result = executeQuery($mysqli, $query, "ss", [$courseID, $studentID]);
 
     if ($result['success'] && $result['result']->num_rows > 0) {
         $student = $result['result']->fetch_assoc();
