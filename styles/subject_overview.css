@@ -364,7 +364,26 @@ width: 80px;
 .head h1 {
 margin-left: 10px;
 }
+.back-item {
+    background-color: #5f0b0b;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px 0;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    width: 100px;
+}
+.back-item:hover {
+    transform: translateY(-2px);
+}
 
+.back-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
 footer div {
 position: block;
 width: 100%;

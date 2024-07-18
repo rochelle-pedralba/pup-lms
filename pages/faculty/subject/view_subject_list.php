@@ -100,6 +100,11 @@ mysqli_close($mysqli);
                 </article>
             <?php endforeach; ?>
         </main>
+        <div class="back-item" onclick="window.location.href='../faculty_view.html'">
+            <div class="back-header">
+                <h3>Back</h3>
+            </div>
+        </div> 
     </div>
 
     </div>
