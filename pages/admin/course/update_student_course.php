@@ -2,10 +2,13 @@
 
 require_once '../../../php/includes/config_session_inc.php';
 
+session_start();
+
 $_SESSION["course_ID"] = "BSCS";
 $_SESSION["cohort_ID"] = "PUPSJ";
-$_SESSION["ay"] = "2324";
-$_SESSION["semester"] = "1";
+
+$courseID = $_SESSION["course_ID"];
+$cohortID = $_SESSION["cohort_ID"];
 
 ?>
 
