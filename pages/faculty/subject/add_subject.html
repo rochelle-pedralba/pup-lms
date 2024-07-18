@@ -1,3 +1,12 @@
+<?php
+require_once '../../../php/includes/config_session_inc.php';
+
+if (!isset($_SESSION['user_ID'])) {
+    header("Location: login.html");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,7 +68,7 @@
 <body>
     <div id="subject_form">
         <h1>ADD SUBJECT</h1>
-        <form method="POST" action="/php/add_subject.php" id="subject_form">
+        <form method="POST" action="../../../php/add_subject.php" id="subject_form">
             <label for="cohort_ID">Campus:</label>
             <select id="cohort_ID" name="cohort_ID" required>
                 <option selected disabled>Select Campus</option>

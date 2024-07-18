@@ -1,4 +1,12 @@
 <?php
+
+require_once 'includes/config_session_inc.php';
+
+if (!isset($_SESSION['user_ID'])) {
+    header("Location: login.html");
+    exit;
+}
+
 date_default_timezone_set('Asia/Manila');
 
 $dbhost = "localhost:3307";
@@ -130,7 +138,7 @@ $mysqli->close();
     <?php endif; ?>
     <script>
         setTimeout(function() {
-        window.location.href = '../pages/faculty/subject/subject_view_list.php';
+        window.location.href = '../pages/faculty/subject/view_subject_list.php';
             }, 2000);
     </script>
 </body>
