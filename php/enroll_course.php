@@ -6,8 +6,8 @@ require_once 'includes/error_model_inc.php';
 
 session_start();
 
-$courseID = $_SESSION["course_ID"];
-$cohortID = $_SESSION["cohort_ID"];
+$_SESSION["course_ID"] = "BSCS";
+$_SESSION["cohort_ID"] = "PUPSJ";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
