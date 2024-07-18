@@ -14,7 +14,7 @@ if (!$mysqli) {
     $result = mysqli_query($mysqli, $sql);
 
     if (mysqli_num_rows($result) > 0) {
-        $courses = array();
+        $subjects = array();
         while ($row = mysqli_fetch_assoc($result)) {
             $courses[] = array(
                 "id" => $row["course_ID"],
@@ -26,7 +26,7 @@ if (!$mysqli) {
             );
         }
     } else {
-        $courses = [];
+        $subjects = [];
     }
 }
 
