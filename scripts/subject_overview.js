@@ -5,6 +5,10 @@ function populatesubjects() {
     subjects.forEach(subject => {
         const subjectItem = document.createElement('article');
         subjectItem.classList.add('subject-item');
+        subjectItem.onclick = () => {
+            // Change the location to the course detail page
+            window.location.href = `../subject/enroll_subject.php`;
+            };
 
         // subject header
         const subjectHeader = document.createElement('header');
