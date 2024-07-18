@@ -18,8 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $course_desc = isset($_POST['course_desc']) ? sanitize_input($_POST['course_desc']) : null;
     $college_ID = isset($_POST['college_ID']) ? sanitize_input($_POST['college_ID']) : null;
     $no_of_years = isset($_POST['no_of_years']) ? sanitize_input($_POST['no_of_years']) : null;
+    $course_name = isset($_POST['course_name']) ? sanitize_input($_POST['course_name']) : null;
 
-    if ($course_ID && $creator_ID  && $cohort_ID && $course_desc && $college_ID && $no_of_years) {
+    if ($course_ID && $creator_ID  && $cohort_ID && $course_desc && $college_ID && $no_of_years && $course_name) {
         function record_exists($mysqli, $table, $column, $value) {
             $sql = $mysqli->prepare("SELECT COUNT(*) FROM $table WHERE $column = ?");
             $sql->bind_param("s", $value);
@@ -37,14 +38,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } elseif (!record_exists($mysqli, 'COURSE', 'creator_ID', $creator_ID)) {
             echo "<script>alert('Error: CREATOR ID does not exist.');</script>";
         } else {
-            $sql = $mysqli->prepare("UPDATE COURSE SET creator_ID = ?,  cohort_ID = ?, course_Description = ?, college_ID = ?, no_Of_Years = ? WHERE course_ID = ?");
-            $sql->bind_param("ssssis", $creator_ID, $cohort_ID, $course_desc, $college_ID, $no_of_years, $course_ID);
+            $sql = $mysqli->prepare("UPDATE COURSE SET creator_ID = ?,  cohort_ID = ?, course_Description = ?, college_ID = ?, no_Of_Years = ?, course_Name = ? WHERE course_ID = ?");
+            $sql->bind_param("ssssiss", $creator_ID, $cohort_ID, $course_desc, $college_ID, $no_of_years, $course_name, $course_ID);
             if ($sql->execute()) {
                 echo "<script>alert('Course has been successfully updated.');</script>";
-                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/update_student_course.php?>";
+                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/course_overview.php'>";
                 exit;
             } else {
                 echo "<script>alert('Error: " . $sql->error . "');</script>";
+                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/course_overview.php'>";
             }
             $sql->close();
         }

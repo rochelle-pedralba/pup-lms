@@ -34,10 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql->bind_param("sss", $college_name, $college_desc, $college_ID);
             if ($sql->execute()) {
                 echo "<script>alert('College has been successfully updated.');</script>";
-                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/update_college.php?>";
+                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/college_overview.php'>";
                 exit;
             } else {
                 echo "<script>alert('Error: " . $sql->error . "');</script>";
+                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/college_overview.php?>";
             }
             $sql->close();
         }

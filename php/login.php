@@ -184,4 +184,3 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 $error_message = "Invalid submission method. Form submission method not allowed";
 redirectWithError($error_message);
 exit;
-?>

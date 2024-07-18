@@ -35,10 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql->bind_param("ssss", $creator_ID, $cohort_name, $cohort_size, $cohort_ID);
             if ($sql->execute()) {
                 echo "<script>alert('Cohort has been successfully updated.');</script>";
-                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/update_cohort.php?>";
+                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/cohort_overview.php'>";
                 exit;
             } else {
                 echo "<script>alert('Error: " . $sql->error . "');</script>";
+                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/cohort_overview.php'>";
+                exit;
             }
             $sql->close();
         }

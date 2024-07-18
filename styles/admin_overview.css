@@ -84,3 +84,36 @@ body {
 .overview-item:hover .progress-bar {
     width: 100%;
 }
+
+.head {
+    position: relative; /* Change from absolute to relative */
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 29px;
+    background-color: #5f0b0b;
+    color: white;
+}
+  .head img {
+    width: 80px;
+}
+  .head h1 {
+    margin-left: 10px;
+}
+  
+footer div {
+    position: block;
+    width: 100%;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #5f0b0b;
+    color: white;
+}

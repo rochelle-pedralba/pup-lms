@@ -1,0 +1,354 @@
+:root {
+    --maroon: maroon;
+    --background-color: #f4f4f4;
+    --text-color: #333;
+    --header-text-color: #555;
+    --white: #fff;
+    --gray: #777;
+    --light-gray: #f0f0f0;
+    --dark-gray: #555;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 1200px;
+    margin: 30px auto;
+    background: var(--white);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative; /* Added for positioning */
+}
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.header h1 {
+    color: var(--maroon);
+    margin-bottom: 10px;
+}
+#college-container {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 20px;
+}
+.college-item {
+border: 1px solid #ccc;
+padding: 15px;
+background-color: #f9f9f9;
+}
+.college-item[style*="display: none;"] {
+display: none; /* Ensure archived courses are visually hidden */
+}
+.college-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.college-options {
+position: relative;
+}
+
+.options {
+display: none;
+position: absolute;
+background-color: #fff;
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+padding: 5px 0;
+list-style-type: none;
+right: 0;
+}
+
+.options.show {
+display: block;
+}
+
+.options li {
+padding: 5px 10px;
+}
+
+.college-footer {
+margin-top: 10px;
+font-size: 0.8rem;
+color: #666;
+}
+
+.header h2 {
+    color: var(--header-text-color);
+    margin: 0;
+}
+.college-grid-wrapper {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+.college-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+.college-item {
+    width: calc(33.333% - 20px);
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: var(--white);
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 200px; /* Fixed height for uniform size */
+    cursor: pointer;
+}
+
+.college-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.college-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--maroon);
+    color: var(--white);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.college-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+.college-header p {
+    margin: 0;
+    font-size: 14px;
+    text-align: right;
+    width: 50%;
+}
+
+.college-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--light-gray);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.college-footer p {
+    color: var(--gray);
+    font-size: 14px;
+}
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    background-color: var(--maroon);
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: var(--white);
+}
+.search-bar {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-right: 10px;
+}
+.sort-options {
+    display: flex;
+    align-items: center;
+}
+.sort-label {
+    margin-right: 10px;
+    font-size: 14px;
+}
+.sort-select {
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+.list-view .college-item {
+    width: 100%;
+    margin-bottom: 20px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.list-view .college-item:hover {
+    transform: none;
+    box-shadow: none;
+}
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.modal-content {
+    background-color: var(--white);
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.close {
+    color: var(--dark-gray);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: var(--gray);
+    text-decoration: none;
+    cursor: pointer;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+.form-group textarea {
+    resize: vertical;
+}
+.form-group button {
+    background-color: var(--maroon);
+    color: var(--white);
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.form-group button:hover {
+    background-color: #800000;
+}
+.add-college-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--gray);
+}
+.add-college-item:hover {
+    background-color: var(--light-gray);
+    color: var(--maroon);
+}
+.college-options ul {
+list-style-type: none;
+padding: 0;
+margin: 0;
+background-color: var(--white);
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+border-radius: 4px;
+position: absolute;
+top: 30px;
+right: 0;
+display: none;
+}
+
+.college-options li {
+padding: 10px;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+.college-options li:hover {
+background-color: var(--light-gray);
+}
+
+.college-options li:first-child {
+border-top-left-radius: 4px;
+border-top-right-radius: 4px;
+}
+
+.college-options li:last-child {
+border-bottom-left-radius: 4px;
+border-bottom-right-radius: 4px;
+}
+
+.college-options.open ul {
+display: block;
+}
+
+.college-options button {
+background: none;
+border: none;
+cursor: pointer;
+color: var(--white);
+font-size: 18px;
+}
+
+
+.college-options button:focus {
+outline: none;
+}
+.options {
+display: none; /* Hide options by default */
+position: absolute; /* Position the options absolutely */
+background-color: #fff; /* White background */
+border: 1px solid #ccc; /* Gray border */
+padding: 5px; /* Padding around options */
+z-index: 1; /* Ensure options appear above other content */
+}
+
+.head {
+position: relative; /* Change from absolute to relative */
+width: 100%;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+padding-top: 20px;
+padding-bottom: 20px;
+margin-bottom: 29px;
+background-color: #5f0b0b;
+color: white;
+}
+.head img {
+width: 80px;
+}
+.head h1 {
+margin-left: 10px;
+}
+
+footer div {
+position: block;
+width: 100%;
+margin-top: 60px;
+display: flex;
+flex-direction: row;
+justify-content: center;
+padding-top: 20px;
+padding-bottom: 20px;
+background-color: #5f0b0b;
+color: white;
+}

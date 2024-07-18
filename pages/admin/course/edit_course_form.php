@@ -14,10 +14,10 @@ function sanitize_input($data) {
 $course_ID = isset($_GET['course_ID']) ? sanitize_input($_GET['course_ID']) : null;
 
 if ($course_ID) {
-    $sql = $mysqli->prepare("SELECT creator_ID, cohort_ID, course_Description, college_ID, no_Of_Years FROM COURSE WHERE course_ID = ?");
+    $sql = $mysqli->prepare("SELECT creator_ID, cohort_ID, course_Description, college_ID, no_Of_Years, course_Name FROM COURSE WHERE course_ID = ?");
     $sql->bind_param("s", $course_ID);
     $sql->execute();
-    $sql->bind_result($creator_ID, $cohort_ID, $course_desc, $college_ID, $no_of_years);
+    $sql->bind_result($creator_ID, $cohort_ID, $course_desc, $college_ID, $no_of_years, $course_name);
     $sql->fetch();
     $sql->close();
 } else {
@@ -48,6 +48,9 @@ if ($course_ID) {
 
                 <label for="course_ID">Course ID: <p><?= $course_ID ?></p></label><br>
                 <input type="hidden" name="course_ID" value="<?= $course_ID ?>">
+                
+                <label for="course_Name">Course Name:</label>
+                <input type="text" id="course_name" name="course_name" maxlength="100" value="<?= $course_name ?>"  required><br><br>
 
                 <label for="creator_ID">Creator ID:</label>
                 <input type="text" id="creator_ID" name="creator_ID" maxlength="12" value="<?= $creator_ID ?>" required><br>

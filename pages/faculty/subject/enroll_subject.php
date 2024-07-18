@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="../../../styles/update_enrollee1.css">
+    <link rel="stylesheet" href="../../../styles/update_class.css">
     <script src="../../../scripts/unenroll.js"></script>
   </head>
 
@@ -30,10 +30,9 @@
       </div>
     </div>
 
-    <div class="row-container">
       <div class="row">
         
-      <div class="column column-one" style="background-color:#aaa;">
+      <div class="column" style="background-color:#aaa;">
         <div id="search_student">
           <form method="POST">
             <input type="text" id="studentSearch" name="studentID" placeholder="Enter Student ID">
@@ -51,7 +50,7 @@
           </div>
         </div>
         
-        <div class="column column-two" style="background-color:#bbb;">
+        <div class="column" style="background-color:#bbb;">
           <div class="selected-student-container">
             <div class="title">
               <h3>Selected Student</h3>
@@ -60,18 +59,17 @@
             <div id="selected_student"></div>
           </div>
         </div>
-      </div>
 
-    <div id="unenroll_students">
-        <div class="column column-three" style="background-color:#ccc;">
-          <div id="unenroll_students">
-          <div class="unenroll-student-container">
-            <h3>Student Enrolled</h3>
-            <table id="enrolled_student">
-                <?php require_once '../../../php/unenroll.php'; ?>
-            </table>
-          </div> 
-          </div>
+        <div id="unenroll_students">
+          <div class="column column-three" style="background-color:#ccc;">
+            <div id="unenroll_students">
+              <div class="unenroll-student-container">
+                <h3>Student Enrolled</h3>
+                <table id="enrolled_student">
+                    <?php require_once '../../../php/unenroll.php'; ?>
+                </table>
+              </div> 
+            </div>
 
           <div id="searchedStudentInfo">
             <div class="display-student">
@@ -83,7 +81,6 @@
             </div>
           </div>
         </div>
-      </div>
     </div>
   </body>
 </html>
