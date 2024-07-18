@@ -1,15 +1,10 @@
 <?php
 
-// Itong tatlo for the connection lang ng db, dito sa file na to lahat ng pang display ng data sa sub
-require_once '../../../php/includes/dbh_inc.php'; // for db connection
+require_once '../../../php/includes/dbh_inc.php';
 require_once '../../../php/includes/execute_query_inc.php';
 require_once '../../../php/includes/error_model_inc.php';
 
 $user_ID = "FA0123561212";
-
-// change into something like FA0123561212
-// user_ID yung user_ID ng professor
-// Palagyan nalang din muna sa db niyo sa subject table, di ko pa naiinform sa grp nila jasper
 
 // s for subject, u for user_information
 $querySubject = "SELECT s.course_ID, s.subject_Name, s.subject_ID, s.semester, s.ay, s.year, s.section, s.subject_Description, u.first_Name, u.last_Name FROM subject s JOIN user_information u ON s.user_ID = u.user_ID WHERE s.user_ID = ?";

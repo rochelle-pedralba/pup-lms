@@ -1,7 +1,5 @@
 <?php 
 
-  session_start();
-
   $_SESSION["course_ID"] = "BSCS";
   $_SESSION["cohort_ID"] = "PUPMN";
   $_SESSION["ay"] = "2324";
