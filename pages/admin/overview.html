@@ -24,24 +24,27 @@
             <h2>Welcome, Admin!</h2>
         </div>
         <div class="overview-grid" id="overview-grid">
-            <div class="overview-item" onclick="createSubject()">
+
+            <div class="overview-item" onclick="window.location.href='cohort_overview.php'">
                 <div class="overview-header">
-                    <h3>Create Subject</h3>
+                    <h3>Update Cohort</h3>
                 </div>
                 <div class="overview-description">
-                    <p>Set up new subjects and assign faculty members with this feature.
-                        Ensure each subject has a designated instructor and all required parts, such as academic year and year and section</p>
+                    <p>Maintain accurate records of the branches and campuses with the Update Cohort Lists feature. 
+                        Add, modify, or remove cohort details to reflect the current organizational structure.</p>
                 </div>
             </div>
-            <div class="overview-item" onclick="updateSubject()">
+            
+            <div class="overview-item" onclick="window.location.href='college_overview.php'">
                 <div class="overview-header">
-                    <h3>Update Subject</h3>
+                    <h3>Update College</h3>
                 </div>
                 <div class="overview-description">
-                    <p>Manage and revise existing subjects with the Update Subject feature. Assign or reassign faculty members, update course description, etc. 
-                        to ensure the subject remains current and meets educational standards. </p>
+                    <p>Manage various colleges with the Update College feature. 
+                        Add, edit, or remove college details to keep your academic structure up-to-date. </p>
                 </div>
             </div>
+
             <div class="overview-item" onclick="window.location.href='course_overview.php'">
                 <div class="overview-header">
                     <h3>Update Course</h3>
@@ -51,16 +54,17 @@
                         Modify, add, or remove courses such as BSCS or BSIT to reflect the latest curriculum changes.</p>
                 </div>
             </div>
-            
-            <div class="overview-item" onclick="updateCohort()">
+
+            <div class="overview-item" onclick="updateSubject()">
                 <div class="overview-header">
-                    <h3>Update Cohort</h3>
+                    <h3>Update Subject</h3>
                 </div>
                 <div class="overview-description">
-                    <p>Maintain accurate records of the branches and campuses with the Update Cohort Lists feature. 
-                        Add, modify, or remove cohort details to reflect the current organizational structure.</p>
+                    <p>Manage and revise existing subjects with the Update Subject feature. Assign or reassign faculty members, update course description, etc. 
+                        to ensure the subject remains current and meets educational standards. </p>
                 </div>
             </div>
+
             <div class="overview-item" onclick="enrollStudent()">
                 <div class="overview-header">
                     <h3>Enroll Student in Subject</h3>
@@ -70,6 +74,7 @@
                         ensuring they are registered for the correct classes and schedules</p>
                 </div>
             </div>
+            
             <div class="overview-item" onclick="enrollStudentCourse()">
                 <div class="overview-header">
                     <h3>Enroll Student in Course</h3>
@@ -78,6 +83,11 @@
                     <p>Officially enroll students in their designated courses, 
                         ensuring they are registered to be included in classes and schedules</p>
                 </div>
+            </div>
+        </div>
+        <div class="logout-item" onclick="window.location.href='../../php/includes/logout_model_inc.php'">
+            <div class="logout-header">
+                <h3>Log Out</h3>
             </div>
         </div>
     </div>

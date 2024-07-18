@@ -10,23 +10,24 @@ if (!$mysqli) {
     echo "Connection failed: " . mysqli_connect_error();
 } else {
     // Retrieve courses from database
-    $sql = "SELECT course_ID, course_Name, course_Description, cohort_ID, college_ID, no_Of_Years FROM course";
+    $sql = "SELECT cohort_ID, cohort_Name, cohort_Size FROM COHORT";
     $result = mysqli_query($mysqli, $sql);
 
+    if (!$result) {
+        die("Query failed: " . mysqli_error($mysqli));
+    }
+
     if (mysqli_num_rows($result) > 0) {
-        $subjects = array();
+        $cohorts = array();
         while ($row = mysqli_fetch_assoc($result)) {
-            $courses[] = array(
-                "id" => $row["course_ID"],
-                "name" => $row["course_Name"],
-                "description" => $row["course_Description"],
-                "cohort" => $row["cohort_ID"],
-                "college" => $row["college_ID"],
-                "duration" => $row["no_Of_Years"] . " Years"
+            $cohorts[] = array(
+                "id" => $row["cohort_ID"],
+                "name" => $row["cohort_Name"],
+                "size" => $row["cohort_Size"]
             );
         }
     } else {
-        $subjects = [];
+        $cohorts = [];
     }
 }
 
@@ -38,9 +39,9 @@ mysqli_close($mysqli);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | Course Overview</title>
+    <title>Admin | Cohort Overview</title>
     <link rel="icon" type="image/png" href="logo.png">
-    <link rel="stylesheet" type="text/css" href="../../styles/course_overview.css">
+    <link rel="stylesheet" type="text/css" href="../../styles/cohort_overview.css">
 </head>
 
 <body>
@@ -55,17 +56,16 @@ mysqli_close($mysqli);
 
     <div class="container">
         <header class="header">
-            <h1>Course Overview</h1>
+            <h1>Cohort Overview</h1>
         </header>
         <section class="footer">
             <div class="search-bar">
-                <input type="text" id="search-input" placeholder="Search..." oninput="searchCourses()">
+                <input type="text" id="search-input" placeholder="Search..." oninput="searchCohorts()">
             </div>
             <div class="sort-options">
                 <label for="sort-by" class="sort-label">Sort by:</label>
-                <select id="sort-by" class="sort-select" onchange="sortCourses()">
-                    <option value="name">Course Name</option>
-                    <option value="duration">Duration</option>
+                <select id="sort-by" class="sort-select" onchange="sortCohorts()">
+                    <option value="name">Cohort Name</option>
                 </select>
                 <label for="view-type" class="sort-label" style="margin-left: 20px;">View:</label>
                 <select id="view-type" class="sort-select" onchange="toggleView()">
@@ -74,9 +74,9 @@ mysqli_close($mysqli);
                 </select>
             </div>
         </section>
-        <main class="course-grid" id="course-grid">
-            <?php foreach ($courses as $course): ?>
-                <article class="course-item" id="course-item-<?php echo $course['id']; ?>">
+        <main class="cohort-grid" id="cohort-grid">
+            <?php foreach ($cohorts as $cohort): ?>
+                <article class="cohort-item" id="cohort-item-<?php echo $cohort['id']; ?>">
                     <!-- Course item content here -->
                 </article>
             <?php endforeach; ?>
@@ -97,15 +97,15 @@ mysqli_close($mysqli);
     </footer>
 
     <script>
-        let courses = <?php echo json_encode($courses); ?>;
+        let cohorts = <?php echo json_encode($cohorts); ?>;
     </script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="../../scripts/course_overview.js"></script>
+    <script src="../../scripts/cohort_overview.js"></script>
 
     <div id="archiveModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <p>Are you sure you want to archive this course?</p>
+            <p>Are you sure you want to archive this cohort?</p>
             <button id="confirmArchive">Yes</button>
             <button id="cancelArchive">No</button>
         </div>

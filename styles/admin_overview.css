@@ -25,6 +25,37 @@ body {
     color: #555;
     margin: 0;
 }
+
+.logout-item {
+    background-color: maroon; 
+    color: #ffffff;
+    text-align: center;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px 0;
+    transition: background-color 0.3s ease;
+}
+
+.logout-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.overview-item, .logout-item {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.overview-item:hover, .logout-item:hover {
+    transform: translateY(-5px);
+}
 .overview-grid {
     display: flex;
     flex-wrap: wrap;
@@ -98,15 +129,14 @@ body {
     background-color: #5f0b0b;
     color: white;
 }
-  .head img {
+.head img {
     width: 80px;
 }
-  .head h1 {
+.head h1 {
     margin-left: 10px;
 }
   
 footer div {
-    position: block;
     width: 100%;
     margin-top: 60px;
     display: flex;

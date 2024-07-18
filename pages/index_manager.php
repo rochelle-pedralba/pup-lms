@@ -12,6 +12,7 @@ if ($_SESSION['user_Role'] != '1') {
     redirectWithError($error_message);
     exit;
 }
+
 ?>
 
 <!DOCTYPE html>

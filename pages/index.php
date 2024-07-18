@@ -6,6 +6,11 @@ if (!isset($_SESSION['user_ID'])) {
     exit;
 }
 
+if ($_SESSION['user_Role'] == '2') {
+    header("Location: faculty/faculty_view.html");
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>

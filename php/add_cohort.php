@@ -51,10 +51,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             if ($result === true) {
                 echo "<script>alert('Cohort has been successfully created');</script>";
-                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/cohort/add_cohort.html'>";
+                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/cohort_overview.php'>";
                 exit;
             } else {
                 echo "<script>alert('$result');</script>";
+                echo "<meta http-equiv='refresh' content='0;url=../pages/admin/cohort_overview.php'>";
             }
         } else {
             echo "<script>alert('Database connection error.');</script>";

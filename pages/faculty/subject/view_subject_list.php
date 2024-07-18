@@ -1,34 +1,53 @@
 <?php
 date_default_timezone_set('Asia/Manila');
 
-require_once '../../php/includes/dbh_inc.php'; 
-require_once '../../php/includes/execute_query_inc.php';
-require_once '../../php/includes/error_model_inc.php';
+require_once '../../../php/includes/dbh_inc.php'; 
+require_once '../../../php/includes/execute_query_inc.php';
+require_once '../../../php/includes/error_model_inc.php';
+require_once '../../../php/includes/config_session_inc.php';
 
+if (!isset($_SESSION['user_ID'])) {
+    header("Location: ../../login.html");
+    exit;
+}
+
+$user_ID = $_SESSION['user_ID'];
 
 if (!$mysqli) {
     echo "Connection failed: " . mysqli_connect_error();
 } else {
-    // Retrieve courses from database
-    $sql = "SELECT course_ID, course_Name, course_Description, cohort_ID, college_ID, no_Of_Years FROM course";
-    $result = mysqli_query($mysqli, $sql);
+    // Prepare the SQL statement to prevent SQL injection
+    $stmt = $mysqli->prepare("SELECT subject_ID, subject_Name, subject_Description, subject_ID, course_ID, cohort_ID, semester FROM subject WHERE user_ID = ?");
+    
+    // Bind parameters to the prepared statement
+    $stmt->bind_param("i", $user_ID); // 'i' denotes the type is integer
 
-    if (mysqli_num_rows($result) > 0) {
+    // Execute the prepared statement
+    $stmt->execute();
+
+    // Store the result
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
         $subjects = array();
-        while ($row = mysqli_fetch_assoc($result)) {
-            $courses[] = array(
-                "id" => $row["course_ID"],
-                "name" => $row["course_Name"],
-                "description" => $row["course_Description"],
+        while ($row = $result->fetch_assoc()) {
+            $subjects[] = array(
+                "id" => $row["subject_ID"],
+                "name" => $row["subject_Name"], // Assuming you meant subject_Name here
+                "description" => $row["subject_Description"], // Assuming you meant subject_Description here
                 "cohort" => $row["cohort_ID"],
-                "college" => $row["college_ID"],
-                "duration" => $row["no_Of_Years"] . " Years"
+                "course" => $row["course_ID"],
+                "semester" => $row["semester"]
             );
         }
     } else {
         $subjects = [];
     }
+
+    // Close the statement
+    $stmt->close();
 }
+
 
 mysqli_close($mysqli);
 ?>
@@ -38,15 +57,15 @@ mysqli_close($mysqli);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | Course Overview</title>
+    <title>Faculty | Subject Overview</title>
     <link rel="icon" type="image/png" href="logo.png">
-    <link rel="stylesheet" type="text/css" href="../../styles/course_overview.css">
+    <link rel="stylesheet" type="text/css" href="../../../styles/subject_overview.css">
 </head>
 
 <body>
     <header class="head">
             <div class="logo">
-              <img src="../../assets/PUP_logo.png" alt="PUP Logo">
+              <img src="../../../assets/PUP_logo.png" alt="PUP Logo">
             </div>
             <div class="title">
               <h1>PUP Learning Management System</h1>
@@ -55,16 +74,16 @@ mysqli_close($mysqli);
 
     <div class="container">
         <header class="header">
-            <h1>Course Overview</h1>
+            <h1>Subject Overview</h1>
         </header>
         <section class="footer">
             <div class="search-bar">
-                <input type="text" id="search-input" placeholder="Search..." oninput="searchCourses()">
+                <input type="text" id="search-input" placeholder="Search..." oninput="searchSubjects()">
             </div>
             <div class="sort-options">
                 <label for="sort-by" class="sort-label">Sort by:</label>
-                <select id="sort-by" class="sort-select" onchange="sortCourses()">
-                    <option value="name">Course Name</option>
+                <select id="sort-by" class="sort-select" onchange="sortSubjects()">
+                    <option value="name">Subject Name</option>
                     <option value="duration">Duration</option>
                 </select>
                 <label for="view-type" class="sort-label" style="margin-left: 20px;">View:</label>
@@ -74,14 +93,14 @@ mysqli_close($mysqli);
                 </select>
             </div>
         </section>
-        <main class="course-grid" id="course-grid">
-            <?php foreach ($courses as $course): ?>
-                <article class="course-item" id="course-item-<?php echo $course['id']; ?>">
-                    <!-- Course item content here -->
+        <main class="subject-grid" id="subject-grid">
+            <?php foreach ($subjects as $subject): ?>
+                <article class="subject-item" id="subject-item-<?php echo $subject['id']; ?>">
+                    <!-- Subject item content here -->
                 </article>
             <?php endforeach; ?>
         </main>
-        <div class="back-item" onclick="window.location.href='overview.html'">
+        <div class="back-item" onclick="window.location.href='../faculty_view.html'">
             <div class="back-header">
                 <h3>Back</h3>
             </div>
@@ -97,10 +116,11 @@ mysqli_close($mysqli);
     </footer>
 
     <script>
-        let courses = <?php echo json_encode($courses); ?>;
+        let subjects = <?php echo json_encode($subjects); ?>;
+        console.log(subjects);
     </script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="../../scripts/course_overview.js"></script>
+    <script src="../../../scripts/subject_overview.js"></script>
 
     <div id="archiveModal" class="modal">
         <div class="modal-content">

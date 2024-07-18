@@ -1,11 +1,7 @@
 <?php 
 
-  session_start();
+echo id;
 
-  $_SESSION["course_ID"] = "BSCS";
-  $_SESSION["cohort_ID"] = "PUPMN";
-  $_SESSION["ay"] = "2324";
-  $_SESSION["semester"] = "1";
 ?>
 
 <!DOCTYPE html>
@@ -88,6 +84,11 @@
           </div>
         </div>
       </div>
+      <div class="back-item" onclick="window.location.href='../overview.html'">
+            <div class="back-header">
+                <h3>Back</h3>
+            </div>
+        </div> 
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
