@@ -4,8 +4,14 @@ date_default_timezone_set('Asia/Manila');
 require_once '../../../php/includes/dbh_inc.php'; 
 require_once '../../../php/includes/execute_query_inc.php';
 require_once '../../../php/includes/error_model_inc.php';
+require_once '../../../php/includes/config_session_inc.php';
 
-$user_ID = "FA0123561212";
+if (!isset($_SESSION['user_ID'])) {
+    header("Location: login.html");
+    exit;
+}
+
+$user_ID = $_SESSION['user_ID'];
 
 if (!$mysqli) {
     echo "Connection failed: " . mysqli_connect_error();
