@@ -1,13 +1,7 @@
 <?php 
   session_start();
 
-  $_SESSION["course_ID"] = "BSCS";
-  $_SESSION["subject_ID"] = "COMP10173";
-  $_SESSION["cohort_ID"] = "PUPSJ";
-  $_SESSION["ay"] = "2324";
-  $_SESSION["semester"] = "2";
-  $_SESSION["year"] = "3";
-  $_SESSION["section"] = "5";
+
 
 ?>
 
