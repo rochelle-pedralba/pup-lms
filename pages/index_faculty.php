@@ -40,7 +40,7 @@ if ($_SESSION['user_Role'] != '2') {
         </div>
         <div class="overview-grid" id="overview-grid">
 
-            <div class="overview-item" onclick="window.location.href='../profile.php'">
+            <div class="overview-item" onclick="window.location.href='profile.php'">
                 <div class="overview-header">
                     <h3>Your Profile</h3>
                 </div>
@@ -49,7 +49,7 @@ if ($_SESSION['user_Role'] != '2') {
                 </div>
             </div>
             
-            <div class="overview-item" onclick="window.location.href='faculty/subject/add_subject.html'">
+            <div class="overview-item" onclick="window.location.href='faculty/subject/add_subject.php'">
                 <div class="overview-header">
                     <h3>Add Subject</h3>
                 </div>
