@@ -4,9 +4,6 @@ require_once 'includes/dbh_inc.php';
 require_once 'includes/execute_query_inc.php';
 require_once 'includes/error_model_inc.php';
 
-$courseID = isset($_SESSION["course_ID"]) ? $_SESSION["course_ID"] : null;
-$cohortID = isset($_SESSION["cohort_ID"]) ? $_SESSION["cohort_ID"] : null;
-
 function name_searching($mysqli, $studentID) {
     $studentNames = [];
     $query = "SELECT user_ID, last_name, first_name, middle_name FROM user_information WHERE user_ID = ?";
@@ -30,8 +27,8 @@ function name_searching($mysqli, $studentID) {
 function EnrolledStudentCourse($mysqli, $params_1) {
     $students = [];
     $query = "SELECT user_ID FROM course_enrolled
-            WHERE course_ID = ? AND ay = ? AND semester = ? AND user_ID = ? AND cohort_ID = ?"; 
-    $queryResult = executeQuery($mysqli, $query, "sssss", $params_1);
+            WHERE course_ID = ? AND user_ID = ? AND cohort_ID = ?"; 
+    $queryResult = executeQuery($mysqli, $query, "sss", $params_1);
 
     if (!$queryResult['success']) {
         $error_message = "An error has occurred. Please try again later or contact the administrator.";
@@ -50,14 +47,12 @@ function EnrolledStudentCourse($mysqli, $params_1) {
     }
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION["course_ID"]) && isset($_SESSION["ay"]) && isset($_SESSION["semester"]) && isset($_POST["studentID"]) && isset($_SESSION["cohort_ID"])) {
-    $course_ID = $_SESSION["course_ID"];
-    $ay = $_SESSION["ay"];
-    $semester = $_SESSION["semester"];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $courseID = isset($_GET['course_ID']) ? $_GET['course_ID'] : null;
+    $cohortID = isset($_GET['cohort_ID']) ? $_GET['cohort_ID'] : null;
     $user_ID = $_POST["studentID"];
-    $cohort_ID = $_SESSION["cohort_ID"];
 
-    $params_1 = [$course_ID, $ay, $semester, $user_ID, $cohort_ID];
+    $params_1 = [$courseID, $user_ID, $cohortID];
     $studentDetails = EnrolledStudentCourse($mysqli, $params_1);
     
     if ($studentDetails == null) {
