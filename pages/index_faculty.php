@@ -25,7 +25,7 @@ if ($_SESSION['user_Role'] != '2') {
 
 <body>
     <h1>Welcome, faculty</h1>
-    <p><a href="faculty/subject/add_subject.html">Add a subject</a></p>
+    <p><a href="faculty/subject/add_subject.php">Add a subject</a></p>
     <p><a href="faculty/subject/enroll_subject.php">Enroll a subject</a></p>
     <p><a href="faculty/subject/view_subject.php">View subjects</a></p>
     <p><a href="faculty/subject/faculty_page_lectures.php">Lectures</a></p>

@@ -11,7 +11,7 @@ function updateDepartment(){
     window.location.href = '../../../pages/update_department.html' //change to the real path
 }
 function enrollStudent(){
-    window.location.href = '../../../pages/enroll_student.html' //change to the real path
+    window.location.href = '../faculty/subject/enroll_subject.php' //change to the real path
 }
 function enrollStudentCourse(){
     window.location.href = '../../pages/admin/course/update_student_course.php' //change to the real path
