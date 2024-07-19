@@ -4,11 +4,8 @@ require_once 'includes/dbh_inc.php';
 require_once 'includes/execute_query_inc.php';
 require_once 'includes/error_model_inc.php';
 
-$_SESSION["course_ID"] = "BSCS";
-$_SESSION["cohort_ID"] = "PUPSJ";
-
-$ay = $_SESSION["ay"];
-$semester = $_SESSION["semester"];
+$courseID = $_SESSION["course_ID"];
+$cohortID = $_SESSION["cohort_ID"];
 
 function name_searching($mysqli, $studentID) {
     $studentNames = [];
@@ -53,7 +50,7 @@ function EnrolledStudentCourse($mysqli, $params_1) {
     }
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION["course_ID"]) && isset($_SESSION["ay"]) && isset($_SESSION["semester"]) && isset($_POST["studentID"]) && isset($_SESSION["cohort_ID"])) {
     $course_ID = $_SESSION["course_ID"];
     $ay = $_SESSION["ay"];
     $semester = $_SESSION["semester"];
@@ -61,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cohort_ID = $_SESSION["cohort_ID"];
 
     $params_1 = [$course_ID, $ay, $semester, $user_ID, $cohort_ID];
-
     $studentDetails = EnrolledStudentCourse($mysqli, $params_1);
     
     if ($studentDetails == null) {
