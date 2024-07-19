@@ -1,16 +1,13 @@
-<?php 
+<?php
 
-require_once '../../../php/includes/config_session_inc.php';
+$collegeID = isset($_GET['college_ID']) ? $_GET['college_ID'] : null;
+$cohort_ID = isset($_GET['cohort_ID']) ? $_GET['cohort_ID'] : null;
+$college = isset($_GET['college']) ? $_GET['college'] : null;
+$no_Of_Years = isset($_GET['no_Of_Years']) ? $_GET['no_Of_Years'] : null;
+$courseID = isset($_GET['course_ID']) ? $_GET['course_ID'] : null;
+$courseName = isset($_GET['course_name']) ? $_GET['course_name'] : null;
 
-session_start();
-
-$_SESSION["course_ID"] = "BSCS";
-$_SESSION["cohort_ID"] = "PUPSJ";
-
-$courseID = $_SESSION["course_ID"];
-$cohortID = $_SESSION["cohort_ID"];
-
-?>
+?> 
 
 <!DOCTYPE html>
 <html>
@@ -25,8 +22,8 @@ $cohortID = $_SESSION["cohort_ID"];
         <h4>Course Creator Name</h4>
       </div>
       <div>
-        <h1>Course ID: Course Name</h1>
-        <h3>No. of Years</h3>
+        <h1><?php echo $courseID." : ".$courseName ?></h1>
+        <h3><?php echo $no_Of_Years; ?></h3>
       </div>
     </div>
 
