@@ -1,26 +1,24 @@
-<?php 
+<?php
+
+session_start();
 
 require_once 'includes/dbh_inc.php';
 require_once 'includes/execute_query_inc.php';
 require_once 'includes/error_model_inc.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['studentID']) && isset($_SESSION["ay"]) && isset($_SESSION["semester"])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-  $courseID = isset($_GET['course_ID']) ? $_GET['course_ID'] : null;
-  $cohortID = isset($_GET['cohort_ID']) ? $_GET['cohort_ID'] : null;
+  $courseID = isset($_SESSION['course_ID']) ? $_SESSION['course_ID'] : null;
+  $cohortID = isset($_SESSION['cohort_ID']) ? $_SESSION['cohort_ID'] : null;
 
   $data = json_decode(file_get_contents('php://input'), true);
   echo '<script>console.log(' . json_encode($data) . ')</script>';
-
 
   if(isset($data['ay']) && isset($data['semester']) && isset($data['studentData'])){
     
     $ay = $data['ay'];
     $semester = $data['semester'];
     $studentData = $data['studentData'];
-
-    $_SESSION["ay"] = $ay;
-    $_SESSION["semester"] = $semester;
 
     $responses = []; // Initialize an array to store responses for each student
 
