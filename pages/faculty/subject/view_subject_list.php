@@ -17,7 +17,7 @@ if (!$mysqli) {
     echo "Connection failed: " . mysqli_connect_error();
 } else {
     // Prepare the SQL statement to prevent SQL injection
-    $stmt = $mysqli->prepare("SELECT subject_ID, subject_Name, subject_Description, subject_ID, course_ID, cohort_ID, semester FROM subject WHERE user_ID = ?");
+    $stmt = $mysqli->prepare("SELECT * FROM subject WHERE user_ID = ?");
     
     // Bind parameters to the prepared statement
     $stmt->bind_param("i", $user_ID); // 'i' denotes the type is integer
@@ -33,11 +33,14 @@ if (!$mysqli) {
         while ($row = $result->fetch_assoc()) {
             $subjects[] = array(
                 "id" => $row["subject_ID"],
-                "name" => $row["subject_Name"], // Assuming you meant subject_Name here
-                "description" => $row["subject_Description"], // Assuming you meant subject_Description here
+                "name" => $row["subject_Name"],
+                "description" => $row["subject_Description"],
                 "cohort" => $row["cohort_ID"],
                 "course" => $row["course_ID"],
-                "semester" => $row["semester"]
+                "semester" => $row["semester"],
+                "ay" => $row["ay"],
+                "section" => $row["section"],
+                "year" => $row["year"]
             );
         }
     } else {
