@@ -5,10 +5,6 @@ function populatesubjects() {
     subjects.forEach(subject => {
         const subjectItem = document.createElement('article');
         subjectItem.classList.add('subject-item');
-        subjectItem.onclick = () => {
-            // Change the location to the course detail page
-            window.location.href = `../subject/enroll_subject.php`;
-            };
 
         // subject header
         const subjectHeader = document.createElement('header');
@@ -75,17 +71,19 @@ function populatesubjects() {
         subjectFooter.classList.add('subject-footer');
         const SemesterText = document.createElement('p');
         SemesterText.textContent = 'SEMESTER: ' + subject.semester;
+
         subjectFooter.appendChild(SemesterText);
-
         subjectItem.appendChild(subjectFooter);
-
         subjectGrid.appendChild(subjectItem);
+
+
     });
 
     // Add 'Add subject' button item at the end
     const addsubjectItem = document.createElement('article');
     addsubjectItem.classList.add('subject-item', 'add-subject-item');
     addsubjectItem.onclick = () => { window.location.href = 'add_subject.html'; };
+    
     const addsubjectContent = document.createElement('div');
     addsubjectContent.innerHTML = '<p>+ Add subject</p>';
     addsubjectItem.appendChild(addsubjectContent);
