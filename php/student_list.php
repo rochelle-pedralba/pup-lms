@@ -1,11 +1,8 @@
-<?php 
+<?php
 
   require_once 'includes/dbh_inc.php';
   require_once 'includes/execute_query_inc.php';
   require_once 'includes/error_model_inc.php';
-
-  $_SESSION["course_ID"] = "BSCS";
-    $_SESSION["cohort_ID"] = "PUPSJ";
   
   $courseID = $_SESSION["course_ID"];
   $cohortID = $_SESSION["cohort_ID"];
