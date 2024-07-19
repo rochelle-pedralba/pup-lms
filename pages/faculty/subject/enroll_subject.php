@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+  session_start();
+
   $cohort = isset($_GET['cohort']) ? $_GET['cohort'] : null;
   $course = isset($_GET['course']) ? $_GET['course'] : null;
   $subjectID = isset($_GET['subject_ID']) ? $_GET['subject_ID'] : null;
@@ -7,6 +10,15 @@
   $ay = isset($_GET['ay']) ? $_GET['ay'] : null;
   $section = isset($_GET['section']) ? $_GET['section'] : null;
   $year = isset($_GET['year']) ? $_GET['year'] : null;
+
+  $_SESSION["cohort_ID"] = $cohort;
+  $_SESSION["course_ID"] = $course;
+  $_SESSION["subject_ID"] = $subjectID;
+  $_SESSION["subject_Name"] = $subjectName;
+  $_SESSION["ay"] = $ay;
+  $_SESSION["section"] = $section;
+  $_SESSION["year"] = $year;
+  $_SESSION["semester"] = $semester;
 ?>
 
 <!DOCTYPE html>
@@ -79,7 +91,7 @@
             </div>
           </div>
         </div>
-        <button onclick="window.location.href='../../admin/overview.html'">BACK</button>
+        <button onclick="window.location.href='../../index_faculty.php'">BACK</button>
     </div>
     
   </body>
