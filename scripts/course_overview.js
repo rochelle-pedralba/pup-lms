@@ -5,10 +5,6 @@ function populateCourses() {
     courses.forEach(course => {
         const courseItem = document.createElement('article');
         courseItem.classList.add('course-item');
-        courseItem.onclick = () => {
-            // Change the location to the course detail page
-            window.location.href = `../admin/course/update_student_course.php`;
-            };
 
         // Course header
         const courseHeader = document.createElement('header');
@@ -78,8 +74,19 @@ function populateCourses() {
         courseFooter.appendChild(durationText);
 
         courseItem.appendChild(courseFooter);
-
         courseGrid.appendChild(courseItem);
+
+        console.log('Course ID: ' + course.id);
+        console.log('Course Name: ' + course.name);
+        console.log('Course Description: ' + course.description);
+        console.log('Course Cohort: ' + course.cohort);
+        console.log('Course College: ' + course.college);
+        console.log('Course Duration: ' + course.duration);
+
+        courseItem.onclick = () => {
+            // Change the location to the course detail page
+            window.location.href = `../admin/course/update_student_course.php?course_name=${course.name}&course_ID=${course.id}&cohort_ID=${course.cohort}&college=${course.college}&no_Of_Years=${course.duration}`;
+            };
     });
 
     // Add 'Add Course' button item at the end
