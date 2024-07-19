@@ -1,8 +1,12 @@
 <?php 
-  session_start();
-
-
-
+  $cohort = isset($_GET['cohort']) ? $_GET['cohort'] : null;
+  $course = isset($_GET['course']) ? $_GET['course'] : null;
+  $subjectID = isset($_GET['subject_ID']) ? $_GET['subject_ID'] : null;
+  $subjectName = isset($_GET['subject_Name']) ? $_GET['subject_Name'] : null;
+  $semester = isset($_GET['semester']) ? $_GET['semester'] : null;
+  $ay = isset($_GET['ay']) ? $_GET['ay'] : null;
+  $section = isset($_GET['section']) ? $_GET['section'] : null;
+  $year = isset($_GET['year']) ? $_GET['year'] : null;
 ?>
 
 <!DOCTYPE html>
@@ -18,9 +22,9 @@
         <h4>Professor Name</h4>
       </div>
       <div>
-        <h3 class="year-section-container">Year and Section</h3>
-        <h1>Subject ID: Subject Name</h1>
-        <h3>Semester  A.Y.</h3>
+        <h3 class="year-section-container"><?php echo $year." - ".$section ?></h3>
+        <h1><?php echo $subjectID." : ".$subjectName ?></h1>
+        <h3>Semester: <?php echo $semester." A.Y. ".$ay?></h3>
       </div>
     </div>
 
