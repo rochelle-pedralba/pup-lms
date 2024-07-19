@@ -4,6 +4,9 @@
   require_once 'includes/execute_query_inc.php';
   require_once 'includes/error_model_inc.php';
 
+  $courseID = isset($_SESSION['course_ID']) ? $_SESSION['course_ID'] : null;
+  $cohortID = isset($_SESSION['cohort_ID']) ? $_SESSION['cohort_ID'] : null;
+
   if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['studentID'])) {
     
     $courseID = isset($_GET['course_ID']) ? $_GET['course_ID'] : null;
