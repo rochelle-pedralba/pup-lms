@@ -16,7 +16,6 @@ $courseName = isset($_GET['course_name']) ? $_GET['course_name'] : null;
   </head>
 
   <body>
-    
     <div class="year-section-container">
       <div>
         <h4>Course Creator Name</h4>
@@ -91,7 +90,7 @@ $courseName = isset($_GET['course_name']) ? $_GET['course_name'] : null;
       </div>
       <div class="back-item" onclick="window.location.href='../overview.html'">
             <div class="back-header">
-                <button>Back</button>
+                <center><h2>Back</h2></center>
             </div>
         </div> 
     </div>
