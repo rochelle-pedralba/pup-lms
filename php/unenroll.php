@@ -6,13 +6,13 @@ require_once 'includes/execute_query_inc.php';
 require_once 'includes/error_model_inc.php';
 
 // Assuming information is obtained from session
-$subjectID = $_SESSION['subject_ID'];
-$semester = $_SESSION['semester'];
-$year = $_SESSION['year'];
-$section = $_SESSION['section'];
-$course_ID = $_SESSION['course_ID'];
-$cohort_ID = $_SESSION['cohort_ID'];
-$ay = $_SESSION['ay'];
+$subjectID = $_SESSION['subject_ID'] ? $_GET['subject_ID'] : null;
+$semester = $_SESSION['semester'] ? $_GET['semester'] : null;
+$year = $_SESSION['year'] ? $_GET['year'] : null;   
+$section = $_SESSION['section'] ? $_GET['section'] : null;
+$course_ID = $_SESSION['course_ID'] ? $_GET['course'] : null;
+$cohort_ID = $_SESSION['cohort_ID'] ? $_GET['cohort'] : null;
+$ay = $_SESSION['ay'] ? $_GET['ay'] : null;
 
 $params_1 = [$subjectID, $semester, $year, $section, $course_ID, $cohort_ID, $ay];
 
