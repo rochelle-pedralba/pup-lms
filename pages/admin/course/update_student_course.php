@@ -1,11 +1,16 @@
 <?php
 
+session_start();
+
 $collegeID = isset($_GET['college_ID']) ? $_GET['college_ID'] : null;
 $cohort_ID = isset($_GET['cohort_ID']) ? $_GET['cohort_ID'] : null;
 $college = isset($_GET['college']) ? $_GET['college'] : null;
 $no_Of_Years = isset($_GET['no_Of_Years']) ? $_GET['no_Of_Years'] : null;
 $courseID = isset($_GET['course_ID']) ? $_GET['course_ID'] : null;
 $courseName = isset($_GET['course_name']) ? $_GET['course_name'] : null;
+
+$_SESSION['college_ID'] = $collegeID;
+$_SESSION['cohort_ID'] = $cohort_ID;
 
 ?> 
 
