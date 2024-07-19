@@ -71,19 +71,21 @@ function populatesubjects() {
         subjectFooter.classList.add('subject-footer');
         const SemesterText = document.createElement('p');
         SemesterText.textContent = 'SEMESTER: ' + subject.semester;
-
+        
         subjectFooter.appendChild(SemesterText);
         subjectItem.appendChild(subjectFooter);
         subjectGrid.appendChild(subjectItem);
 
-
+        subjectItem.onclick = () => {
+            // Change the location to the course detail page
+            window.location.href = `../subject/enroll_subject.php?subject_ID=${subject.id}&subject_Name=${subject.name}&cohort=${subject.cohort}&course=${subject.course}&semester=${subject.semester}&ay=${subject.ay}&year=${subject.year}&section=${subject.section}`;
+            };
     });
 
     // Add 'Add subject' button item at the end
     const addsubjectItem = document.createElement('article');
     addsubjectItem.classList.add('subject-item', 'add-subject-item');
     addsubjectItem.onclick = () => { window.location.href = 'add_subject.html'; };
-    
     const addsubjectContent = document.createElement('div');
     addsubjectContent.innerHTML = '<p>+ Add subject</p>';
     addsubjectItem.appendChild(addsubjectContent);
