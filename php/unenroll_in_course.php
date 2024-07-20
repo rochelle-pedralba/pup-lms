@@ -27,7 +27,7 @@ function name_searching($mysqli, $studentID) {
 function EnrolledStudentCourse($mysqli, $params_1) {
     $students = [];
     $query = "SELECT user_ID FROM course_enrolled
-            WHERE course_ID = ? AND user_ID = ? AND cohort_ID = ?"; 
+            WHERE course_ID = ? AND user_ID = ? AND cohort_ID = ?";
     $queryResult = executeQuery($mysqli, $query, "sss", $params_1);
 
     if (!$queryResult['success']) {
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<table>";
         foreach ($studentDetails as $student) {
             echo "<tr>";
-            echo "<td><button onclick = 'unenrollFunc(\"" . htmlspecialchars(addslashes($student['name']), ENT_QUOTES) . "\")' style = 'padding:0px 5px; margin: 0px 10px'>x</button></td>";
+            echo "<td><button onclick='unenrollFunc(\"" . htmlspecialchars(addslashes($student['name']), ENT_QUOTES) . "\", \"" . htmlspecialchars(addslashes($student['user_ID']), ENT_QUOTES) . "\")' style='padding:0px 5px; margin: 0px 10px'>x</button></td>";
             echo "<td> " . htmlspecialchars($student['user_ID']) . " </td>";
             echo "<td>".": "." </td>";
             echo "<td> " . htmlspecialchars($student['name']) . " </td>";
