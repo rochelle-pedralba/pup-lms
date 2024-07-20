@@ -15,16 +15,22 @@ function getInformation($mysqli, $user_ID){
 if (isset($_POST['studentID'])) {
     $studentID = $_POST['studentID'];
 
+    $info = getInformation($mysqli, $studentID);
+
+    $archiveQuery = "INSERT INTO course_enrolled_archive (user_ID, course_ID, ay, semester, cohort_ID) VALUES (?, ?, ?, ?, ?)";
+    $archiveParams = [$info['user_ID'], $info['course_ID'], $info['ay'], $info['semester'], $info['cohort_ID']];
+    $archiveResult = executeQuery($mysqli, $archiveQuery, "sssss", $archiveParams);
+
     // Assuming executeQuery() sets 'success' correctly
     $deleteQuery = "DELETE FROM course_enrolled WHERE user_ID = ?";
     $deleteResult = executeQuery($mysqli, $deleteQuery, "s", [$studentID]);
 
-    // Padagdagan ng archive na query nalang dito
-
-    if ($deleteResult['success']) {
+    if ($deleteResult['success'] && $archiveResult['success']) {
         echo "Student successfully removed."; // This will be the responseText in the AJAX call
     } else {
-        echo "An error has occurred. Please try again later or contact the administrator.";
+        $error_message = "An error has occured. Please try again later or contact the administrator.";
+        redirectWithError($error_message);
+        exit;
     }
 } else {
     redirectWithError("Student ID not provided.");
