@@ -12,43 +12,21 @@ function getInformation($mysqli, $user_ID){
     return $row;
 }
 
-if (isset($_GET['studentName'])) {
-    $studentName = $_GET['studentName'];
+if (isset($_POST['studentID'])) {
+    $studentID = $_POST['studentID'];
 
-    $query = "SELECT user_ID FROM user_information WHERE CONCAT(last_name, ', ', first_name, ' ', middle_name) = ?";
-    $params = [$studentName];
+    // Assuming executeQuery() sets 'success' correctly
+    $deleteQuery = "DELETE FROM course_enrolled WHERE user_ID = ?";
+    $deleteResult = executeQuery($mysqli, $deleteQuery, "s", [$studentID]);
 
-    $queryResult = executeQuery($mysqli, $query, "s", $params);
+    // Padagdagan ng archive na query nalang dito
 
-    if ($queryResult['success']) {
-        $row = $queryResult['result']->fetch_assoc();
-        $userID = $row['user_ID'];
-
-        $info = getInformation($mysqli, $userID);
-
-        $archiveQuery = "INSERT INTO course_enrolled_archive (user_ID, course_ID, ay, semester, cohort_ID) VALUES (?, ?, ?, ?, ?)";
-        $archiveParams = [$info['user_ID'], $info['course_ID'], $info['ay'], $info['semester'], $info['cohort_ID']];
-        $archiveResult = executeQuery($mysqli, $archiveQuery, "sssss", $archiveParams);
-
-        $deleteQuery = "DELETE FROM course_enrolled WHERE user_ID = ?";
-        $deleteResult = executeQuery($mysqli, $deleteQuery, "s", [$userID]);
-
-
-        if ($deleteResult['success'] && $archiveResult['success']) {
-            header('Location: ../pages/admin/course/update_student_course.php');
-        } else {
-            $error_message = "An error has occured. Please try again later or contact the administrator.";
-            redirectWithError($error_message);
-            exit;
-        }
+    if ($deleteResult['success']) {
+        echo "Student successfully removed."; // This will be the responseText in the AJAX call
     } else {
-        $error_message = "An error has occured. Please try again later or contact the administrator.";
-        redirectWithError($error_message);
-        exit;
+        echo "An error has occurred. Please try again later or contact the administrator.";
     }
 } else {
-    $error_message = "An error has occured. Please try again later or contact the administrator.";
-    redirectWithError($error_message);
-    exit;
+    redirectWithError("Student ID not provided.");
 }
 ?>
