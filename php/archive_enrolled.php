@@ -12,11 +12,9 @@ function getInfo($mysqli, $user_ID){
     return $row;
 }
 
-if (isset($_GET['studentName'])) {
-    $studentName = $_GET['studentName'];
-
-    $query = "SELECT user_ID FROM user_information WHERE CONCAT(last_name, ', ', first_name, ' ', middle_name) = ?";
-    $params = [$studentName];
+if (isset($_POST['studentID'])) {
+    $studentID = $_POST['studentID'];
+    $params = [$studentID];
 
     $queryResult = executeQuery($mysqli, $query, "s", $params);
 
@@ -47,7 +45,7 @@ if (isset($_GET['studentName'])) {
         exit;
     }
 } else {
-    $error_message = "An error has occured. Please try again later or contact the administrator.";
+    $error_message = "Student ID is not provided.";
     redirectWithError($error_message);
     exit;
 }
