@@ -11,7 +11,7 @@ function unenrollFunc(studentName, studentID) {
 
                 xhr.onreadystatechange = function() {
                     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                        //window.location.reload();
+                        window.location.reload();
                     }
                 }
                 xhr.send('studentID=' + encodeURIComponent(studentID));
