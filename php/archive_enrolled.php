@@ -13,32 +13,18 @@ function getInfo($mysqli, $user_ID){
 }
 
 if (isset($_POST['studentID'])) {
-    $studentID = $_POST['studentID'];
-    $params = [$studentID];
+    $userID = $_POST['studentID'];
+    $info = getInfo($mysqli, $userID);
 
-    $queryResult = executeQuery($mysqli, $query, "s", $params);
+    $archiveQuery = "INSERT INTO subject_enrolled_archive (user_ID, subject_ID, semester, year, section, course_ID, cohort_ID, ay) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $archiveParams = [$info['user_ID'], $info['subject_ID'], $info['semester'], $info['year'], $info['section'], $info['course_ID'], $info['cohort_ID'], $info['ay']];
+    $archiveResult = executeQuery($mysqli, $archiveQuery, "ssssssss", $archiveParams);
 
-    if ($queryResult['success']) {
-        $row = $queryResult['result']->fetch_assoc();
-        $userID = $row['user_ID'];
+    $deleteQuery = "DELETE FROM subject_enrolled WHERE user_ID = ?";
+    $deleteResult = executeQuery($mysqli, $deleteQuery, "s", [$userID]);
 
-        $info = getInfo($mysqli, $userID);
-
-        $archiveQuery = "INSERT INTO subject_enrolled_archive (user_ID, subject_ID, semester, year, section, course_ID, cohort_ID, ay) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        $archiveParams = [$info['user_ID'], $info['subject_ID'], $info['semester'], $info['year'], $info['section'], $info['course_ID'], $info['cohort_ID'], $info['ay']];
-        $archiveResult = executeQuery($mysqli, $archiveQuery, "ssssssss", $archiveParams);
-
-        $deleteQuery = "DELETE FROM subject_enrolled WHERE user_ID = ?";
-        $deleteResult = executeQuery($mysqli, $deleteQuery, "s", [$userID]);
-
-
-        if ($deleteResult['success'] && $archiveResult['success']) {
-            header('Location: ../pages/faculty/subject/enroll_subject.php');
-        } else {
-            $error_message = "An error has occured. Please try again later or contact the administrator.";
-            redirectWithError($error_message);
-            exit;
-        }
+    if ($deleteResult['success'] && $archiveResult['success']) {
+        echo "Student with ID " . htmlspecialchars($userID) . " has been archived.";
     } else {
         $error_message = "An error has occured. Please try again later or contact the administrator.";
         redirectWithError($error_message);
