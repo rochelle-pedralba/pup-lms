@@ -49,7 +49,10 @@ function user_id_searching($mysqli, $students): array
         
         if ($queryResult['success']) {
             while ($row = $queryResult['result']->fetch_assoc()) {
-                $studentNames[] = $row['last_name'] . ", " . $row['first_name'] . " " . $row['middle_name'];
+                $studentNames[] = [
+                    'name' => $row['last_name'] . ", " . $row['first_name'] . " " . ($row['middle_name'] ?? ''),
+                    'user_ID' => $row['user_ID']
+                ];
             }
         } else {
             $error_message = "An error has occured. Please try again later or contact the administrator.";
@@ -64,10 +67,10 @@ function user_id_searching($mysqli, $students): array
 $students = EnrolledStudent($mysqli, $params_1); 
 
 if ($students !== null) {
-    foreach ($students as $studentName) {
+    foreach ($students as $student) {
             echo "<tr>";
             echo "<td><button onclick='unenrollFunc(\"" . htmlspecialchars(addslashes($student['name']), ENT_QUOTES) . "\", \"" . htmlspecialchars(addslashes($student['user_ID']), ENT_QUOTES) . "\")' style='padding:0px 5px; margin: 0px 10px'>x</button></td>";
-            echo "<td id='showname'>" . htmlspecialchars($studentName) . "</td>";
+            echo "<td id='showname'>" . htmlspecialchars($student['name']) . "</td>";
             echo "</tr>";
     }
 } else {
