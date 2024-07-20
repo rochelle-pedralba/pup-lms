@@ -66,7 +66,7 @@ $students = EnrolledStudent($mysqli, $params_1);
 if ($students !== null) {
     foreach ($students as $studentName) {
             echo "<tr>";
-            echo "<td><button onclick = 'unenrollFunc(\"" . htmlspecialchars(addslashes($studentName), ENT_QUOTES) . "\")' style = 'padding:0px 5px; margin: 0px 0px'>x</button></td>";
+            echo "<td><button onclick='unenrollFunc(\"" . htmlspecialchars(addslashes($student['name']), ENT_QUOTES) . "\", \"" . htmlspecialchars(addslashes($student['user_ID']), ENT_QUOTES) . "\")' style='padding:0px 5px; margin: 0px 10px'>x</button></td>";
             echo "<td id='showname'>" . htmlspecialchars($studentName) . "</td>";
             echo "</tr>";
     }
